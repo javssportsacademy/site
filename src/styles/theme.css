@@ -1,0 +1,61 @@
+/* ==========================================================================
+   JAV'S SPORTS ACADEMY — BRAND THEME & PALETTES
+   --------------------------------------------------------------------------
+   Modify this file to update the site's brand colors, palettes, and surface
+   tokens at any time without touching component logic.
+   ========================================================================== */
+
+:root {
+  /* --- Brand Core Palette --- */
+  --brand-primary: #F59E0B;        /* Athletic Amber / Gold (Brochure primary accent) */
+  --brand-primary-hover: #D97706;  /* Deeper Amber */
+  --brand-primary-light: #FEF3C7;  /* Soft Amber glow */
+
+  --brand-crimson: #E11D48;        /* Sporting Crimson / Cricket Seam Red */
+  --brand-crimson-hover: #BE123C;  /* Deeper Red */
+  --brand-crimson-light: #FFE4E6;  /* Soft Crimson glow */
+
+  --brand-cyan: #0EA5E9;           /* Velocity Cyan / Stadium Floodlight */
+  --brand-cyan-hover: #0284C7;     /* Deeper Cyan */
+  --brand-cyan-light: #E0F2FE;     /* Soft Cyan glow */
+
+  /* --- Athletic Dark Canvas (Default) --- */
+  --brand-bg: #0B1120;             /* Stadium Obsidian base */
+  --brand-bg-elevated: #0F172A;    /* Slate 900 */
+  --brand-surface: #1E293B;        /* Slate 800 - Card Surfaces */
+  --brand-surface-hover: #334155;  /* Slate 700 */
+  --brand-border: rgba(255, 255, 255, 0.08);
+  --brand-border-glow: rgba(245, 158, 11, 0.25);
+
+  /* --- Typography --- */
+  --brand-text-primary: #F8FAFC;   /* Slate 50 */
+  --brand-text-secondary: #CBD5E1; /* Slate 300 */
+  --brand-text-muted: #94A3B8;     /* Slate 400 */
+
+  /* --- Accents & UI Status --- */
+  --brand-whatsapp: #25D366;       /* Official WhatsApp Green */
+  --brand-whatsapp-hover: #1EBE5D;
+  --brand-youtube: #FF0000;        /* Official YouTube Red */
+
+  /* --- Shadcn Semantic Variable Mappings --- */
+  --background: var(--brand-bg);
+  --foreground: var(--brand-text-primary);
+  --card: var(--brand-surface);
+  --card-foreground: var(--brand-text-primary);
+  --popover: var(--brand-surface);
+  --popover-foreground: var(--brand-text-primary);
+  --primary: var(--brand-primary);
+  --primary-foreground: #0B1120;
+  --secondary: var(--brand-surface-hover);
+  --secondary-foreground: var(--brand-text-primary);
+  --muted: var(--brand-bg-elevated);
+  --muted-foreground: var(--brand-text-muted);
+  --accent: var(--brand-cyan);
+  --accent-foreground: #0B1120;
+  --destructive: var(--brand-crimson);
+  --destructive-foreground: #FFFFFF;
+  --border: var(--brand-border);
+  --input: var(--brand-surface);
+  --ring: var(--brand-primary);
+  --radius: 0.75rem;
+}
