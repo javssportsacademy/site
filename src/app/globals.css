@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../styles/theme.css";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-brand-bg: var(--brand-bg);
   --color-brand-bg-elevated: var(--brand-bg-elevated);
@@ -30,6 +32,8 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);

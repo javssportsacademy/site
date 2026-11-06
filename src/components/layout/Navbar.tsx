@@ -28,7 +28,7 @@ import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 import { PRIMARY_PHONE_DISPLAY, WHATSAPP_PRIMARY_NUMBER, getQuickChatWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-// --- Dropdown Data Structure ---
+// --- Dropdown Navigation Items ---
 interface DropdownItem {
   title: string;
   subtitle: string;
@@ -195,7 +195,7 @@ export function Navbar() {
   const [mobileExpandedSection, setMobileExpandedSection] = useState<DropdownKey>(null);
 
   const navRef = useRef<HTMLElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Scroll detection for subtle elevation styling
   useEffect(() => {
@@ -206,14 +206,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menus on route navigation
+  // Close menus on route change
   useEffect(() => {
     setActiveDropdown(null);
     setMobileMenuOpen(false);
     setMobileExpandedSection(null);
   }, [pathname]);
 
-  // Click outside listener to close dropdowns
+  // Click outside listener
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
@@ -225,32 +225,40 @@ export function Navbar() {
   }, []);
 
   // Keyboard accessibility: Escape key closes menus
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActiveDropdown(null);
-        setMobileMenuOpen(false);
-      }
-    },
-    []
-  );
-
-  // Mouse hover handlers with 150ms leave delay buffer
-  const handleMouseEnter = (key: DropdownKey) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setActiveDropdown(null);
+      setMobileMenuOpen(false);
     }
+  }, []);
+
+  // Clear pending close timer
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  // Hover enter: open immediately and cancel close
+  const handleDropdownEnter = (key: DropdownKey) => {
+    clearCloseTimer();
     setActiveDropdown(key);
   };
 
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => {
+  // Hover leave: wait 300ms before closing
+  const handleDropdownLeave = () => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 150);
+    }, 300);
   };
 
-  const toggleDropdown = (key: DropdownKey) => {
+  // Click toggle: If open, close; if closed, open!
+  const handleDropdownClick = (key: DropdownKey, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    clearCloseTimer();
     setActiveDropdown((prev) => (prev === key ? null : key));
   };
 
@@ -277,7 +285,7 @@ export function Navbar() {
         "fixed top-0 left-0 right-0 z-40 transition-all duration-200 select-none",
         scrolled
           ? "bg-card/95 backdrop-blur-md border-b border-border shadow-xs"
-          : "bg-background/90 backdrop-blur-sm border-b border-border/60"
+          : "bg-background/95 backdrop-blur-sm border-b border-border/60"
       )}
     >
       {/* 80px Compact Navbar Container */}
@@ -312,12 +320,12 @@ export function Navbar() {
               {/* 1. Sports Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => handleMouseEnter("sports")}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => handleDropdownEnter("sports")}
+                onMouseLeave={handleDropdownLeave}
               >
                 <button
                   type="button"
-                  onClick={() => toggleDropdown("sports")}
+                  onClick={(e) => handleDropdownClick("sports", e)}
                   aria-expanded={activeDropdown === "sports"}
                   aria-haspopup="menu"
                   className={cn(
@@ -339,10 +347,12 @@ export function Navbar() {
                 {activeDropdown === "sports" && (
                   <div
                     role="menu"
-                    className="absolute left-0 top-full pt-2 w-[460px] animate-in fade-in-50 zoom-in-95 duration-150 z-50"
+                    onMouseEnter={() => handleDropdownEnter("sports")}
+                    onMouseLeave={handleDropdownLeave}
+                    className="absolute left-0 top-full pt-2 w-[460px] z-50 animate-in fade-in zoom-in-95 duration-150"
                   >
-                    <div className="bg-popover text-popover-foreground border border-border shadow-xl rounded-2xl p-4">
-                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-border/60">
+                    <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
+                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-border">
                         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                           12 Olympic & Athletic Disciplines
                         </span>
@@ -365,7 +375,7 @@ export function Navbar() {
                               role="menuitem"
                               className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-muted transition-colors"
                             >
-                              <div className="p-1.5 rounded-lg bg-primary/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                              <div className="p-1.5 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
                                 <Icon className="h-4 w-4" />
                               </div>
                               <div className="flex flex-col min-w-0">
@@ -388,7 +398,7 @@ export function Navbar() {
                         })}
                       </div>
 
-                      <div className="mt-3 pt-3 border-t border-border/60 bg-muted/40 rounded-xl p-2.5 flex items-center justify-between">
+                      <div className="mt-3 pt-3 border-t border-border bg-muted/50 rounded-xl p-2.5 flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">
                           Also training Basketball, Skating, Karate, Table Tennis & Archery.
                         </span>
@@ -407,12 +417,12 @@ export function Navbar() {
               {/* 2. Programmes Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => handleMouseEnter("programs")}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => handleDropdownEnter("programs")}
+                onMouseLeave={handleDropdownLeave}
               >
                 <button
                   type="button"
-                  onClick={() => toggleDropdown("programs")}
+                  onClick={(e) => handleDropdownClick("programs", e)}
                   aria-expanded={activeDropdown === "programs"}
                   aria-haspopup="menu"
                   className={cn(
@@ -434,10 +444,12 @@ export function Navbar() {
                 {activeDropdown === "programs" && (
                   <div
                     role="menu"
-                    className="absolute left-0 top-full pt-2 w-[380px] animate-in fade-in-50 zoom-in-95 duration-150 z-50"
+                    onMouseEnter={() => handleDropdownEnter("programs")}
+                    onMouseLeave={handleDropdownLeave}
+                    className="absolute left-0 top-full pt-2 w-[380px] z-50 animate-in fade-in zoom-in-95 duration-150"
                   >
-                    <div className="bg-popover text-popover-foreground border border-border shadow-xl rounded-2xl p-4">
-                      <div className="flex items-center justify-between pb-3 mb-2 border-b border-border/60">
+                    <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
+                      <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                           Lifelong Athletic Pathways
                         </span>
@@ -460,7 +472,7 @@ export function Navbar() {
                               role="menuitem"
                               className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                             >
-                              <div className="p-2 rounded-lg bg-primary/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                              <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
                                 <Icon className="h-4 w-4" />
                               </div>
                               <div className="flex flex-col min-w-0">
@@ -490,12 +502,12 @@ export function Navbar() {
               {/* 3. Institutions Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => handleMouseEnter("institutions")}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => handleDropdownEnter("institutions")}
+                onMouseLeave={handleDropdownLeave}
               >
                 <button
                   type="button"
-                  onClick={() => toggleDropdown("institutions")}
+                  onClick={(e) => handleDropdownClick("institutions", e)}
                   aria-expanded={activeDropdown === "institutions"}
                   aria-haspopup="menu"
                   className={cn(
@@ -517,10 +529,12 @@ export function Navbar() {
                 {activeDropdown === "institutions" && (
                   <div
                     role="menu"
-                    className="absolute left-0 top-full pt-2 w-[400px] animate-in fade-in-50 zoom-in-95 duration-150 z-50"
+                    onMouseEnter={() => handleDropdownEnter("institutions")}
+                    onMouseLeave={handleDropdownLeave}
+                    className="absolute left-0 top-full pt-2 w-[400px] z-50 animate-in fade-in zoom-in-95 duration-150"
                   >
-                    <div className="bg-popover text-popover-foreground border border-border shadow-xl rounded-2xl p-4">
-                      <div className="flex items-center justify-between pb-3 mb-2 border-b border-border/60">
+                    <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
+                      <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                           Institutional Sports Solutions
                         </span>
@@ -543,7 +557,7 @@ export function Navbar() {
                               role="menuitem"
                               className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                             >
-                              <div className="p-2 rounded-lg bg-primary/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                              <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
                                 <Icon className="h-4 w-4" />
                               </div>
                               <div className="flex flex-col min-w-0">
@@ -585,7 +599,7 @@ export function Navbar() {
                 )}
                 aria-label="JAV'S Inbox — Inside the Game: Watch and listen to sports conversations with athletes, coaches, and sports science specialists"
               >
-                {/* White Play Glyph with subtle corner radius styling */}
+                {/* White Play Glyph */}
                 <Play className="h-4 w-4 xl:h-5 xl:w-5 fill-white text-white translate-x-0.5" />
               </Link>
 
@@ -607,18 +621,18 @@ export function Navbar() {
           </div>
 
           {/* ======================================================== */}
-          {/* RIGHT COLUMN: Academy ▾ | Centres | ThemeToggle | Book Assessment */}
+          {/* RIGHT COLUMN: Academy ▾ | Centres ▾ | ThemeToggle | Book Assessment */}
           {/* ======================================================== */}
           <div className="flex items-center justify-end gap-3 xl:gap-4 min-w-0">
-            {/* 4. Academy Dropdown (Founder, Mentors, Milestones, Safeguarding, Philosophy) */}
+            {/* 4. Academy Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => handleMouseEnter("academy")}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => handleDropdownEnter("academy")}
+              onMouseLeave={handleDropdownLeave}
             >
               <button
                 type="button"
-                onClick={() => toggleDropdown("academy")}
+                onClick={(e) => handleDropdownClick("academy", e)}
                 aria-expanded={activeDropdown === "academy"}
                 aria-haspopup="menu"
                 className={cn(
@@ -640,10 +654,12 @@ export function Navbar() {
               {activeDropdown === "academy" && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-full pt-2 w-[420px] animate-in fade-in-50 zoom-in-95 duration-150 z-50"
+                  onMouseEnter={() => handleDropdownEnter("academy")}
+                  onMouseLeave={handleDropdownLeave}
+                  className="absolute right-0 top-full pt-2 w-[420px] z-50 animate-in fade-in zoom-in-95 duration-150"
                 >
-                  <div className="bg-popover text-popover-foreground border border-border shadow-xl rounded-2xl p-4">
-                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border/60">
+                  <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
+                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                         Institutional Leadership & Safeguarding
                       </span>
@@ -666,7 +682,7 @@ export function Navbar() {
                             role="menuitem"
                             className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                           >
-                            <div className="p-2 rounded-lg bg-primary/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                            <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
                               <Icon className="h-4 w-4" />
                             </div>
                             <div className="flex flex-col min-w-0">
@@ -693,16 +709,19 @@ export function Navbar() {
               )}
             </div>
 
-            {/* 5. Centres Direct Link / Popover */}
+            {/* 5. Centres Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => handleMouseEnter("centres")}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => handleDropdownEnter("centres")}
+              onMouseLeave={handleDropdownLeave}
             >
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={(e) => handleDropdownClick("centres", e)}
+                aria-expanded={activeDropdown === "centres"}
+                aria-haspopup="menu"
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
+                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
                   isCentresActive || activeDropdown === "centres"
                     ? "text-brand-primary bg-primary/10 font-bold"
                     : "text-foreground/85 hover:text-foreground hover:bg-muted"
@@ -715,15 +734,17 @@ export function Navbar() {
                     activeDropdown === "centres" && "rotate-180 text-brand-primary"
                   )}
                 />
-              </Link>
+              </button>
 
               {activeDropdown === "centres" && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-full pt-2 w-[340px] animate-in fade-in-50 zoom-in-95 duration-150 z-50"
+                  onMouseEnter={() => handleDropdownEnter("centres")}
+                  onMouseLeave={handleDropdownLeave}
+                  className="absolute right-0 top-full pt-2 w-[360px] z-50 animate-in fade-in zoom-in-95 duration-150"
                 >
-                  <div className="bg-popover text-popover-foreground border border-border shadow-xl rounded-2xl p-4">
-                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border/60">
+                  <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
+                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                         Academy Locations
                       </span>
@@ -746,7 +767,7 @@ export function Navbar() {
                             role="menuitem"
                             className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                           >
-                            <div className="p-2 rounded-lg bg-primary/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                            <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
                               <Icon className="h-4 w-4" />
                             </div>
                             <div className="flex flex-col min-w-0">
@@ -769,8 +790,8 @@ export function Navbar() {
                       })}
                     </div>
 
-                    {/* Compact Click-to-call action inside Centres */}
-                    <div className="mt-3 pt-3 border-t border-border/60">
+                    {/* Direct Coaching Desk Call action inside Centres dropdown */}
+                    <div className="mt-3 pt-3 border-t border-border">
                       <a
                         href={`tel:${WHATSAPP_PRIMARY_NUMBER}`}
                         className="flex items-center justify-between p-2 rounded-xl bg-muted/60 hover:bg-muted text-xs font-bold text-foreground transition-colors"
@@ -886,7 +907,7 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation Drawer"
-          className="lg:hidden bg-card/98 border-b border-border backdrop-blur-xl px-4 pt-3 pb-6 max-h-[calc(100vh-80px)] overflow-y-auto space-y-3 shadow-2xl animate-in slide-in-from-top-3 duration-200"
+          className="lg:hidden bg-white/98 dark:bg-slate-900/98 border-b border-border backdrop-blur-xl px-4 pt-3 pb-6 max-h-[calc(100vh-80px)] overflow-y-auto space-y-3 shadow-2xl animate-in slide-in-from-top-3 duration-200"
         >
           {/* Quick Header inside Mobile Drawer */}
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
@@ -911,7 +932,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => toggleMobileSection("sports")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
                 aria-expanded={mobileExpandedSection === "sports"}
               >
                 <span className="flex items-center gap-2">
@@ -955,7 +976,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => toggleMobileSection("programs")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
                 aria-expanded={mobileExpandedSection === "programs"}
               >
                 <span className="flex items-center gap-2">
@@ -999,7 +1020,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => toggleMobileSection("institutions")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
                 aria-expanded={mobileExpandedSection === "institutions"}
               >
                 <span className="flex items-center gap-2">
@@ -1038,12 +1059,12 @@ export function Navbar() {
               )}
             </div>
 
-            {/* 4. Academy Accordion (Founder, Mentors, Milestones, Safeguarding, About) */}
+            {/* 4. Academy Accordion */}
             <div className="border border-border/70 rounded-xl overflow-hidden bg-background/50">
               <button
                 type="button"
                 onClick={() => toggleMobileSection("academy")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
                 aria-expanded={mobileExpandedSection === "academy"}
               >
                 <span className="flex items-center gap-2">
@@ -1086,7 +1107,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => toggleMobileSection("centres")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
                 aria-expanded={mobileExpandedSection === "centres"}
               >
                 <span className="flex items-center gap-2">
