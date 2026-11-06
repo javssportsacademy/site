@@ -13,6 +13,7 @@ export interface Sport {
   benefits: string[];
   equipmentNeeded: string;
   accentColor: string;
+  locationAvailability: string[];
 }
 
 export interface AgeProgram {

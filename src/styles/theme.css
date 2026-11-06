@@ -1,31 +1,38 @@
 /* ==========================================================================
-   JAV'S SPORTS ACADEMY — BRAND THEME & PALETTES
+   JAV'S SPORTS ACADEMY — REVISED V2 BRAND THEME & PALETTES
    --------------------------------------------------------------------------
-   Modify this file to update the site's brand colors, palettes, and surface
-   tokens at any time without touching component logic.
+   Athletic Editorial & Performance Precision Design System.
+   Restrained, high-trust institutional palette with warm-white reading panels
+   and disciplined athletic amber accents.
    ========================================================================== */
 
 :root {
   /* --- Brand Core Palette --- */
-  --brand-primary: #F59E0B;        /* Athletic Amber / Gold (Brochure primary accent) */
-  --brand-primary-hover: #D97706;  /* Deeper Amber */
+  --brand-primary: #D97706;        /* Athletic Amber (Deep, grounded, authoritative) */
+  --brand-primary-hover: #B45309;  /* Deeper Amber */
   --brand-primary-light: #FEF3C7;  /* Soft Amber glow */
 
-  --brand-crimson: #E11D48;        /* Sporting Crimson / Cricket Seam Red */
-  --brand-crimson-hover: #BE123C;  /* Deeper Red */
-  --brand-crimson-light: #FFE4E6;  /* Soft Crimson glow */
+  --brand-crimson: #DC2626;        /* Sporting Crimson (Restrained accent for media/live) */
+  --brand-crimson-hover: #B91C1C;
+  --brand-crimson-light: #FEE2E2;
 
-  --brand-cyan: #0EA5E9;           /* Velocity Cyan / Stadium Floodlight */
-  --brand-cyan-hover: #0284C7;     /* Deeper Cyan */
-  --brand-cyan-light: #E0F2FE;     /* Soft Cyan glow */
+  --brand-cyan: #0284C7;           /* Technical Precision Blue */
+  --brand-cyan-hover: #0369A1;
 
   /* --- Athletic Dark Canvas (Default) --- */
-  --brand-bg: #0B1120;             /* Stadium Obsidian base */
+  --brand-bg: #0A1120;             /* Stadium Obsidian / Deep Charcoal base */
   --brand-bg-elevated: #0F172A;    /* Slate 900 */
-  --brand-surface: #1E293B;        /* Slate 800 - Card Surfaces */
-  --brand-surface-hover: #334155;  /* Slate 700 */
+  --brand-surface: #141E33;        /* Restrained dark card surface */
+  --brand-surface-hover: #1E293B;  /* Slate 800 */
   --brand-border: rgba(255, 255, 255, 0.08);
-  --brand-border-glow: rgba(245, 158, 11, 0.25);
+  --brand-border-subtle: rgba(255, 255, 255, 0.05);
+
+  /* --- Editorial Contrast Panels (Light/Warm Surfaces) --- */
+  --brand-editorial-bg: #FAFAF9;   /* Warm Stone White for high-trust reading */
+  --brand-editorial-surface: #FFFFFF;
+  --brand-editorial-text: #0F172A; /* Deep Charcoal for crisp legibility */
+  --brand-editorial-muted: #57534E;
+  --brand-editorial-border: #E7E5E4;
 
   /* --- Typography --- */
   --brand-text-primary: #F8FAFC;   /* Slate 50 */
@@ -45,13 +52,13 @@
   --popover: var(--brand-surface);
   --popover-foreground: var(--brand-text-primary);
   --primary: var(--brand-primary);
-  --primary-foreground: #0B1120;
+  --primary-foreground: #FFFFFF;
   --secondary: var(--brand-surface-hover);
   --secondary-foreground: var(--brand-text-primary);
   --muted: var(--brand-bg-elevated);
   --muted-foreground: var(--brand-text-muted);
   --accent: var(--brand-cyan);
-  --accent-foreground: #0B1120;
+  --accent-foreground: #FFFFFF;
   --destructive: var(--brand-crimson);
   --destructive-foreground: #FFFFFF;
   --border: var(--brand-border);

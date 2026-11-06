@@ -1,25 +1,46 @@
 import React from "react";
 import { HeroSection } from "@/components/home/HeroSection";
-import { StatsBanner } from "@/components/home/StatsBanner";
-import { PillarsSection } from "@/components/home/PillarsSection";
+import { CredibilityBar } from "@/components/home/CredibilityBar";
+import { InsideTheGameSection } from "@/components/home/InsideTheGameSection";
+import { CapabilityOverview } from "@/components/home/CapabilityOverview";
+import { AudienceJourneys } from "@/components/home/AudienceJourneys";
 import { SportsShowcase } from "@/components/home/SportsShowcase";
-import { ProgramsPreview } from "@/components/home/ProgramsPreview";
-import { JavsInboxPreview } from "@/components/home/JavsInboxPreview";
+import { FounderSection } from "@/components/home/FounderSection";
+import { SafeguardingSection } from "@/components/home/SafeguardingSection";
 import { PartnershipsPreview } from "@/components/home/PartnershipsPreview";
-import { FounderPreview } from "@/components/home/FounderPreview";
 import { LocationsPreview } from "@/components/home/LocationsPreview";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col space-y-0">
+      {/* 01. The JAV'S Promise (Hero) */}
       <HeroSection />
-      <StatsBanner />
-      <PillarsSection />
+
+      {/* 02. Experience & Verified Credibility Bar */}
+      <CredibilityBar />
+
+      {/* 03. Signature Feature: Inside the Game — With JAV'S */}
+      <InsideTheGameSection />
+
+      {/* 04. Everything We Do (Capabilities Overview) */}
+      <CapabilityOverview />
+
+      {/* 05. Find Your Path (Audience-Specific Journeys) */}
+      <AudienceJourneys />
+
+      {/* 06. 12 Sports. Structured Development */}
       <SportsShowcase />
-      <ProgramsPreview />
-      <JavsInboxPreview />
+
+      {/* 07. The People Behind JAV'S (Founder & Mentors) */}
+      <FounderSection />
+
+      {/* 08. Standards & Safeguarding */}
+      <SafeguardingSection />
+
+      {/* 09. Bring JAV'S to Your Institution (Institutional Solutions) */}
       <PartnershipsPreview />
-      <FounderPreview />
+
+      {/* 10. Train With JAV'S (Locations & Verified Enquiry) */}
       <LocationsPreview />
     </div>
   );

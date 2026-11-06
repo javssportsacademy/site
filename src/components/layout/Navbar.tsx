@@ -11,14 +11,13 @@ import { PRIMARY_PHONE_DISPLAY, WHATSAPP_PRIMARY_NUMBER, createWhatsAppUrl } fro
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
-  { name: "Home", href: "/" },
-  { name: "All Sports (12)", href: "/sports" },
-  { name: "Age Programs", href: "/programs" },
-  { name: "Jav's Inbox", href: "/javs-inbox", highlight: true },
-  { name: "Partnerships", href: "/partnerships" },
+  { name: "Academy", href: "/about" },
+  { name: "Sports (12)", href: "/sports" },
+  { name: "Programmes", href: "/programs" },
+  { name: "For Institutions", href: "/partnerships" },
+  { name: "Inside the Game", href: "/javs-inbox", highlight: true },
   { name: "Founder", href: "/founder" },
-  { name: "About", href: "/about" },
-  { name: "Contact & Centers", href: "/contact" },
+  { name: "Centers & Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -102,7 +101,7 @@ export function Navbar() {
               triggerButton={
                 <Button size="sm" variant="default" className="font-bold gap-1.5 shadow-md shadow-brand-primary/20">
                   <Calendar className="h-4 w-4" />
-                  <span>Free Trial</span>
+                  <span>Book Assessment</span>
                 </Button>
               }
             />

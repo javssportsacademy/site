@@ -54,20 +54,20 @@ export function TrialBookingModal({
         {triggerButton || (
           <Button variant="default" size="lg" className="font-bold gap-2">
             <CalendarCheck className="h-5 w-5" />
-            <span>Book Free Assessment Session</span>
+            <span>Book Assessment Session</span>
           </Button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[520px] bg-slate-900 border-white/10 text-white">
         <DialogHeader>
           <div className="flex items-center gap-2 text-brand-primary text-xs uppercase font-bold tracking-widest">
-            <CheckCircle2 className="h-4 w-4" /> Free Trial & Physical Assessment
+            <CheckCircle2 className="h-4 w-4" /> Assessment Session & Program Enquiry
           </div>
           <DialogTitle className="text-2xl font-black uppercase text-white mt-1">
             Book Your Session
           </DialogTitle>
           <DialogDescription className="text-brand-text-muted text-sm">
-            Experience our professional coaching firsthand. Fill this quick form to connect directly with Coach Mohammed Javeed on WhatsApp.
+            Experience our structured coaching and discuss age-appropriate batches directly with Coach Mohammed Javeed on WhatsApp.
           </DialogDescription>
         </DialogHeader>
 

@@ -1,60 +1,79 @@
-import { MediaEpisode } from "@/types";
+export interface FeaturedConversation {
+  id: string;
+  guestName: string;
+  guestTitle: string;
+  guestRoleBadge: string;
+  topic: string;
+  format: "Video Interview" | "Technical Masterclass" | "Parent Guidance" | "Match Analysis";
+  duration: string;
+  discussionSummary: string;
+  actionableTakeaway: string;
+  evidenceDisclaimer: string;
+  youtubeUrl: string;
+}
 
 export const JAVS_INBOX_CHANNEL = {
   channelName: "Jav's Inbox",
   handle: "@JavsInbox",
   youtubeUrl: "https://www.youtube.com/@JavsInbox",
   host: "Mohammed Javeed",
-  tagline: "Unfiltered Cricket Conversations, Expert Coach Insights & Grassroots Athlete Guidance",
-  description: "Hosted by Coach Mohammed Javeed (Founder of JAV'S Sports Academy), Jav's Inbox is one of Tamil Nadu's most insightful sports and cricket podcast channels. Featuring in-depth conversations with National Cricket Academy (NCA) coaches, Star Sports Tamil commentators, Ranji Trophy stars, and youth development specialists.",
-  subscriberHighlight: "Active Sports Community",
-  coreTopics: [
-    "Guidance for Cricket Parents & Aspiring Youth Athletes",
-    "Conversations with NCA & BCCI Certified Coaches",
-    "Tactical Match Breakdowns: IPL, CSK, TNPL & International Cricket",
-    "Mental Conditioning & Modern Athlete Biomechanics"
-  ]
+  tagline: "Conversations With The People Who Shape The Game",
+  description: "Curated by Coach Mohammed Javeed (M.P.Ed.), Jav's Inbox is an editorial interview and podcast platform dedicated to exploring high-performance sports insights. Featuring frank, in-depth conversations with international cricketers, National Cricket Academy (NCA) coaches, Ranji Trophy players, and physical education authorities.",
+  curationMission: "We believe parents and young athletes deserve authentic, unvarnished guidance from practitioners who have actually reached the highest echelons of competitive sport.",
+  evidenceDistinctionNotice: "Note: Guest appearances on Jav's Inbox represent independent editorial conversations exploring athletic development. They do not constitute commercial endorsements or partnerships with JAV'S Sports Academy."
 };
 
-export const FEATURED_MEDIA_EPISODES: MediaEpisode[] = [
+export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
   {
-    id: "ep-1",
-    title: "Parent's Role in Youth Cricket: Advice from Top National Coaches",
-    category: "NCA Masterclass",
-    duration: "42 mins",
-    description: "Coach Mohammed Javeed sits down with senior coaches to discuss realistic age milestones, avoiding burnout, choosing the right academies, and building mental resilience in young athletes.",
-    youtubeId: "featured-1",
-    publishedDate: "Recent Episode",
-    viewsOrBadge: "Must Watch for Parents"
+    id: "hemalatha-interview",
+    guestName: "Dayalan Hemalatha",
+    guestTitle: "Indian International Cricketer & WPL Athlete (Gujarat Giants / Railways)",
+    guestRoleBadge: "International Athlete",
+    topic: "Handling Pressure, Patience, and Physical Conditioning in Young Athletes",
+    format: "Video Interview",
+    duration: "45 mins",
+    discussionSummary: "In this candid discussion, international cricketer Dayalan Hemalatha explores the mental and emotional pressures that aspiring youth cricketers face from scoreboards and parental expectations. She shares her personal journey through domestic circuits, emphasizing how emotional patience and physical durability outweigh early rush for selection.",
+    actionableTakeaway: "Key Insight for Parents: Rushing young athletes into high-stakes competitive tournaments before their core physical conditioning and mental composure are set often leads to early dropout. Patience, consistent process, and emotional support at home are the true differentiators.",
+    evidenceDisclaimer: "Independent Sporting Conversation • Jav's Inbox Episode",
+    youtubeUrl: "https://www.youtube.com/@JavsInbox"
   },
   {
-    id: "ep-2",
-    title: "Modern Bowling Biomechanics: Pace Variations & Injury Prevention",
-    category: "Youth Coaching",
-    duration: "28 mins",
-    description: "An in-depth breakdown of load-up, front-foot plant, and shoulder rotation mechanics to add yards of pace while shielding the lower back and shoulders from stress injuries.",
-    youtubeId: "featured-2",
-    publishedDate: "Coaching Series",
-    viewsOrBadge: "Technical Masterclass"
+    id: "nca-coach-masterclass",
+    guestName: "Senior NCA / BCCI Certified Coach",
+    guestTitle: "National Cricket Academy Mentor & Youth Talent Scout",
+    guestRoleBadge: "Elite Coaching Authority",
+    topic: "The Transition from Grassroots Movement to Technical Specialization",
+    format: "Parent Guidance",
+    duration: "38 mins",
+    discussionSummary: "A masterclass examining how premature single-sport overspecialization can harm adolescent motor development. The coach details why multi-sport athletic literacy in childhood produces far more resilient, tactically astute athletes when they begin specialization at age 12+.",
+    actionableTakeaway: "Key Insight for Athletes: Developing multi-directional agility, balance, and spatial awareness through varied sports (like football, badminton, and gymnastics) creates the kinetic foundation needed for elite cricket or racket performance later.",
+    evidenceDisclaimer: "Independent Sporting Conversation • Jav's Inbox Episode",
+    youtubeUrl: "https://www.youtube.com/@JavsInbox"
   },
   {
-    id: "ep-3",
-    title: "IPL & CSK Tactical Breakdown: Match Strategy & Field Placements",
-    category: "Match Analysis",
-    duration: "35 mins",
-    description: "Analyzing high-pressure death overs execution, matchup analytics between left-arm spin and power hitters, and how elite captains manipulate field angles.",
-    youtubeId: "featured-3",
-    publishedDate: "Tactical Series",
-    viewsOrBadge: "Tactical Breakdown"
+    id: "pace-bowling-biomechanics",
+    guestName: "First-Class Ranji Trophy Cricketer",
+    guestTitle: "Veteran Fast Bowler & Bowling Mentor",
+    guestRoleBadge: "State Level Professional",
+    topic: "Pace Variations, Run-Up Biomechanics & Lower-Back Protection",
+    format: "Technical Masterclass",
+    duration: "32 mins",
+    discussionSummary: "An analytical breakdown of fast bowling biomechanics: run-up rhythm, front-foot brace mechanics, shoulder alignment, and avoiding mixed-action stress fractures that frequently derail young fast bowlers.",
+    actionableTakeaway: "Key Insight for Bowlers: Speed is generated by kinetic chain sequencing, not violent muscle strain. Safe bowling mechanics must be ingrained before introducing heavy bowling workloads.",
+    evidenceDisclaimer: "Independent Sporting Conversation • Jav's Inbox Episode",
+    youtubeUrl: "https://www.youtube.com/@JavsInbox"
   },
   {
-    id: "ep-4",
-    title: "Grassroots Sports in Tamil Nadu: Building All-Round Champions",
-    category: "Podcast",
-    duration: "31 mins",
-    description: "Why early multi-sport movement programs (Ages 4-7) produce more durable, adaptable athletes than premature single-sport overspecialization.",
-    youtubeId: "featured-4",
-    publishedDate: "Academy Philosophy",
-    viewsOrBadge: "Grassroots Special"
+    id: "sports-physio-rehab",
+    guestName: "Sports Physical Therapist & Conditioning Coach",
+    guestTitle: "Certified Exercise Physiologist & Athlete Rehab Specialist",
+    guestRoleBadge: "Sports Medicine",
+    topic: "Safe Kinetic Chain Loading & Recovery for School-Age Athletes",
+    format: "Technical Masterclass",
+    duration: "29 mins",
+    discussionSummary: "A grounded discussion on growth-plate vulnerabilities, adequate sleep hygiene, post-practice hydration, and distinguishing between healthy muscular soreness and early overuse tendonitis.",
+    actionableTakeaway: "Key Insight for Coaches & Parents: Young bodies adapt during rest, not during workouts. Monitoring weekly training hours against chronological age is critical for long-term athletic health.",
+    evidenceDisclaimer: "Independent Sporting Conversation • Jav's Inbox Episode",
+    youtubeUrl: "https://www.youtube.com/@JavsInbox"
   }
 ];
