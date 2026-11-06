@@ -46,7 +46,9 @@ export default function SportsDirectoryPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {SPORTS_LIST.map((sport) => (
-            <SportCard key={sport.id} sport={sport} />
+            <div key={sport.id} id={sport.slug} className="scroll-mt-24">
+              <SportCard sport={sport} />
+            </div>
           ))}
         </div>
 

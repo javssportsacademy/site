@@ -21,6 +21,13 @@ import {
   Activity,
   Sparkles,
   MessageCircle,
+  Flame,
+  Zap,
+  Target,
+  Waves,
+  CircleDot,
+  Compass,
+  Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -40,40 +47,77 @@ interface DropdownItem {
 const SPORTS_ITEMS: DropdownItem[] = [
   {
     title: "Cricket",
-    subtitle: "Net & turf drills, biomechanics & match awareness",
-    href: "/sports#cricket",
+    subtitle: "Net & turf drills, biomechanics",
+    href: "/sports/cricket",
     icon: Trophy,
     badge: "Flagship",
   },
   {
     title: "Football",
-    subtitle: "Grass pitch technical skills & tactical teamwork",
-    href: "/sports#football",
+    subtitle: "Grass pitch technical skills & tactics",
+    href: "/sports/football",
     icon: Activity,
+    badge: "Popular",
   },
   {
     title: "Badminton",
-    subtitle: "Indoor synthetic courts, footwork & strokeplay",
-    href: "/sports#badminton",
+    subtitle: "Indoor courts, footwork & smashes",
+    href: "/sports/badminton",
     icon: Sparkles,
   },
   {
     title: "Swimming",
-    subtitle: "Stroke correction, safety & lane conditioning",
-    href: "/sports#swimming",
-    icon: ShieldCheck,
+    subtitle: "Stroke correction, safety & lanes",
+    href: "/sports/swimming",
+    icon: Waves,
   },
   {
     title: "Tennis & Pickleball",
-    subtitle: "Hard courts, agility & modern racket mechanics",
-    href: "/sports#tennis",
-    icon: Trophy,
+    subtitle: "Hard courts & modern racket play",
+    href: "/sports/tennis",
+    icon: CircleDot,
   },
   {
     title: "Athletics & Track",
-    subtitle: "Sprinting rhythm, agility (SAQ) & endurance",
-    href: "/sports#athletics",
-    icon: Users,
+    subtitle: "Sprint rhythm, agility (SAQ) & speed",
+    href: "/sports/athletics",
+    icon: Zap,
+  },
+  {
+    title: "Basketball",
+    subtitle: "Dribble control, jump shots & 3v3",
+    href: "/sports/basketball",
+    icon: Flame,
+  },
+  {
+    title: "Table Tennis",
+    subtitle: "Spin serves & quick table reflexes",
+    href: "/sports/table-tennis",
+    icon: Sparkles,
+  },
+  {
+    title: "Archery",
+    subtitle: "Stance, concentration & precision",
+    href: "/sports/archery",
+    icon: Target,
+  },
+  {
+    title: "Volleyball",
+    subtitle: "Spike approach, setting & net blocks",
+    href: "/sports/volleyball",
+    icon: Award,
+  },
+  {
+    title: "Cycling",
+    subtitle: "Cadence, gear shifting & road safety",
+    href: "/sports/cycling",
+    icon: Compass,
+  },
+  {
+    title: "Handball",
+    subtitle: "3-step jump shots & court agility",
+    href: "/sports/handball",
+    icon: CircleDot,
   },
 ];
 
@@ -226,7 +270,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-200 select-none",
+        "fixed top-0 left-0 right-0 z-40 transition-all duration-200",
         scrolled
           ? "bg-card/95 backdrop-blur-md border-b border-border shadow-xs"
           : "bg-background/95 backdrop-blur-sm border-b border-border/60"
@@ -279,45 +323,45 @@ export function Navbar() {
                 </Link>
 
                 {/* Dropdown Card */}
-                <div className="absolute left-0 top-full pt-2 w-[460px] z-50 hidden group-hover:block group-focus-within:block">
+                <div className="absolute left-0 top-full pt-2 w-[580px] xl:w-[640px] z-50 hidden group-hover:block group-focus-within:block">
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
-                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-border">
+                    <div className="flex items-center justify-between pb-3 mb-2.5 border-b border-border">
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                        12 Olympic & Athletic Disciplines
+                        12 Structured Sports Curriculums
                       </span>
                       <Link
                         href="/sports"
                         className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
                       >
-                        <span>All Curriculums</span>
+                        <span>Full Directory</span>
                         <ChevronRight className="h-3 w-3" />
                       </Link>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-3 gap-1.5">
                       {SPORTS_ITEMS.map((item) => {
                         const Icon = item.icon;
                         return (
                           <Link
                             key={item.title}
                             href={item.href}
-                            className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-muted transition-colors"
+                            className="group/item flex items-start gap-2 p-2 rounded-xl hover:bg-muted transition-colors"
                           >
                             <div className="p-1.5 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                              <Icon className="h-4 w-4" />
+                              <Icon className="h-3.5 w-3.5" />
                             </div>
                             <div className="flex flex-col min-w-0">
-                              <div className="flex items-center gap-1.5">
+                              <div className="flex items-center gap-1">
                                 <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors truncate">
                                   {item.title}
                                 </span>
                                 {item.badge && (
-                                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                                  <span className="text-[8px] font-extrabold uppercase px-1 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 shrink-0">
                                     {item.badge}
                                   </span>
                                 )}
                               </div>
-                              <span className="text-[11px] text-muted-foreground line-clamp-1">
+                              <span className="text-[10px] text-muted-foreground line-clamp-1 leading-tight">
                                 {item.subtitle}
                               </span>
                             </div>
@@ -326,15 +370,16 @@ export function Navbar() {
                       })}
                     </div>
 
-                    <div className="mt-3 pt-3 border-t border-border bg-muted/50 rounded-xl p-2.5 flex items-center justify-between">
+                    <div className="mt-2.5 pt-2.5 border-t border-border bg-muted/40 rounded-xl px-3 py-2 flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">
-                        Also training Basketball, Skating, Karate, Table Tennis & Archery.
+                        Structured coaching from grassroots to competitive squads across Chennai.
                       </span>
                       <Link
                         href="/sports"
-                        className="text-xs font-bold text-brand-primary shrink-0 ml-2 hover:underline"
+                        className="text-xs font-bold text-brand-primary shrink-0 ml-2 hover:underline flex items-center gap-1"
                       >
-                        View 12 →
+                        <span>Explore All 12</span>
+                        <ChevronRight className="h-3 w-3" />
                       </Link>
                     </div>
                   </div>
@@ -706,11 +751,11 @@ export function Navbar() {
           </Link>
 
           {/* Mobile Center: JAV'S Inbox Red Play Icon (Exact Geometric Center) */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+          <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
             <Link
               href="/javs-inbox"
               className={cn(
-                "flex items-center justify-center w-11 h-7.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white shadow-sm transition-transform",
+                "pointer-events-auto flex items-center justify-center w-11 h-8 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white shadow-sm transition-transform",
                 isInboxActive && "ring-2 ring-red-500 ring-offset-1"
               )}
               aria-label="JAV'S Inbox — Inside the Game: Watch & Listen"
@@ -783,6 +828,7 @@ export function Navbar() {
               <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
                 <Link
                   href="/sports"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
                 >
                   <Trophy className="h-4 w-4 text-brand-primary" />
@@ -805,20 +851,24 @@ export function Navbar() {
               </div>
 
               {mobileExpandedSection === "sports" && (
-                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
-                  {SPORTS_ITEMS.map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-foreground/90 hover:bg-muted hover:text-brand-primary transition-colors"
-                    >
-                      <span>{item.title}</span>
-                      <ChevronRight className="h-3 w-3 text-muted-foreground" />
-                    </Link>
-                  ))}
+                <div className="px-3 pb-3 pt-1 space-y-2 bg-muted/20 border-t border-border">
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {SPORTS_ITEMS.map((item) => (
+                      <Link
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-semibold text-foreground/90 hover:bg-muted hover:text-brand-primary transition-colors bg-background/60 border border-border/50"
+                      >
+                        <span className="truncate">{item.title}</span>
+                        <ChevronRight className="h-3 w-3 text-muted-foreground shrink-0" />
+                      </Link>
+                    ))}
+                  </div>
                   <div className="pt-2 border-t border-border/40">
                     <Link
                       href="/sports"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block text-center text-xs font-bold text-brand-primary py-1.5 hover:underline"
                     >
                       View All 12 Sports & Curriculums →
@@ -833,6 +883,7 @@ export function Navbar() {
               <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
                 <Link
                   href="/programs"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
                 >
                   <Activity className="h-4 w-4 text-brand-primary" />
@@ -860,6 +911,7 @@ export function Navbar() {
                     <Link
                       key={item.title}
                       href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-foreground/90 hover:bg-muted hover:text-brand-primary transition-colors"
                     >
                       <span>{item.title}</span>
@@ -869,6 +921,7 @@ export function Navbar() {
                   <div className="pt-2 border-t border-border/40">
                     <Link
                       href="/programs"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block text-center text-xs font-bold text-brand-primary py-1.5 hover:underline"
                     >
                       Explore Full Age Pathways →
@@ -883,6 +936,7 @@ export function Navbar() {
               <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
                 <Link
                   href="/partnerships"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
                 >
                   <Building2 className="h-4 w-4 text-brand-primary" />
@@ -910,6 +964,7 @@ export function Navbar() {
                     <Link
                       key={item.title}
                       href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-foreground/90 hover:bg-muted hover:text-brand-primary transition-colors"
                     >
                       <span>{item.title}</span>
@@ -919,6 +974,7 @@ export function Navbar() {
                   <div className="pt-2 border-t border-border/40">
                     <Link
                       href="/partnerships"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block text-center text-xs font-bold text-brand-primary py-1.5 hover:underline"
                     >
                       View Institutional Services & Turnkey PE →
@@ -933,6 +989,7 @@ export function Navbar() {
               <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
                 <Link
                   href="/about"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
                 >
                   <ShieldCheck className="h-4 w-4 text-brand-primary" />
@@ -960,6 +1017,7 @@ export function Navbar() {
                     <Link
                       key={item.title}
                       href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-foreground/90 hover:bg-muted hover:text-brand-primary transition-colors"
                     >
                       <div className="flex items-center gap-1.5">
@@ -982,6 +1040,7 @@ export function Navbar() {
               <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
                 <Link
                   href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
                 >
                   <MapPin className="h-4 w-4 text-brand-primary" />
@@ -1009,6 +1068,7 @@ export function Navbar() {
                     <Link
                       key={item.title}
                       href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold text-foreground/90 hover:bg-muted hover:text-brand-primary transition-colors"
                     >
                       <span>{item.title}</span>
@@ -1018,6 +1078,7 @@ export function Navbar() {
                   <div className="pt-2 border-t border-border/40">
                     <Link
                       href="/contact"
+                      onClick={() => setMobileMenuOpen(false)}
                       className="block text-center text-xs font-bold text-brand-primary py-1.5 hover:underline"
                     >
                       View Map Directions & Timings →

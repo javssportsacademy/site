@@ -38,7 +38,7 @@ export default function ProgramsPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 space-y-24">
         {/* Section 1: Age Pathways */}
-        <section className="space-y-12">
+        <section className="space-y-12" id="age-pathways">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <Badge variant="default" className="text-xs uppercase tracking-widest font-bold">
               Development Milestones
@@ -53,70 +53,71 @@ export default function ProgramsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {AGE_PROGRAMS.map((prog) => (
-              <Card
-                key={prog.id}
-                className="flex flex-col justify-between bg-card border-border hover:border-brand-primary/40 transition-all duration-300 hover:-translate-y-1.5 shadow-sm hover:shadow-md"
-              >
-                <CardHeader className="p-8 pb-4">
-                  <Badge variant="default" className="w-fit mb-3 text-xs font-bold uppercase tracking-wider">
-                    {prog.ageBracket}
-                  </Badge>
-                  <CardTitle className="text-2xl font-black uppercase text-foreground tracking-tight">
-                    {prog.title}
-                  </CardTitle>
-                  <p className="text-xs font-semibold text-brand-primary mt-1">
-                    {prog.tagline}
-                  </p>
-                </CardHeader>
-
-                <CardContent className="p-8 pt-2 space-y-6 flex-grow">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {prog.description}
-                  </p>
-
-                  <div className="space-y-2 pt-4 border-t border-border">
-                    <p className="text-xs font-bold uppercase tracking-wider text-foreground">
-                      Core Curriculum Drills:
+              <div key={prog.id} id={prog.id} className="scroll-mt-24 flex flex-col">
+                <Card
+                  className="flex flex-col justify-between bg-card border-border hover:border-brand-primary/40 transition-all duration-300 hover:-translate-y-1.5 shadow-sm hover:shadow-md h-full"
+                >
+                  <CardHeader className="p-8 pb-4">
+                    <Badge variant="default" className="w-fit mb-3 text-xs font-bold uppercase tracking-wider">
+                      {prog.ageBracket}
+                    </Badge>
+                    <CardTitle className="text-2xl font-black uppercase text-foreground tracking-tight">
+                      {prog.title}
+                    </CardTitle>
+                    <p className="text-xs font-semibold text-brand-primary mt-1">
+                      {prog.tagline}
                     </p>
-                    <ul className="space-y-2 text-xs text-muted-foreground">
-                      {prog.highlights.map((hl, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <Check className="h-4 w-4 text-brand-primary shrink-0 mt-0.5" />
-                          <span>{hl}</span>
-                        </li>
+                  </CardHeader>
+
+                  <CardContent className="p-8 pt-2 space-y-6 flex-grow">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {prog.description}
+                    </p>
+
+                    <div className="space-y-2 pt-4 border-t border-border">
+                      <p className="text-xs font-bold uppercase tracking-wider text-foreground">
+                        Core Curriculum Drills:
+                      </p>
+                      <ul className="space-y-2 text-xs text-muted-foreground">
+                        {prog.highlights.map((hl, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <Check className="h-4 w-4 text-brand-primary shrink-0 mt-0.5" />
+                            <span>{hl}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {prog.focusAreas.map((f, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2.5 py-1 rounded-md bg-muted text-[10px] font-bold text-foreground border border-border uppercase"
+                        >
+                          {f}
+                        </span>
                       ))}
-                    </ul>
-                  </div>
+                    </div>
+                  </CardContent>
 
-                  <div className="flex flex-wrap gap-1.5 pt-2">
-                    {prog.focusAreas.map((f, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2.5 py-1 rounded-md bg-muted text-[10px] font-bold text-foreground border border-border uppercase"
-                      >
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-
-                <CardFooter className="p-8 pt-0 border-t border-border">
-                  <TrialBookingModal
-                    defaultSport={prog.title}
-                    triggerButton={
-                      <Button variant="default" className="w-full font-bold shadow-xs">
-                        <span>Book Assessment for this Age Group</span>
-                      </Button>
-                    }
-                  />
-                </CardFooter>
-              </Card>
+                  <CardFooter className="p-8 pt-0 border-t border-border">
+                    <TrialBookingModal
+                      defaultSport={prog.title}
+                      triggerButton={
+                        <Button variant="default" className="w-full font-bold shadow-xs">
+                          <span>Book Assessment for this Age Group</span>
+                        </Button>
+                      }
+                    />
+                  </CardFooter>
+                </Card>
+              </div>
             ))}
           </div>
         </section>
 
         {/* Section 2: Sports Science & Performance Development */}
-        <section className="p-8 sm:p-14 rounded-3xl bg-card border border-border shadow-md space-y-12">
+        <section id="sports-science" className="scroll-mt-24 p-8 sm:p-14 rounded-3xl bg-card border border-border shadow-md space-y-12">
           <div className="max-w-3xl space-y-3">
             <Badge variant="cyan" className="text-xs uppercase tracking-widest font-bold">
               Scientific Foundation

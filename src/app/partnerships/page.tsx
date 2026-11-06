@@ -47,7 +47,8 @@ export default function PartnershipsPage() {
             {INSTITUTIONAL_PARTNERS.map((partner) => (
               <Card
                 key={partner.id}
-                className="flex flex-col justify-between bg-card border-border hover:border-brand-primary/40 transition-all duration-300 shadow-sm hover:shadow-md p-8"
+                id={partner.id}
+                className="scroll-mt-24 flex flex-col justify-between bg-card border-border hover:border-brand-primary/40 transition-all duration-300 shadow-sm hover:shadow-md p-8"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
@@ -111,7 +112,7 @@ export default function PartnershipsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Case Study 1: School Sports Day Model */}
-            <Card className="bg-card border-border p-8 rounded-3xl shadow-sm space-y-5">
+            <Card id="sports-days" className="scroll-mt-24 bg-card border-border p-8 rounded-3xl shadow-sm space-y-5">
               <div className="flex items-center justify-between gap-2">
                 <Badge variant="default" className="text-xs font-bold uppercase tracking-wider">
                   School Execution Model

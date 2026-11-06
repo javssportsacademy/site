@@ -115,7 +115,8 @@ export default function ContactPage() {
               {ACADEMY_LOCATIONS.map((loc) => (
                 <Card
                   key={loc.id}
-                  className="bg-card border-border p-8 rounded-3xl shadow-sm space-y-6"
+                  id={loc.id}
+                  className="scroll-mt-24 bg-card border-border p-8 rounded-3xl shadow-sm space-y-6"
                 >
                   <div className="flex items-center justify-between gap-2">
                     <Badge variant="default" className="text-xs font-bold uppercase tracking-wider">

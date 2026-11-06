@@ -1,10 +1,11 @@
 import React from "react";
 import { SubpageHero } from "@/components/layout/SubpageHero";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 import { DirectWhatsAppButton } from "@/components/shared/DirectWhatsAppButton";
-import { Shield, Target, Compass, Award, Heart, CheckCircle2 } from "lucide-react";
+import { Shield, Target, Compass, Award, Heart, CheckCircle2, Trophy, Sparkles, UserCheck } from "lucide-react";
+import { COACHING_TEAM, ACADEMY_ACHIEVEMENTS } from "@/lib/constants/team";
 
 export const metadata = {
   title: "About Us & Safeguarding | JAV'S SPORTS ACADEMY Chennai",
@@ -121,6 +122,97 @@ export function AboutPage() {
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {val.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Section: Coaching Team & Mentors */}
+        <section id="team" className="scroll-mt-24 space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <Badge variant="default" className="text-xs uppercase tracking-widest font-bold">
+              Experienced Mentorship
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-black uppercase text-foreground tracking-tight">
+              Coaching Team & Mentors
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
+              Led by Director Coach Mohammed Javeed (M.P.Ed.), alongside specialist mentors in pace bowling, spin bowling, and athletic physical conditioning.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {COACHING_TEAM.map((coach) => (
+              <Card
+                key={coach.id}
+                className="bg-card border-border p-8 rounded-3xl shadow-sm hover:shadow-md transition-all space-y-5"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <Badge variant="default" className="text-xs font-bold uppercase tracking-wider">
+                    {coach.badge}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground font-semibold">
+                    {coach.experience}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-black uppercase text-foreground tracking-tight">
+                    {coach.name}
+                  </h3>
+                  <p className="text-sm font-bold text-brand-primary mt-0.5">
+                    {coach.role}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {coach.credentials}
+                  </p>
+                </div>
+
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  {coach.bio}
+                </p>
+
+                <div className="pt-3 border-t border-border flex items-center gap-2 text-xs font-semibold text-foreground/90">
+                  <UserCheck className="h-4 w-4 text-brand-primary shrink-0" />
+                  <span>Specialty: <strong className="text-foreground">{coach.specialty}</strong></span>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Section: Proven Milestones & Achievements */}
+        <section id="achievements" className="scroll-mt-24 space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <Badge variant="default" className="text-xs uppercase tracking-widest font-bold">
+              Proven Track Record
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-black uppercase text-foreground tracking-tight">
+              Proven Milestones & Records
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
+              Verifiable athlete honours, district league representations, institutional case studies, and sports education outreach across Chennai.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {ACADEMY_ACHIEVEMENTS.map((ach) => (
+              <div
+                key={ach.id}
+                className="p-6 rounded-3xl bg-card border border-border shadow-xs hover:border-brand-primary/40 transition-colors space-y-3"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-bold uppercase px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                    {ach.tag}
+                  </span>
+                  <Trophy className="h-4 w-4 text-brand-primary" />
+                </div>
+                <h3 className="text-lg font-black uppercase text-foreground tracking-tight">
+                  {ach.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  {ach.description}
                 </p>
               </div>
             ))}
