@@ -10,9 +10,8 @@ const PILLARS = [
     id: "sports-excellence",
     title: "Sports Excellence",
     icon: Trophy,
-    color: "text-amber-400",
+    color: "text-amber-500",
     borderColor: "hover:border-amber-500/50",
-    bgGlow: "from-amber-500/10",
     desc: "Professional coaching, skill development, tactical understanding, and competitive tournament performance.",
     points: [
       "Certified coach-led technical progression",
@@ -25,9 +24,8 @@ const PILLARS = [
     id: "fitness-wellness",
     title: "Fitness & Wellness",
     icon: HeartPulse,
-    color: "text-cyan-400",
+    color: "text-cyan-600 dark:text-cyan-400",
     borderColor: "hover:border-cyan-500/50",
-    bgGlow: "from-cyan-500/10",
     desc: "Movement development, physical conditioning, healthy ageing, and lifelong fitness for every generation.",
     points: [
       "Speed, Agility & Quickness (SAQ) drills",
@@ -40,9 +38,8 @@ const PILLARS = [
     id: "mind-character",
     title: "Mind & Character",
     icon: Brain,
-    color: "text-red-400",
+    color: "text-red-500",
     borderColor: "hover:border-red-500/50",
-    bgGlow: "from-red-500/10",
     desc: "Confidence, discipline, leadership, mental conditioning, emotional composure, and sportsmanship resilience.",
     points: [
       "Managing scoreboard pressure & self-doubt",
@@ -55,9 +52,8 @@ const PILLARS = [
     id: "events-partnerships",
     title: "Events & Partnerships",
     icon: Shield,
-    color: "text-emerald-400",
+    color: "text-emerald-600 dark:text-emerald-400",
     borderColor: "hover:border-emerald-500/50",
-    bgGlow: "from-emerald-500/10",
     desc: "Sports events, school sports days, corporate leagues, qualified officiating, and community programmes.",
     points: [
       "Turnkey annual sports day management",
@@ -70,7 +66,7 @@ const PILLARS = [
 
 export function PillarsSection() {
   return (
-    <section className="py-24 bg-slate-950 relative overflow-hidden">
+    <section className="py-24 bg-background relative overflow-hidden border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
           badge="Our Core Pillars"
@@ -79,11 +75,11 @@ export function PillarsSection() {
         />
 
         {/* Central Quote Callout */}
-        <div className="max-w-4xl mx-auto mb-16 p-8 rounded-3xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-red-500/10 border border-white/10 text-center relative shadow-2xl">
-          <p className="text-xl sm:text-2xl md:text-3xl font-black italic text-white tracking-tight">
+        <div className="max-w-4xl mx-auto mb-16 p-8 rounded-3xl bg-gradient-to-r from-amber-500/5 via-card to-red-500/5 border border-border text-center relative shadow-sm">
+          <p className="text-xl sm:text-2xl md:text-3xl font-black italic text-foreground tracking-tight">
             &ldquo;We develop people through sport, not just players for the game.&rdquo;
           </p>
-          <p className="mt-3 text-sm sm:text-base text-brand-text-muted max-w-2xl mx-auto">
+          <p className="mt-3 text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
             Every session is an opportunity to build discipline, confidence, teamwork, resilience and an authentic growth mindset that endures far beyond the field.
           </p>
         </div>
@@ -95,22 +91,22 @@ export function PillarsSection() {
             return (
               <Card
                 key={pillar.id}
-                className={`relative flex flex-col justify-between bg-slate-900/90 border-white/10 transition-all duration-300 ${pillar.borderColor} hover:-translate-y-1.5 shadow-xl group`}
+                className={`relative flex flex-col justify-between bg-card border-border transition-all duration-300 ${pillar.borderColor} hover:-translate-y-1.5 shadow-sm hover:shadow-md group`}
               >
                 <CardHeader className="p-6">
-                  <div className={`w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center ${pillar.color} mb-4 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-muted border border-border flex items-center justify-center ${pillar.color} mb-4 group-hover:scale-110 transition-transform shadow-2xs`}>
                     <Icon className="h-7 w-7" />
                   </div>
-                  <CardTitle className="text-xl font-black uppercase tracking-tight text-white group-hover:text-brand-primary transition-colors">
+                  <CardTitle className="text-xl font-black uppercase tracking-tight text-foreground group-hover:text-brand-primary transition-colors">
                     {pillar.title}
                   </CardTitle>
                 </CardHeader>
 
                 <CardContent className="p-6 pt-0 space-y-4 flex-grow">
-                  <p className="text-sm text-brand-text-muted leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {pillar.desc}
                   </p>
-                  <ul className="space-y-2 pt-2 border-t border-white/5 text-xs text-slate-300">
+                  <ul className="space-y-2 pt-2 border-t border-border text-xs text-muted-foreground">
                     {pillar.points.map((pt, idx) => (
                       <li key={idx} className="flex items-start gap-2">
                         <span className={`text-sm ${pillar.color}`}>•</span>
@@ -120,10 +116,10 @@ export function PillarsSection() {
                   </ul>
                 </CardContent>
 
-                <div className="p-6 pt-0 mt-auto border-t border-white/5">
+                <div className="p-6 pt-0 mt-auto border-t border-border">
                   <Link
                     href={pillar.link}
-                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-brand-primary transition-colors pt-2"
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-foreground hover:text-brand-primary transition-colors pt-2"
                   >
                     <span>Learn More</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -135,31 +131,31 @@ export function PillarsSection() {
         </div>
 
         {/* Vision & Mission Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 pt-12 border-t border-white/10">
-          <div className="p-8 rounded-3xl bg-slate-900/70 border border-white/10 relative overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 pt-12 border-t border-border">
+          <div className="p-8 rounded-3xl bg-card border border-border shadow-xs">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-xl bg-amber-500/10 text-brand-primary">
+              <div className="p-2.5 rounded-xl bg-amber-500/10 text-brand-primary">
                 <Target className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-black uppercase text-white tracking-wide">
+              <h3 className="text-xl font-black uppercase text-foreground tracking-wide">
                 Our Vision
               </h3>
             </div>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               To build a trusted and progressive sports organisation that transforms how people learn, play, perform and live through sport.
             </p>
           </div>
 
-          <div className="p-8 rounded-3xl bg-slate-900/70 border border-white/10 relative overflow-hidden">
+          <div className="p-8 rounded-3xl bg-card border border-border shadow-xs">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400">
+              <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
                 <Compass className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-black uppercase text-white tracking-wide">
+              <h3 className="text-xl font-black uppercase text-foreground tracking-wide">
                 Our Mission
               </h3>
             </div>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               To deliver inclusive, age-appropriate and professionally guided sports and fitness programmes that develop skills, strengthen communities and inspire lifelong physical activity.
             </p>
           </div>

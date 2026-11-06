@@ -1,68 +1,94 @@
 /* ==========================================================================
-   JAV'S SPORTS ACADEMY — REVISED V2 BRAND THEME & PALETTES
+   JAV'S SPORTS ACADEMY — SHADCN UNIFIED THEME SYSTEM
    --------------------------------------------------------------------------
-   Athletic Editorial & Performance Precision Design System.
-   Restrained, high-trust institutional palette with warm-white reading panels
-   and disciplined athletic amber accents.
+   Light mode by default with full Next-Themes Shadcn Provider support.
+   Both Light & Dark modes share authoritative Athletic Amber (#D97706).
    ========================================================================== */
 
 :root {
-  /* --- Brand Core Palette --- */
-  --brand-primary: #D97706;        /* Athletic Amber (Deep, grounded, authoritative) */
-  --brand-primary-hover: #B45309;  /* Deeper Amber */
-  --brand-primary-light: #FEF3C7;  /* Soft Amber glow */
+  /* --- Shadcn UI Light Mode Tokens (Default) --- */
+  --background: #F8FAFC;          /* Clean Slate-50 background */
+  --foreground: #0F172A;          /* Crisp Slate-900 typography */
+  
+  --card: #FFFFFF;                /* Crisp White card surface */
+  --card-foreground: #0F172A;
 
-  --brand-crimson: #DC2626;        /* Sporting Crimson (Restrained accent for media/live) */
-  --brand-crimson-hover: #B91C1C;
-  --brand-crimson-light: #FEE2E2;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
 
-  --brand-cyan: #0284C7;           /* Technical Precision Blue */
-  --brand-cyan-hover: #0369A1;
-
-  /* --- Athletic Dark Canvas (Default) --- */
-  --brand-bg: #0A1120;             /* Stadium Obsidian / Deep Charcoal base */
-  --brand-bg-elevated: #0F172A;    /* Slate 900 */
-  --brand-surface: #141E33;        /* Restrained dark card surface */
-  --brand-surface-hover: #1E293B;  /* Slate 800 */
-  --brand-border: rgba(255, 255, 255, 0.08);
-  --brand-border-subtle: rgba(255, 255, 255, 0.05);
-
-  /* --- Editorial Contrast Panels (Light/Warm Surfaces) --- */
-  --brand-editorial-bg: #FAFAF9;   /* Warm Stone White for high-trust reading */
-  --brand-editorial-surface: #FFFFFF;
-  --brand-editorial-text: #0F172A; /* Deep Charcoal for crisp legibility */
-  --brand-editorial-muted: #57534E;
-  --brand-editorial-border: #E7E5E4;
-
-  /* --- Typography --- */
-  --brand-text-primary: #F8FAFC;   /* Slate 50 */
-  --brand-text-secondary: #CBD5E1; /* Slate 300 */
-  --brand-text-muted: #94A3B8;     /* Slate 400 */
-
-  /* --- Accents & UI Status --- */
-  --brand-whatsapp: #25D366;       /* Official WhatsApp Green */
-  --brand-whatsapp-hover: #1EBE5D;
-  --brand-youtube: #FF0000;        /* Official YouTube Red */
-
-  /* --- Shadcn Semantic Variable Mappings --- */
-  --background: var(--brand-bg);
-  --foreground: var(--brand-text-primary);
-  --card: var(--brand-surface);
-  --card-foreground: var(--brand-text-primary);
-  --popover: var(--brand-surface);
-  --popover-foreground: var(--brand-text-primary);
-  --primary: var(--brand-primary);
+  --primary: #D97706;             /* Athletic Amber */
   --primary-foreground: #FFFFFF;
-  --secondary: var(--brand-surface-hover);
-  --secondary-foreground: var(--brand-text-primary);
-  --muted: var(--brand-bg-elevated);
-  --muted-foreground: var(--brand-text-muted);
-  --accent: var(--brand-cyan);
-  --accent-foreground: #FFFFFF;
-  --destructive: var(--brand-crimson);
+
+  --secondary: #F1F5F9;           /* Slate-100 secondary */
+  --secondary-foreground: #0F172A;
+
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;    /* Slate-500 muted text */
+
+  --accent: #F1F5F9;
+  --accent-foreground: #0F172A;
+
+  --destructive: #DC2626;
   --destructive-foreground: #FFFFFF;
-  --border: var(--brand-border);
-  --input: var(--brand-surface);
-  --ring: var(--brand-primary);
+
+  --border: #E2E8F0;             /* Slate-200 hairline border */
+  --input: #E2E8F0;
+  --ring: #D97706;
   --radius: 0.75rem;
+
+  /* --- Brand Custom Palette --- */
+  --brand-primary: #D97706;
+  --brand-primary-hover: #B45309;
+  --brand-primary-light: #FEF3C7;
+  --brand-crimson: #DC2626;
+  --brand-cyan: #0284C7;
+  --brand-whatsapp: #16A34A;
+  --brand-youtube: #DC2626;
+
+  /* --- Elevated surface for cards in light mode --- */
+  --surface-elevated: #FFFFFF;
+  --surface-subtle: #F1F5F9;
+}
+
+.dark {
+  /* --- Shadcn UI Dark Mode Tokens --- */
+  --background: #090D16;          /* Deep stadium obsidian */
+  --foreground: #F8FAFC;          /* Clean Slate-50 */
+
+  --card: #0F172A;                /* Slate-900 elevated card */
+  --card-foreground: #F8FAFC;
+
+  --popover: #0F172A;
+  --popover-foreground: #F8FAFC;
+
+  --primary: #D97706;             /* Athletic Amber */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #1E293B;           /* Slate-800 */
+  --secondary-foreground: #F8FAFC;
+
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;    /* Slate-400 */
+
+  --accent: #1E293B;
+  --accent-foreground: #F8FAFC;
+
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #D97706;
+
+  /* --- Brand Custom Palette in Dark --- */
+  --brand-primary: #D97706;
+  --brand-primary-hover: #B45309;
+  --brand-primary-light: rgba(217, 119, 6, 0.2);
+  --brand-crimson: #EF4444;
+  --brand-cyan: #38BDF8;
+  --brand-whatsapp: #22C55E;
+  --brand-youtube: #EF4444;
+
+  --surface-elevated: #0F172A;
+  --surface-subtle: #1E293B;
 }

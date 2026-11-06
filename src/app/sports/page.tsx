@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function SportsDirectoryPage() {
   return (
-    <div className="bg-slate-950 pb-24">
+    <div className="bg-background pb-24 text-foreground">
       <SubpageHero
         badge="Structured Curriculum"
         title="12 Sporting Disciplines"
@@ -27,14 +27,14 @@ export default function SportsDirectoryPage() {
 
       {/* Main Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <div className="p-6 rounded-2xl bg-amber-500/10 border border-brand-primary/20 mb-12 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-amber-500/10 border border-brand-primary/20 mb-12 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
           <div className="flex items-center gap-3">
             <Award className="h-6 w-6 text-brand-primary shrink-0" />
             <div>
-              <p className="font-bold text-white text-sm">
+              <p className="font-bold text-foreground text-sm">
                 Multi-Sport Foundation or Single-Sport Specialization
               </p>
-              <p className="text-xs text-brand-text-muted">
+              <p className="text-xs text-muted-foreground">
                 Athletes can build broad athletic literacy across multiple sports before focusing on competitive state/district squads.
               </p>
             </div>
@@ -51,8 +51,8 @@ export default function SportsDirectoryPage() {
         </div>
 
         {/* Disclaimer / Note from Brochure */}
-        <div className="mt-16 p-6 rounded-2xl bg-slate-900 border border-white/10 text-center">
-          <p className="text-xs text-brand-text-muted italic">
+        <div className="mt-16 p-6 rounded-2xl bg-card border border-border text-center shadow-xs">
+          <p className="text-xs text-muted-foreground italic">
             &ldquo;Gallery images and sport availability may vary by location and programme. Batch timings and equipment lists are provided upon enrollment.&rdquo;
           </p>
         </div>

@@ -6,13 +6,14 @@ import { CapabilityOverview } from "@/components/home/CapabilityOverview";
 import { AudienceJourneys } from "@/components/home/AudienceJourneys";
 import { SportsShowcase } from "@/components/home/SportsShowcase";
 import { FounderSection } from "@/components/home/FounderSection";
+import { TeamAndAchievements } from "@/components/home/TeamAndAchievements";
 import { SafeguardingSection } from "@/components/home/SafeguardingSection";
 import { PartnershipsPreview } from "@/components/home/PartnershipsPreview";
 import { LocationsPreview } from "@/components/home/LocationsPreview";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col space-y-0">
+    <div className="flex flex-col space-y-0 bg-background text-foreground">
       {/* 01. The JAV'S Promise (Hero) */}
       <HeroSection />
 
@@ -31,16 +32,19 @@ export default function HomePage() {
       {/* 06. 12 Sports. Structured Development */}
       <SportsShowcase />
 
-      {/* 07. The People Behind JAV'S (Founder & Mentors) */}
+      {/* 07. The People Behind JAV'S (Founder Leadership) */}
       <FounderSection />
 
-      {/* 08. Standards & Safeguarding */}
+      {/* 08. Specialist Mentors & Proven Milestones (Blocker 3: Coaching Team & Achievements) */}
+      <TeamAndAchievements />
+
+      {/* 09. Standards & Safeguarding */}
       <SafeguardingSection />
 
-      {/* 09. Bring JAV'S to Your Institution (Institutional Solutions) */}
+      {/* 10. Bring JAV'S to Your Institution (Institutional Solutions) */}
       <PartnershipsPreview />
 
-      {/* 10. Train With JAV'S (Locations & Verified Enquiry) */}
+      {/* 11. Train With JAV'S (Locations & Verified Enquiry) */}
       <LocationsPreview />
     </div>
   );

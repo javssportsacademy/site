@@ -54,19 +54,19 @@ export function TrialBookingModal({
         {triggerButton || (
           <Button variant="default" size="lg" className="font-bold gap-2">
             <CalendarCheck className="h-5 w-5" />
-            <span>Book Assessment Session</span>
+            <span>Programme Enquiry & Assessment</span>
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[520px] bg-slate-900 border-white/10 text-white">
+      <DialogContent className="sm:max-w-[520px] bg-card border-border text-foreground shadow-2xl">
         <DialogHeader>
           <div className="flex items-center gap-2 text-brand-primary text-xs uppercase font-bold tracking-widest">
-            <CheckCircle2 className="h-4 w-4" /> Assessment Session & Program Enquiry
+            <CheckCircle2 className="h-4 w-4" /> Assessment Session & Programme Enquiry
           </div>
-          <DialogTitle className="text-2xl font-black uppercase text-white mt-1">
-            Book Your Session
+          <DialogTitle className="text-2xl font-black uppercase text-foreground mt-1">
+            Book Your Assessment
           </DialogTitle>
-          <DialogDescription className="text-brand-text-muted text-sm">
+          <DialogDescription className="text-muted-foreground text-sm">
             Experience our structured coaching and discuss age-appropriate batches directly with Coach Mohammed Javeed on WhatsApp.
           </DialogDescription>
         </DialogHeader>
@@ -74,7 +74,7 @@ export function TrialBookingModal({
         <form onSubmit={handleSubmit} className="space-y-4 mt-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-brand-text-secondary uppercase mb-1">
+              <label className="block text-xs font-semibold text-foreground uppercase mb-1">
                 Participant Name *
               </label>
               <input
@@ -83,11 +83,11 @@ export function TrialBookingModal({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Rahul / Aditi"
-                className="w-full h-11 px-3 rounded-lg bg-slate-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary text-sm"
+                className="w-full h-11 px-3.5 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-brand-primary text-sm"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-brand-text-secondary uppercase mb-1">
+              <label className="block text-xs font-semibold text-foreground uppercase mb-1">
                 WhatsApp Phone *
               </label>
               <input
@@ -96,56 +96,56 @@ export function TrialBookingModal({
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="e.g. 9876543210"
-                className="w-full h-11 px-3 rounded-lg bg-slate-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary text-sm"
+                className="w-full h-11 px-3.5 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-brand-primary text-sm"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-brand-text-secondary uppercase mb-1">
+              <label className="block text-xs font-semibold text-foreground uppercase mb-1">
                 Select Sport
               </label>
               <select
                 value={sport}
                 onChange={(e) => setSport(e.target.value)}
-                className="w-full h-11 px-3 rounded-lg bg-slate-800 border border-white/10 text-white focus:outline-none focus:border-brand-primary text-sm"
+                className="w-full h-11 px-3 rounded-xl bg-muted/50 border border-border text-foreground focus:outline-none focus:border-brand-primary text-sm"
               >
                 {SPORTS_LIST.map((s) => (
-                  <option key={s.id} value={s.name}>
+                  <option key={s.id} value={s.name} className="bg-card text-foreground">
                     {s.name}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-brand-text-secondary uppercase mb-1">
+              <label className="block text-xs font-semibold text-foreground uppercase mb-1">
                 Age Category
               </label>
               <select
                 value={ageBracket}
                 onChange={(e) => setAgeBracket(e.target.value)}
-                className="w-full h-11 px-3 rounded-lg bg-slate-800 border border-white/10 text-white focus:outline-none focus:border-brand-primary text-sm"
+                className="w-full h-11 px-3 rounded-xl bg-muted/50 border border-border text-foreground focus:outline-none focus:border-brand-primary text-sm"
               >
-                <option value="Ages 4-5 (Early Years Movement)">Ages 4-5 (Early Years)</option>
-                <option value="Ages 6-12 (Junior)">Ages 6-12 (Junior)</option>
-                <option value="Ages 13-17 (Youth / Competitive)">Ages 13-17 (Youth)</option>
-                <option value="Adults & Senior Fitness (18+ / 50+)">Adults & Senior Fitness</option>
+                <option value="Ages 4-5 (Early Years Movement)" className="bg-card text-foreground">Ages 4-5 (Early Years)</option>
+                <option value="Ages 6-12 (Junior)" className="bg-card text-foreground">Ages 6-12 (Junior)</option>
+                <option value="Ages 13-17 (Youth / Competitive)" className="bg-card text-foreground">Ages 13-17 (Youth)</option>
+                <option value="Adults & Senior Fitness (18+ / 50+)" className="bg-card text-foreground">Adults & Senior Fitness</option>
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-brand-text-secondary uppercase mb-1">
+            <label className="block text-xs font-semibold text-foreground uppercase mb-1">
               Preferred Academy Location
             </label>
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full h-11 px-3 rounded-lg bg-slate-800 border border-white/10 text-white focus:outline-none focus:border-brand-primary text-sm"
+              className="w-full h-11 px-3 rounded-xl bg-muted/50 border border-border text-foreground focus:outline-none focus:border-brand-primary text-sm"
             >
               {ACADEMY_LOCATIONS.map((loc) => (
-                <option key={loc.id} value={loc.name}>
+                <option key={loc.id} value={loc.name} className="bg-card text-foreground">
                   {loc.name} ({loc.area})
                 </option>
               ))}
@@ -153,15 +153,15 @@ export function TrialBookingModal({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-brand-text-secondary uppercase mb-1">
+            <label className="block text-xs font-semibold text-foreground uppercase mb-1">
               Goals or Experience (Optional)
             </label>
             <textarea
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="e.g. Beginner looking to learn basics, or preparing for school team trials..."
-              className="w-full p-3 rounded-lg bg-slate-800 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary text-sm resize-none"
+              placeholder="e.g. Beginner looking to learn fundamentals, or preparing for school team trials..."
+              className="w-full p-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-brand-primary text-sm resize-none"
             />
           </div>
 
@@ -169,13 +169,13 @@ export function TrialBookingModal({
             type="submit"
             variant="whatsapp"
             size="lg"
-            className="w-full font-bold gap-2 text-base mt-2"
+            className="w-full font-bold gap-2 text-base mt-2 shadow-md"
           >
             <MessageCircle className="h-5 w-5 fill-current" />
-            <span>Send Request on WhatsApp</span>
+            <span>Send Enquiry on WhatsApp</span>
           </Button>
-          <p className="text-center text-xs text-brand-text-muted">
-            Instant booking • No commitment • Equipment provided during trial
+          <p className="text-center text-xs text-muted-foreground">
+            Direct response from Coach Mohammed Javeed • No commitment required
           </p>
         </form>
       </DialogContent>

@@ -14,6 +14,10 @@ export function createWhatsAppUrl(message: string, phoneNumber: string = WHATSAP
   return `https://wa.me/${phoneNumber}?text=${encoded}`;
 }
 
+export function getQuickChatWhatsAppUrl(): string {
+  return createWhatsAppUrl("Hi Coach Mohammed Javeed, I would like to enquire about sports training at JAV'S Sports Academy.");
+}
+
 export function getTrialBookingWhatsAppUrl(payload: Partial<TrialBookingPayload>): string {
   const sport = payload.sport || "General Sports Assessment";
   const age = payload.ageBracket || "Not specified";
@@ -22,13 +26,13 @@ export function getTrialBookingWhatsAppUrl(payload: Partial<TrialBookingPayload>
   const phone = payload.phone ? `\n- Phone: ${payload.phone}` : "";
   const notes = payload.message ? `\n- Notes: ${payload.message}` : "";
 
-  const text = `🏏 *JAV'S SPORTS ACADEMY — Free Trial Booking Request*
+  const text = `🏆 *JAV'S SPORTS ACADEMY — Programme Assessment Enquiry*
 ${name}${phone}
 - Sport: ${sport}
 - Age Category: ${age}
 - Preferred Location: ${location}${notes}
 
-Please confirm slot availability for my trial session. Thank you!`;
+Please confirm batch schedule and assessment slot details. Thank you!`;
 
   return createWhatsAppUrl(text);
 }

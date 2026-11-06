@@ -5,14 +5,21 @@
   --color-brand-bg: var(--brand-bg);
   --color-brand-bg-elevated: var(--brand-bg-elevated);
   --color-brand-surface: var(--brand-surface);
+  --color-brand-surface-subtle: var(--brand-surface-subtle);
   --color-brand-surface-hover: var(--brand-surface-hover);
   --color-brand-border: var(--brand-border);
+  --color-brand-border-subtle: var(--brand-border-subtle);
+  --color-brand-border-strong: var(--brand-border-strong);
   --color-brand-primary: var(--brand-primary);
   --color-brand-primary-hover: var(--brand-primary-hover);
+  --color-brand-primary-light: var(--brand-primary-light);
+  --color-brand-primary-subtle: var(--brand-primary-subtle);
   --color-brand-crimson: var(--brand-crimson);
   --color-brand-crimson-hover: var(--brand-crimson-hover);
+  --color-brand-crimson-light: var(--brand-crimson-light);
   --color-brand-cyan: var(--brand-cyan);
   --color-brand-cyan-hover: var(--brand-cyan-hover);
+  --color-brand-cyan-light: var(--brand-cyan-light);
   --color-brand-whatsapp: var(--brand-whatsapp);
   --color-brand-youtube: var(--brand-youtube);
   --color-brand-text-primary: var(--brand-text-primary);
@@ -46,47 +53,47 @@ body {
   min-height: 100vh;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar for Light Theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--brand-bg);
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94A3B8;
 }
 
-/* Glassmorphism utility */
+/* Glassmorphism utility for Light Theme */
 .glass-panel {
-  background: rgba(30, 41, 59, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .glass-panel-hover {
   transition: all 0.25s ease-in-out;
 }
 .glass-panel-hover:hover {
-  background: rgba(30, 41, 59, 0.9);
-  border-color: rgba(245, 158, 11, 0.35);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(245, 158, 11, 0.15);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(217, 119, 6, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 0 15px -3px rgba(217, 119, 6, 0.12);
 }
 
 /* Athletic dynamic gradient text */
 .gradient-text-gold {
-  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #F59E0B 100%);
+  background: linear-gradient(135deg, #D97706 0%, #B45309 60%, #92400E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-text-athletic {
-  background: linear-gradient(135deg, #FFFFFF 20%, #CBD5E1 100%);
+  background: linear-gradient(135deg, #0F172A 20%, #334155 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

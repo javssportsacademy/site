@@ -15,17 +15,17 @@ const AUDIENCE_ICONS: Record<string, React.ElementType> = {
 
 export function AudienceJourneys() {
   return (
-    <section className="py-20 md:py-28 bg-slate-950 border-b border-white/10 relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-muted/30 border-b border-border relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <Badge variant="default" className="text-xs uppercase font-bold tracking-widest">
             Audience Pathways
           </Badge>
-          <h2 className="text-3xl sm:text-5xl font-black uppercase text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black uppercase text-foreground tracking-tight">
             Find Your Path
           </h2>
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
             Whether you are a parent seeking disciplined coaching for your child, or a school principal organizing an annual sports day, we provide specialized solutions for your needs.
           </p>
         </div>
@@ -37,36 +37,36 @@ export function AudienceJourneys() {
             return (
               <div
                 key={path.id}
-                className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-brand-primary/40 transition-all duration-300 flex flex-col justify-between shadow-2xl space-y-6"
+                className="p-8 rounded-3xl bg-card border border-border hover:border-brand-primary/40 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md space-y-6"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="p-3 rounded-2xl bg-white/5 text-brand-primary border border-white/5">
+                    <div className="p-3 rounded-2xl bg-primary/10 text-brand-primary border border-primary/20">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <Badge variant="outline" className="text-xs font-bold uppercase border-white/10 text-brand-primary">
+                    <Badge variant="outline" className="text-xs font-bold uppercase border-border text-brand-primary">
                       {path.badge}
                     </Badge>
                   </div>
 
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                       {path.eyebrow}
                     </p>
-                    <h3 className="text-2xl font-black uppercase text-white tracking-tight mt-1">
+                    <h3 className="text-2xl font-black uppercase text-foreground tracking-tight mt-1">
                       {path.headline}
                     </h3>
                   </div>
 
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {path.description}
                   </p>
 
-                  <div className="space-y-2.5 pt-4 border-t border-white/5">
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <div className="space-y-2.5 pt-4 border-t border-border">
+                    <p className="text-xs font-bold uppercase tracking-wider text-foreground">
                       What We Deliver:
                     </p>
-                    <ul className="space-y-2 text-xs sm:text-sm text-slate-200">
+                    <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
                       {path.primaryValuePoints.map((point, idx) => (
                         <li key={idx} className="flex items-start gap-2.5">
                           <Check className="h-4 w-4 text-brand-primary shrink-0 mt-0.5" />
@@ -77,13 +77,13 @@ export function AudienceJourneys() {
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <DirectWhatsAppButton
                     label={path.ctaLabel}
                     message={path.whatsappMessage}
-                    className="flex-1 font-bold text-xs uppercase tracking-wider"
+                    className="flex-1 font-bold text-xs uppercase tracking-wider shadow-xs"
                   />
-                  <Button asChild variant="outline" className="font-bold text-xs uppercase tracking-wider border-white/20 text-white hover:bg-white/10">
+                  <Button asChild variant="outline" className="font-bold text-xs uppercase tracking-wider border-border bg-card text-foreground hover:bg-muted">
                     <Link href={path.ctaLink}>
                       <span>Explore Details</span>
                       <ArrowRight className="h-3.5 w-3.5 ml-1.5" />

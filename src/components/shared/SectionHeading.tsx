@@ -7,7 +7,7 @@ interface SectionHeadingProps {
   badgeVariant?: "default" | "crimson" | "cyan" | "secondary" | "outline";
   title: string;
   subtitle?: string;
-  align?: "left" | "center" | "right";
+  align?: "center" | "left" | "right";
   className?: string;
 }
 
@@ -34,11 +34,11 @@ export function SectionHeading({
           {badge}
         </Badge>
       )}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-slate-900">
         {title}
       </h2>
       {subtitle && (
-        <p className="max-w-2xl text-base sm:text-lg text-brand-text-muted leading-relaxed">
+        <p className="max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed">
           {subtitle}
         </p>
       )}

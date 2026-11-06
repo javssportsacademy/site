@@ -15,17 +15,17 @@ const ICONS_MAP: Record<string, React.ElementType> = {
 
 export function CapabilityOverview() {
   return (
-    <section className="py-20 md:py-28 bg-slate-900 border-b border-white/10 relative overflow-hidden">
+    <section className="py-20 md:py-28 bg-white border-b border-slate-200 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <div className="max-w-3xl mb-16 space-y-3">
           <Badge variant="default" className="text-xs uppercase font-bold tracking-widest">
             Institutional Breadth
           </Badge>
-          <h2 className="text-3xl sm:text-5xl font-black uppercase text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black uppercase text-slate-900 tracking-tight">
             Everything We Do
           </h2>
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             JAV&apos;S Sports Academy is much more than a single-discipline training center. We operate an integrated sporting platform spanning youth development, competitive coaching, sports science, event officiating, and institutional partnerships.
           </p>
         </div>
@@ -37,20 +37,20 @@ export function CapabilityOverview() {
             return (
               <div
                 key={cap.id}
-                className="p-8 rounded-3xl bg-slate-950 border border-white/10 hover:border-brand-primary/40 transition-all duration-300 flex flex-col justify-between shadow-xl"
+                className="p-8 rounded-3xl bg-slate-50 border border-slate-200 hover:border-brand-primary/40 transition-all duration-300 flex flex-col justify-between shadow-xs hover:shadow-md"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="p-3 rounded-2xl bg-amber-500/10 text-brand-primary">
+                    <div className="p-3 rounded-2xl bg-amber-100 text-amber-800">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <Badge variant="outline" className="text-[10px] font-bold uppercase border-white/10 text-slate-300">
+                    <Badge variant="outline" className="text-[10px] font-bold uppercase border-slate-300 text-slate-600">
                       {cap.badge}
                     </Badge>
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-black uppercase text-white tracking-tight">
+                    <h3 className="text-xl font-black uppercase text-slate-900 tracking-tight">
                       {cap.familyTitle}
                     </h3>
                     <p className="text-xs font-semibold text-brand-primary mt-0.5">
@@ -58,15 +58,15 @@ export function CapabilityOverview() {
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {cap.description}
                   </p>
 
-                  <div className="space-y-2 pt-3 border-t border-white/5">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-300">
+                  <div className="space-y-2 pt-3 border-t border-slate-200">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-700">
                       Scope of Services:
                     </p>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-xs text-slate-600">
                       {cap.scopeList.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2">
                           <Check className="h-3.5 w-3.5 text-brand-primary shrink-0 mt-0.5" />
@@ -77,13 +77,13 @@ export function CapabilityOverview() {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-slate-400">
+                <div className="pt-6 mt-6 border-t border-slate-200 flex items-center justify-between">
+                  <span className="text-[11px] font-mono text-slate-500 font-medium">
                     {cap.audienceTarget}
                   </span>
                   <Link
                     href={cap.link}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary hover:text-amber-800 transition-colors"
                   >
                     <span>Explore Scope</span>
                     <ArrowRight className="h-3.5 w-3.5" />

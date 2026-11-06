@@ -24,7 +24,7 @@ const ICONS_MAP: Record<string, React.ElementType> = {
 
 export default function ProgramsPage() {
   return (
-    <div className="bg-slate-950 pb-24">
+    <div className="bg-background pb-24 text-foreground">
       <SubpageHero
         badge="Development Pathways"
         title="Programs & Sports Science"
@@ -43,10 +43,10 @@ export default function ProgramsPage() {
             <Badge variant="default" className="text-xs uppercase tracking-widest font-bold">
               Development Milestones
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black uppercase text-foreground tracking-tight">
               Age-Appropriate Development
             </h2>
-            <p className="text-brand-text-muted text-sm sm:text-base">
+            <p className="text-muted-foreground text-sm sm:text-base">
               Children and adults thrive when movement curriculums align with their biological readiness and psychological curiosity.
             </p>
           </div>
@@ -55,13 +55,13 @@ export default function ProgramsPage() {
             {AGE_PROGRAMS.map((prog) => (
               <Card
                 key={prog.id}
-                className="flex flex-col justify-between bg-slate-900 border-white/10 hover:border-brand-primary/40 transition-all duration-300 hover:-translate-y-1.5 shadow-2xl"
+                className="flex flex-col justify-between bg-card border-border hover:border-brand-primary/40 transition-all duration-300 hover:-translate-y-1.5 shadow-sm hover:shadow-md"
               >
                 <CardHeader className="p-8 pb-4">
                   <Badge variant="default" className="w-fit mb-3 text-xs font-bold uppercase tracking-wider">
                     {prog.ageBracket}
                   </Badge>
-                  <CardTitle className="text-2xl font-black uppercase text-white tracking-tight">
+                  <CardTitle className="text-2xl font-black uppercase text-foreground tracking-tight">
                     {prog.title}
                   </CardTitle>
                   <p className="text-xs font-semibold text-brand-primary mt-1">
@@ -70,15 +70,15 @@ export default function ProgramsPage() {
                 </CardHeader>
 
                 <CardContent className="p-8 pt-2 space-y-6 flex-grow">
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {prog.description}
                   </p>
 
-                  <div className="space-y-2 pt-4 border-t border-white/5">
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <div className="space-y-2 pt-4 border-t border-border">
+                    <p className="text-xs font-bold uppercase tracking-wider text-foreground">
                       Core Curriculum Drills:
                     </p>
-                    <ul className="space-y-2 text-xs text-slate-200">
+                    <ul className="space-y-2 text-xs text-muted-foreground">
                       {prog.highlights.map((hl, idx) => (
                         <li key={idx} className="flex items-start gap-2">
                           <Check className="h-4 w-4 text-brand-primary shrink-0 mt-0.5" />
@@ -92,7 +92,7 @@ export default function ProgramsPage() {
                     {prog.focusAreas.map((f, idx) => (
                       <span
                         key={idx}
-                        className="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] font-bold text-slate-300 uppercase"
+                        className="px-2.5 py-1 rounded-md bg-muted text-[10px] font-bold text-foreground border border-border uppercase"
                       >
                         {f}
                       </span>
@@ -100,11 +100,11 @@ export default function ProgramsPage() {
                   </div>
                 </CardContent>
 
-                <CardFooter className="p-8 pt-0 border-t border-white/5">
+                <CardFooter className="p-8 pt-0 border-t border-border">
                   <TrialBookingModal
                     defaultSport={prog.title}
                     triggerButton={
-                      <Button variant="default" className="w-full font-bold">
+                      <Button variant="default" className="w-full font-bold shadow-xs">
                         <span>Book Assessment for this Age Group</span>
                       </Button>
                     }
@@ -116,15 +116,15 @@ export default function ProgramsPage() {
         </section>
 
         {/* Section 2: Sports Science & Performance Development */}
-        <section className="p-8 sm:p-14 rounded-3xl bg-slate-900 border border-white/10 shadow-2xl space-y-12">
+        <section className="p-8 sm:p-14 rounded-3xl bg-card border border-border shadow-md space-y-12">
           <div className="max-w-3xl space-y-3">
             <Badge variant="cyan" className="text-xs uppercase tracking-widest font-bold">
               Scientific Foundation
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black uppercase text-foreground tracking-tight">
               Sports Science & Performance Development
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               Fitness assessments and physical development • Strength, speed, agility and endurance training • Movement quality and injury prevention practices • Individual skill development and performance preparation • Technology-supported training and performance tracking.
             </p>
           </div>
@@ -135,15 +135,15 @@ export default function ProgramsPage() {
               return (
                 <div
                   key={serv.id}
-                  className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-cyan/40 transition-all duration-300 space-y-3"
+                  className="p-6 rounded-2xl bg-muted/40 border border-border hover:border-brand-cyan/40 transition-all duration-300 space-y-3"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 text-brand-cyan flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-lg font-black uppercase text-white tracking-tight">
+                  <h3 className="text-lg font-black uppercase text-foreground tracking-tight">
                     {serv.title}
                   </h3>
-                  <p className="text-xs text-brand-text-muted leading-relaxed">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     {serv.desc}
                   </p>
                 </div>
@@ -151,12 +151,12 @@ export default function ProgramsPage() {
             })}
           </div>
 
-          <div className="p-6 rounded-2xl bg-gradient-to-r from-cyan-950/40 via-slate-800 to-slate-800 border border-cyan-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="p-6 rounded-2xl bg-muted/60 border border-border flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <p className="text-white font-bold text-sm">
+              <p className="text-foreground font-bold text-sm">
                 Interested in Athlete Physical Profiling or Team Assessments?
               </p>
-              <p className="text-xs text-brand-text-muted">
+              <p className="text-xs text-muted-foreground">
                 Coach Mohammed Javeed (M.P.Ed.) coordinates data-driven fitness testing for schools and competitive athletes.
               </p>
             </div>
