@@ -15,9 +15,9 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="max-w-4xl space-y-6">
           {/* Institutional Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-xs font-bold tracking-wide shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-brand-primary" />
-            <span>Chennai&apos;s Multi-Sport & Athletic Development Institution</span>
+          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] sm:text-xs font-bold tracking-wide shadow-xs max-w-full">
+            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+            <span className="truncate sm:whitespace-normal">Chennai&apos;s Multi-Sport & Athletic Development Institution</span>
           </div>
 
           {/* Core Athletic Manifesto */}
@@ -47,10 +47,10 @@ export function HeroSection() {
           <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <TrialBookingModal
               triggerButton={
-                <Button size="lg" variant="default" className="font-bold text-sm tracking-wide gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white shadow-md shadow-brand-primary/20">
-                  <Users className="h-4 w-4" />
+                <Button size="lg" variant="default" className="font-bold text-sm tracking-wide gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white shadow-md shadow-brand-primary/20 whitespace-normal text-left sm:text-center h-auto py-3 px-4">
+                  <Users className="h-4 w-4 shrink-0" />
                   <span>For Parents: Programme Enquiry & Assessment</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Button>
               }
             />
@@ -59,10 +59,10 @@ export function HeroSection() {
               asChild
               size="lg"
               variant="outline"
-              className="font-bold text-sm tracking-wide gap-2 border-slate-300 bg-white text-slate-900 hover:bg-slate-50 shadow-xs"
+              className="font-bold text-sm tracking-wide gap-2 border-slate-300 bg-white text-slate-900 hover:bg-slate-50 shadow-xs whitespace-normal text-left sm:text-center h-auto py-3 px-4"
             >
               <Link href="/partnerships">
-                <GraduationCap className="h-4 w-4 text-brand-primary" />
+                <GraduationCap className="h-4 w-4 text-brand-primary shrink-0" />
                 <span>For Institutions: Discuss Partnership</span>
               </Link>
             </Button>

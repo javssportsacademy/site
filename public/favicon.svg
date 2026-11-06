@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E11D48" />
+      <stop offset="50%" stop-color="#D97706" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded squircle with subtle border -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#shieldGrad)" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.4" />
+  
+  <!-- Subtle highlight reflex -->
+  <rect x="4" y="4" width="56" height="26" rx="12" fill="url(#glowGrad)" />
+
+  <!-- Stylized Athletic JAV'S Shield & Star/Athlete Wings -->
+  <g fill="#FFFFFF" transform="translate(12, 10)">
+    <!-- Shield Outline / Body -->
+    <path d="M20 2 L38 9 V22 C38 31 29 39 20 42 C11 39 2 31 2 22 V9 L20 2 Z" fill="#FFFFFF" fill-opacity="0.95" />
+    <path d="M20 5 L35 11 V22 C35 29 28 36 20 39 C12 36 5 29 5 22 V11 L20 5 Z" fill="url(#shieldGrad)" />
+    
+    <!-- Bold J & Athletic Motion -->
+    <path d="M22 13 H26 V25 C26 28 24 30.5 20.5 30.5 C17.5 30.5 15.5 28.5 15 26 L18.5 25 C18.8 26.2 19.5 27 20.5 27 C21.6 27 22.2 26.2 22.2 25 V13 Z" fill="#FFFFFF" />
+    <polygon points="15,13 18,13 18,17 15,17" fill="#FDE047" />
+    <polygon points="20,10 21.5,13 24,13 22,14.5 22.8,17 20,15.5 17.2,17 18,14.5 16,13 18.5,13" fill="#FDE047" />
+  </g>
+</svg>
