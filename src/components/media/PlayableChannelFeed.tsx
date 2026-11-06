@@ -114,6 +114,7 @@ const INITIAL_VIDEOS: ChannelVideo[] = [
 export function PlayableChannelFeed() {
   const [videos, setVideos] = useState<ChannelVideo[]>(INITIAL_VIDEOS);
   const [selectedVideo, setSelectedVideo] = useState<ChannelVideo>(INITIAL_VIDEOS[0]);
+  const [playingCardId, setPlayingCardId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"all" | "podcasts" | "shorts" | "instagram">("all");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastRefreshed, setLastRefreshed] = useState<string>("Live Feed Active");
@@ -326,7 +327,7 @@ export function PlayableChannelFeed() {
         </div>
 
         <p className="text-xs text-muted-foreground font-medium">
-          Click any thumbnail below to load into the player above
+          Click any video card below to play directly in-place, or watch on the main player above
         </p>
       </div>
 
@@ -405,50 +406,150 @@ export function PlayableChannelFeed() {
           </div>
         </div>
       ) : (
-        /* YouTube Videos Grid */
+        /* YouTube Videos Grid - Each card playable directly */
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredVideos.map((vid) => {
             const isSelected = selectedVideo.id === vid.id;
+            const isPlayingThisCard = playingCardId === vid.id;
+
             return (
               <Card
                 key={vid.id}
-                onClick={() => setSelectedVideo(vid)}
-                className={`group cursor-pointer overflow-hidden transition-all duration-200 border bg-card hover:shadow-md ${
-                  isSelected ? "border-brand-primary ring-2 ring-brand-primary/20 shadow-md" : "border-border hover:border-brand-primary/40"
+                className={`overflow-hidden transition-all duration-200 border bg-card flex flex-col justify-between ${
+                  isPlayingThisCard
+                    ? "border-red-500 ring-2 ring-red-500/20 shadow-lg"
+                    : isSelected
+                    ? "border-brand-primary ring-2 ring-brand-primary/20 shadow-md"
+                    : "border-border hover:border-brand-primary/40 hover:shadow-md"
                 }`}
               >
-                {/* Thumbnail with Play Overlay */}
-                <div className="relative aspect-video bg-black overflow-hidden">
-                  <img
-                    src={vid.thumbnail}
-                    alt={vid.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                    <div className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                      <Play className="h-4 w-4 fill-current ml-0.5" />
+                {/* 16:9 Player / Thumbnail Container */}
+                <div className="relative aspect-video bg-black overflow-hidden select-none">
+                  {isPlayingThisCard ? (
+                    <div className="relative w-full h-full">
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${vid.id}?autoplay=1&rel=0&modestbranding=1`}
+                        title={vid.title}
+                        className="w-full h-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+
+                      {/* Close button to return to thumbnail preview */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setPlayingCardId(null);
+                        }}
+                        className="absolute top-2 right-2 z-20 px-2 py-0.5 rounded-md bg-black/85 hover:bg-black text-white text-[10px] font-bold flex items-center gap-1 shadow-md border border-white/20 transition-all active:scale-95"
+                        title="Close player and return to thumbnail"
+                      >
+                        <span>✕</span>
+                        <span>Close</span>
+                      </button>
+
+                      {/* Playing in Card Indicator */}
+                      <div className="absolute bottom-2 left-2 z-20 pointer-events-none">
+                        <Badge className="bg-red-600/95 text-white text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 border-0 shadow-sm py-0.5 px-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                          <span>Playing in Card</span>
+                        </Badge>
+                      </div>
                     </div>
-                  </div>
-                  <div className="absolute top-2 left-2">
-                    <Badge variant="outline" className="text-[9px] font-bold uppercase bg-black/70 text-white border-0">
-                      {vid.type}
-                    </Badge>
-                  </div>
-                  {vid.views && (
-                    <div className="absolute bottom-2 right-2 text-[10px] font-mono font-semibold bg-black/80 text-white px-1.5 py-0.5 rounded">
-                      {vid.views}
+                  ) : (
+                    <div
+                      onClick={() => {
+                        setPlayingCardId(vid.id);
+                        setSelectedVideo(vid);
+                      }}
+                      className="relative w-full h-full cursor-pointer group/thumb"
+                      title="Click to play this video directly"
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setPlayingCardId(vid.id);
+                          setSelectedVideo(vid);
+                        }
+                      }}
+                    >
+                      <img
+                        src={vid.thumbnail}
+                        alt={vid.title}
+                        className="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-300 opacity-95 group-hover/thumb:opacity-100"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover/thumb:bg-black/20 transition-colors flex items-center justify-center">
+                        <div className="w-11 h-11 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg group-hover/thumb:scale-110 transition-transform">
+                          <Play className="h-5 w-5 fill-current ml-0.5" />
+                        </div>
+                      </div>
+                      <div className="absolute top-2 left-2">
+                        <Badge variant="outline" className="text-[9px] font-bold uppercase bg-black/75 text-white border-white/15">
+                          {vid.type}
+                        </Badge>
+                      </div>
+                      <div className="absolute top-2 right-2">
+                        <span className="text-[9px] font-bold text-white bg-black/75 px-1.5 py-0.5 rounded border border-white/20 flex items-center gap-1">
+                          <Play className="h-2 w-2 fill-current text-red-500" />
+                          <span>Play Direct</span>
+                        </span>
+                      </div>
+                      {vid.views && (
+                        <div className="absolute bottom-2 right-2 text-[10px] font-mono font-semibold bg-black/80 text-white px-1.5 py-0.5 rounded">
+                          {vid.views}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
 
-                <CardContent className="p-4 space-y-2">
-                  <h4 className="text-xs font-bold text-foreground line-clamp-2 group-hover:text-brand-primary transition-colors leading-snug">
+                <CardContent className="p-4 space-y-2 flex-grow flex flex-col justify-between">
+                  <h4
+                    onClick={() => {
+                      setPlayingCardId(vid.id);
+                      setSelectedVideo(vid);
+                    }}
+                    className="text-xs font-bold text-foreground line-clamp-2 hover:text-brand-primary cursor-pointer transition-colors leading-snug"
+                    title={vid.title}
+                  >
                     {vid.title}
                   </h4>
-                  <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1 border-t border-border/50">
+
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-2 border-t border-border/50">
                     <span className="font-mono">{vid.publishedAt}</span>
-                    <span className="font-semibold text-brand-primary group-hover:underline">Play Now →</span>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (isPlayingThisCard) {
+                          setPlayingCardId(null);
+                        } else {
+                          setPlayingCardId(vid.id);
+                          setSelectedVideo(vid);
+                        }
+                      }}
+                      className={`font-bold text-xs flex items-center gap-1 transition-colors ${
+                        isPlayingThisCard
+                          ? "text-red-500 hover:text-red-600"
+                          : "text-brand-primary hover:text-brand-primary/80 hover:underline"
+                      }`}
+                    >
+                      {isPlayingThisCard ? (
+                        <>
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                          <span>Stop Video</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="h-3 w-3 fill-current text-red-600" />
+                          <span>Play in Card →</span>
+                        </>
+                      )}
+                    </button>
                   </div>
                 </CardContent>
               </Card>

@@ -39,39 +39,47 @@ export function TeamAndAchievements() {
           {COACHING_TEAM.map((coach) => (
             <Card
               key={coach.id}
-              className="bg-card border-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+              className="bg-card border-border shadow-xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden"
             >
-              <CardHeader className="p-6 pb-3">
-                <div className="flex items-center justify-between gap-2 mb-3">
+              {/* Coach Photo Placeholder */}
+              <div className="relative aspect-5/3 w-full bg-gradient-to-tr from-muted via-card to-amber-500/10 border-b border-border flex flex-col items-center justify-center p-3 text-center">
+                <div className="w-10 h-10 rounded-full bg-amber-500/10 text-brand-primary flex items-center justify-center font-bold text-xs font-mono">
+                  {coach.name.split(" ").map(n => n[0]).slice(0, 2).join("")}
+                </div>
+                <span className="text-[9px] font-mono text-muted-foreground mt-1.5">[ Coach Photo Placeholder ]</span>
+              </div>
+
+              <CardHeader className="p-5 pb-2">
+                <div className="flex items-center justify-between gap-2 mb-2">
                   <Badge variant="outline" className="text-[10px] font-bold uppercase border-border text-brand-primary">
                     {coach.badge}
                   </Badge>
-                  <span className="text-[11px] font-mono text-muted-foreground font-semibold">{coach.experience}</span>
+                  <span className="text-[10px] font-mono text-muted-foreground">{coach.experience}</span>
                 </div>
-                <h3 className="text-xl font-black uppercase text-foreground tracking-tight">
+                <h3 className="text-lg font-black uppercase text-foreground tracking-tight">
                   {coach.name}
                 </h3>
                 <p className="text-xs font-bold text-brand-primary">
                   {coach.role}
                 </p>
-                <p className="text-[11px] font-mono text-muted-foreground mt-1">
+                <p className="text-[10px] font-mono text-muted-foreground mt-0.5 line-clamp-1">
                   {coach.credentials}
                 </p>
               </CardHeader>
 
-              <CardContent className="p-6 pt-0 space-y-3 flex-grow">
-                <div className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] font-semibold text-brand-primary dark:text-amber-400">
+              <CardContent className="p-5 pt-0 space-y-2.5 flex-grow">
+                <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[10px] font-semibold text-foreground line-clamp-1">
                   {coach.quoteOrHighlight}
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                   {coach.bio}
                 </p>
               </CardContent>
 
-              <CardFooter className="p-6 pt-0 border-t border-border mt-auto">
+              <CardFooter className="p-5 pt-0 border-t border-border mt-auto">
                 <div className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground pt-2">
                   <ShieldCheck className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                  <span>Specialty: {coach.specialty}</span>
+                  <span className="truncate">Specialty: {coach.specialty}</span>
                 </div>
               </CardFooter>
             </Card>

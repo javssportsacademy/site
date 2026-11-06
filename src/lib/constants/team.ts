@@ -57,6 +57,68 @@ export const COACHING_TEAM: CoachMentor[] = [
   }
 ];
 
+export const ACADEMY_FACILITIES = [
+  {
+    id: "thiruverkadu-turf",
+    title: "Thiruverkadu High-Performance Cricket Nets",
+    hub: "Thiruverkadu Center",
+    specs: "3 Turf Practice Nets • Floodlights • Automated Bowling Machine • Match Practice Pitch",
+    description: "Equipped for all-weather evening net sessions, video-assisted batting drill sequencing, and match simulation bowling.",
+    tag: "Turf Practice Facility"
+  },
+  {
+    id: "bella-vista-arena",
+    title: "Prestige Bella Vista Multi-Sport Campus",
+    hub: "Iyyappanthangal",
+    specs: "Full Badminton Courts • Dedicated Turf Box • Functional Athletic Field",
+    description: "Safe, enclosed gated-community athletic environment providing age-specific coaching for residents and nearby neighborhoods.",
+    tag: "Residential Arena"
+  },
+  {
+    id: "sports-science-lab",
+    title: "Movement Analysis & Kinetic Screening Unit",
+    hub: "Both Hubs",
+    specs: "High-Speed Video Frame Capture • Bowling Action Review • Footwork Alignment",
+    description: "Scientific video playback used during 1-on-1 mentor reviews to assess kinetic chain alignment and bowler injury risks.",
+    tag: "Sports Science"
+  },
+  {
+    id: "agility-conditioning-zone",
+    title: "Youth Fitness & Recovery Zone",
+    hub: "Both Hubs",
+    specs: "Agility Ladders • Plyometric Hurdles • Resistance Bands • Hydration Protocol",
+    description: "Dedicated safe space for neuromuscular warm-ups, multi-directional speed training, and post-session stretching routines.",
+    tag: "Conditioning Facility"
+  }
+];
+
+export const ACADEMY_EVENTS = [
+  {
+    id: "event-01",
+    title: "Annual JAV'S Academy Champions Trophy",
+    format: "Inter-Batch Tournament",
+    participants: "Junior (U-12) & Senior (U-16) Squads",
+    summary: "Annual tournament giving every enrolled student real competitive match pressure, field placements, and live umpiring experience.",
+    outcomes: "Medals, Best Batsman, Best Bowler & Most Disciplined Athlete awards"
+  },
+  {
+    id: "event-02",
+    title: "Institutional Sports Day Turnkey Execution",
+    format: "School Sports Operations",
+    participants: "Over 1,200 Students Across 3 Schools",
+    summary: "Full turnkey organization of track and field heats, event scoring, march-past coordination, and safe athletic event management.",
+    outcomes: "Flawless on-time execution, professional race timing, zero safety incidents"
+  },
+  {
+    id: "event-03",
+    title: "Summer High-Performance Conditioning Camp",
+    format: "Intensive 4-Week Workshop",
+    participants: "80+ Aspiring Athletes",
+    summary: "Multi-sport intensive covering batting technique, bowling seam position, agility drills, nutrition fundamentals, and match mindset.",
+    outcomes: "Comprehensive player diagnostic card & personalized skill roadmap"
+  }
+];
+
 export const ACADEMY_ACHIEVEMENTS = [
   {
     id: "league-representation",

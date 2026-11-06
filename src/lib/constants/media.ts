@@ -11,6 +11,8 @@ export interface FeaturedConversation {
   evidenceDisclaimer: string;
   primaryPlatform: "YouTube" | "Instagram" | "Multi-Platform";
   mediaUrl: string;
+  youtubeVideoId: string;
+  thumbnailUrl: string;
 }
 
 export const JAVS_INBOX_CHANNEL = {
@@ -38,7 +40,9 @@ export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
     actionableTakeaway: "Key Insight for Parents: Rushing young athletes into high-stakes competitive tournaments before their core physical conditioning and emotional composure are grounded leads to early dropout. Consistent technical routines and patient parental encouragement build durable athletes.",
     evidenceDisclaimer: "Published on Instagram @javs_inbox & YouTube @JavsInbox • Independent Sporting Dialogue",
     primaryPlatform: "Instagram",
-    mediaUrl: "https://www.instagram.com/javs_inbox/"
+    mediaUrl: "https://www.instagram.com/javs_inbox/",
+    youtubeVideoId: "sLBk4N8xfF8",
+    thumbnailUrl: "https://i.ytimg.com/vi/sLBk4N8xfF8/hqdefault.jpg"
   },
   {
     id: "srinivasan-pace-bowling",
@@ -52,7 +56,9 @@ export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
     actionableTakeaway: "Key Insight for Bowlers: Bowling velocity originates in kinetic chain sequencing and core alignment, not strained arm violence. Safe action mechanics must be mastered before increasing weekly bowling volume.",
     evidenceDisclaimer: "Academy Mentor Feature • Jav's Inbox Technical Series",
     primaryPlatform: "YouTube",
-    mediaUrl: "https://www.youtube.com/@JavsInbox"
+    mediaUrl: "https://www.youtube.com/@JavsInbox",
+    youtubeVideoId: "4x4hhwS5xwg",
+    thumbnailUrl: "https://i.ytimg.com/vi/4x4hhwS5xwg/hqdefault.jpg"
   },
   {
     id: "srivatsan-spin-craft",
@@ -66,7 +72,9 @@ export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
     actionableTakeaway: "Key Insight for Spinners: True spin bowling is a game of patience and revs. Developing aerial flight and drift requires strong fingers and repeatable body rotation, which demands years of focused net drills.",
     evidenceDisclaimer: "Academy Mentor Feature • Jav's Inbox Technical Series",
     primaryPlatform: "YouTube",
-    mediaUrl: "https://www.youtube.com/@JavsInbox"
+    mediaUrl: "https://www.youtube.com/@JavsInbox",
+    youtubeVideoId: "g9gGOQYnnrs",
+    thumbnailUrl: "https://i.ytimg.com/vi/g9gGOQYnnrs/hqdefault.jpg"
   },
   {
     id: "thousif-ahamed-conditioning",
@@ -80,7 +88,9 @@ export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
     actionableTakeaway: "Key Insight for Coaches & Parents: Young bodies adapt during recovery. Workload monitoring against chronological age is critical for long-term athletic health and preventing early burnout.",
     evidenceDisclaimer: "Youth Conditioning Feature • Jav's Inbox Sports Science Series",
     primaryPlatform: "YouTube",
-    mediaUrl: "https://www.youtube.com/@JavsInbox"
+    mediaUrl: "https://www.youtube.com/@JavsInbox",
+    youtubeVideoId: "Ficu_SLdrp8",
+    thumbnailUrl: "https://i.ytimg.com/vi/Ficu_SLdrp8/hqdefault.jpg"
   },
   {
     id: "muthu-broadcast-commentary",
@@ -94,6 +104,8 @@ export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
     actionableTakeaway: "Key Insight for Athletes: How you carry yourself between deliveries and how you support teammates defines your character and catches selectors' eyes just as much as technical statistics.",
     evidenceDisclaimer: "Editorial Dialogue • Jav's Inbox Media Series",
     primaryPlatform: "YouTube",
-    mediaUrl: "https://www.youtube.com/@JavsInbox"
+    mediaUrl: "https://www.youtube.com/@JavsInbox",
+    youtubeVideoId: "x_vsC40Lp5M",
+    thumbnailUrl: "https://i.ytimg.com/vi/x_vsC40Lp5M/hqdefault.jpg"
   }
 ];

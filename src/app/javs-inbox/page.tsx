@@ -1,6 +1,7 @@
 import React from "react";
 import { SubpageHero } from "@/components/layout/SubpageHero";
 import { PlayableChannelFeed } from "@/components/media/PlayableChannelFeed";
+import { PlayableConversationsGrid } from "@/components/media/PlayableConversationsGrid";
 import { JAVS_INBOX_CHANNEL, FEATURED_CONVERSATIONS } from "@/lib/constants/media";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -106,69 +107,10 @@ export default function JavsInboxPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {FEATURED_CONVERSATIONS.map((conv) => (
-              <Card
-                key={conv.id}
-                className="flex flex-col justify-between bg-card border-border hover:border-border/80 transition-all duration-300 shadow-sm p-8"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <Badge variant="crimson" className="text-xs font-bold uppercase">
-                      {conv.guestRoleBadge}
-                    </Badge>
-                    <span className="text-xs font-mono text-muted-foreground">
-                      {conv.format}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-black uppercase text-foreground tracking-tight">
-                      {conv.guestName}
-                    </h3>
-                    <p className="text-xs sm:text-sm font-bold text-brand-primary mt-0.5">
-                      {conv.guestTitle}
-                    </p>
-                  </div>
-
-                  <p className="text-xs font-bold text-foreground uppercase tracking-wider">
-                    Topic: &ldquo;{conv.topic}&rdquo;
-                  </p>
-
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    {conv.discussionSummary}
-                  </p>
-
-                  {/* Takeaway */}
-                  <div className="p-4 rounded-xl bg-amber-500/10 border-l-4 border-brand-primary space-y-1">
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-primary">
-                      <BookOpen className="h-3.5 w-3.5" />
-                      <span>Takeaway for Parents & Athletes:</span>
-                    </div>
-                    <p className="text-xs text-foreground/90 leading-relaxed font-medium">
-                      {conv.actionableTakeaway}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-6 mt-6 border-t border-border flex items-center justify-between">
-                  <span className="text-[10px] text-muted-foreground italic font-mono">
-                    {conv.evidenceDisclaimer}
-                  </span>
-
-                  <a
-                    href={conv.mediaUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-red-600 hover:text-red-700 transition-colors"
-                  >
-                    <Play className="h-3.5 w-3.5 fill-current" />
-                    <span>Watch Media</span>
-                  </a>
-                </div>
-              </Card>
-            ))}
-          </div>
+          <PlayableConversationsGrid
+            conversations={FEATURED_CONVERSATIONS}
+            columns={3}
+          />
         </section>
       </div>
     </div>
