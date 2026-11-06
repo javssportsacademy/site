@@ -1,12 +1,8 @@
 import type { NextConfig } from "next";
 
-const repoName = process.env.GITHUB_REPOSITORY
-  ? process.env.GITHUB_REPOSITORY.split("/")[1]
-  : "";
-
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: process.env.BASE_PATH || (process.env.NODE_ENV === "production" && repoName ? `/${repoName}` : ""),
+  basePath: process.env.BASE_PATH ?? "",
   images: {
     unoptimized: true,
   },
