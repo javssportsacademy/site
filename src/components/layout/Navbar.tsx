@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -229,13 +229,15 @@ const CENTRES_ITEMS: DropdownItem[] = [
   },
 ];
 
-type MobileSectionKey = "sports" | "programs" | "institutions" | "academy" | "centres" | null;
+type DropdownKey = "sports" | "programs" | "institutions" | "academy" | "centres" | null;
 
 export function Navbar() {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileExpandedSection, setMobileExpandedSection] = useState<MobileSectionKey>(null);
+  const [mobileExpandedSection, setMobileExpandedSection] = useState<DropdownKey>(null);
+  const [desktopDropdown, setDesktopDropdown] = useState<DropdownKey>(null);
 
   // Scroll detection for subtle elevation styling
   useEffect(() => {
@@ -246,13 +248,29 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile drawer on route change
+  // Close dropdowns and drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setMobileExpandedSection(null);
+    setDesktopDropdown(null);
   }, [pathname]);
 
-  const toggleMobileSection = (key: MobileSectionKey) => {
+  // Click outside header closes open desktop dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setDesktopDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDesktopDropdown = (key: DropdownKey) => {
+    setDesktopDropdown((prev) => (prev === key ? null : key));
+  };
+
+  const toggleMobileSection = (key: DropdownKey) => {
     setMobileExpandedSection((prev) => (prev === key ? null : key));
   };
 
@@ -269,6 +287,7 @@ export function Navbar() {
 
   return (
     <header
+      ref={headerRef}
       className={cn(
         "fixed top-0 left-0 right-0 z-40 transition-all duration-200",
         scrolled
@@ -309,21 +328,35 @@ export function Navbar() {
             <nav className="flex items-center gap-1 xl:gap-1.5" aria-label="Main sports and programme navigation">
               {/* 1. Sports Dropdown */}
               <div className="relative group">
-                <Link
-                  href="/sports"
+                <button
+                  type="button"
+                  onClick={() => toggleDesktopDropdown("sports")}
+                  aria-expanded={desktopDropdown === "sports"}
                   className={cn(
-                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
-                    isSportsActive
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
+                    isSportsActive || desktopDropdown === "sports"
                       ? "text-brand-primary bg-primary/10 font-bold"
                       : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                   )}
                 >
                   <span>Sports</span>
-                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
-                </Link>
+                  <ChevronDown
+                    className={cn(
+                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                      desktopDropdown === "sports" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
 
                 {/* Dropdown Card */}
-                <div className="absolute left-0 top-full pt-2 w-[580px] xl:w-[640px] z-50 hidden group-hover:block group-focus-within:block">
+                <div
+                  className={cn(
+                    "absolute left-0 top-full pt-2 w-[580px] xl:w-[640px] z-50",
+                    desktopDropdown === "sports"
+                      ? "block"
+                      : "hidden group-hover:block group-focus-within:block"
+                  )}
+                >
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
                     <div className="flex items-center justify-between pb-3 mb-2.5 border-b border-border">
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -331,6 +364,7 @@ export function Navbar() {
                       </span>
                       <Link
                         href="/sports"
+                        onClick={() => setDesktopDropdown(null)}
                         className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
                       >
                         <span>Full Directory</span>
@@ -345,6 +379,7 @@ export function Navbar() {
                           <Link
                             key={item.title}
                             href={item.href}
+                            onClick={() => setDesktopDropdown(null)}
                             className="group/item flex items-start gap-2 p-2 rounded-xl hover:bg-muted transition-colors"
                           >
                             <div className="p-1.5 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
@@ -376,6 +411,7 @@ export function Navbar() {
                       </span>
                       <Link
                         href="/sports"
+                        onClick={() => setDesktopDropdown(null)}
                         className="text-xs font-bold text-brand-primary shrink-0 ml-2 hover:underline flex items-center gap-1"
                       >
                         <span>Explore All 12</span>
@@ -388,21 +424,35 @@ export function Navbar() {
 
               {/* 2. Programmes Dropdown */}
               <div className="relative group">
-                <Link
-                  href="/programs"
+                <button
+                  type="button"
+                  onClick={() => toggleDesktopDropdown("programs")}
+                  aria-expanded={desktopDropdown === "programs"}
                   className={cn(
-                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
-                    isProgramsActive
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
+                    isProgramsActive || desktopDropdown === "programs"
                       ? "text-brand-primary bg-primary/10 font-bold"
                       : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                   )}
                 >
                   <span>Programmes</span>
-                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
-                </Link>
+                  <ChevronDown
+                    className={cn(
+                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                      desktopDropdown === "programs" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
 
                 {/* Dropdown Card */}
-                <div className="absolute left-0 top-full pt-2 w-[380px] z-50 hidden group-hover:block group-focus-within:block">
+                <div
+                  className={cn(
+                    "absolute left-0 top-full pt-2 w-[380px] z-50",
+                    desktopDropdown === "programs"
+                      ? "block"
+                      : "hidden group-hover:block group-focus-within:block"
+                  )}
+                >
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
                     <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -410,6 +460,7 @@ export function Navbar() {
                       </span>
                       <Link
                         href="/programs"
+                        onClick={() => setDesktopDropdown(null)}
                         className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
                       >
                         <span>Full Overview</span>
@@ -424,6 +475,7 @@ export function Navbar() {
                           <Link
                             key={item.title}
                             href={item.href}
+                            onClick={() => setDesktopDropdown(null)}
                             className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                           >
                             <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
@@ -454,21 +506,35 @@ export function Navbar() {
 
               {/* 3. Institutions Dropdown */}
               <div className="relative group">
-                <Link
-                  href="/partnerships"
+                <button
+                  type="button"
+                  onClick={() => toggleDesktopDropdown("institutions")}
+                  aria-expanded={desktopDropdown === "institutions"}
                   className={cn(
-                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
-                    isInstitutionsActive
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
+                    isInstitutionsActive || desktopDropdown === "institutions"
                       ? "text-brand-primary bg-primary/10 font-bold"
                       : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                   )}
                 >
                   <span>Institutions</span>
-                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
-                </Link>
+                  <ChevronDown
+                    className={cn(
+                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                      desktopDropdown === "institutions" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
 
                 {/* Dropdown Card */}
-                <div className="absolute left-0 top-full pt-2 w-[400px] z-50 hidden group-hover:block group-focus-within:block">
+                <div
+                  className={cn(
+                    "absolute left-0 top-full pt-2 w-[400px] z-50",
+                    desktopDropdown === "institutions"
+                      ? "block"
+                      : "hidden group-hover:block group-focus-within:block"
+                  )}
+                >
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
                     <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -476,6 +542,7 @@ export function Navbar() {
                       </span>
                       <Link
                         href="/partnerships"
+                        onClick={() => setDesktopDropdown(null)}
                         className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
                       >
                         <span>Partner Pathways</span>
@@ -490,6 +557,7 @@ export function Navbar() {
                           <Link
                             key={item.title}
                             href={item.href}
+                            onClick={() => setDesktopDropdown(null)}
                             className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                           >
                             <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
@@ -560,21 +628,35 @@ export function Navbar() {
           <div className="flex items-center justify-end gap-3 xl:gap-4 min-w-0">
             {/* 4. Academy Dropdown */}
             <div className="relative group">
-              <Link
-                href="/about"
+              <button
+                type="button"
+                onClick={() => toggleDesktopDropdown("academy")}
+                aria-expanded={desktopDropdown === "academy"}
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
-                  isAcademyActive
+                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
+                  isAcademyActive || desktopDropdown === "academy"
                     ? "text-brand-primary bg-primary/10 font-bold"
                     : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                 )}
               >
                 <span>Academy</span>
-                <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
-              </Link>
+                <ChevronDown
+                  className={cn(
+                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                    desktopDropdown === "academy" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {/* Dropdown Card */}
-              <div className="absolute right-0 top-full pt-2 w-[420px] z-50 hidden group-hover:block group-focus-within:block">
+              <div
+                className={cn(
+                  "absolute right-0 top-full pt-2 w-[420px] z-50",
+                  desktopDropdown === "academy"
+                    ? "block"
+                    : "hidden group-hover:block group-focus-within:block"
+                )}
+              >
                 <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
                   <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                     <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -582,6 +664,7 @@ export function Navbar() {
                     </span>
                     <Link
                       href="/about"
+                      onClick={() => setDesktopDropdown(null)}
                       className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
                     >
                       <span>About Academy</span>
@@ -596,6 +679,7 @@ export function Navbar() {
                         <Link
                           key={item.title}
                           href={item.href}
+                          onClick={() => setDesktopDropdown(null)}
                           className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                         >
                           <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
@@ -626,21 +710,35 @@ export function Navbar() {
 
             {/* 5. Centres Dropdown */}
             <div className="relative group">
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={() => toggleDesktopDropdown("centres")}
+                aria-expanded={desktopDropdown === "centres"}
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
-                  isCentresActive
+                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
+                  isCentresActive || desktopDropdown === "centres"
                     ? "text-brand-primary bg-primary/10 font-bold"
                     : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                 )}
               >
                 <span>Centres</span>
-                <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
-              </Link>
+                <ChevronDown
+                  className={cn(
+                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                    desktopDropdown === "centres" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {/* Dropdown Card */}
-              <div className="absolute right-0 top-full pt-2 w-[360px] z-50 hidden group-hover:block group-focus-within:block">
+              <div
+                className={cn(
+                  "absolute right-0 top-full pt-2 w-[360px] z-50",
+                  desktopDropdown === "centres"
+                    ? "block"
+                    : "hidden group-hover:block group-focus-within:block"
+                )}
+              >
                 <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
                   <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
                     <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -648,6 +746,7 @@ export function Navbar() {
                     </span>
                     <Link
                       href="/contact"
+                      onClick={() => setDesktopDropdown(null)}
                       className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
                     >
                       <span>Map & Hours</span>
@@ -662,6 +761,7 @@ export function Navbar() {
                         <Link
                           key={item.title}
                           href={item.href}
+                          onClick={() => setDesktopDropdown(null)}
                           className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
                         >
                           <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
@@ -825,30 +925,24 @@ export function Navbar() {
           <div className="flex flex-col space-y-1">
             {/* 1. Sports Accordion */}
             <div className="border border-border rounded-xl overflow-hidden bg-background/50">
-              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
-                <Link
-                  href="/sports"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
-                >
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("sports")}
+                className="w-full flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors text-left cursor-pointer"
+                aria-expanded={mobileExpandedSection === "sports"}
+                aria-label="Toggle sports sub-menu"
+              >
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground">
                   <Trophy className="h-4 w-4 text-brand-primary" />
                   <span>Sports (12 Curriculums)</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleMobileSection("sports")}
-                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
-                  aria-expanded={mobileExpandedSection === "sports"}
-                  aria-label="Toggle sports sub-menu"
-                >
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 transition-transform duration-200",
-                      mobileExpandedSection === "sports" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
-              </div>
+                </div>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    mobileExpandedSection === "sports" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {mobileExpandedSection === "sports" && (
                 <div className="px-3 pb-3 pt-1 space-y-2 bg-muted/20 border-t border-border">
@@ -880,30 +974,24 @@ export function Navbar() {
 
             {/* 2. Programmes Accordion */}
             <div className="border border-border rounded-xl overflow-hidden bg-background/50">
-              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
-                <Link
-                  href="/programs"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
-                >
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("programs")}
+                className="w-full flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors text-left cursor-pointer"
+                aria-expanded={mobileExpandedSection === "programs"}
+                aria-label="Toggle programmes sub-menu"
+              >
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground">
                   <Activity className="h-4 w-4 text-brand-primary" />
                   <span>Programmes & Pathways</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleMobileSection("programs")}
-                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
-                  aria-expanded={mobileExpandedSection === "programs"}
-                  aria-label="Toggle programmes sub-menu"
-                >
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 transition-transform duration-200",
-                      mobileExpandedSection === "programs" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
-              </div>
+                </div>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    mobileExpandedSection === "programs" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {mobileExpandedSection === "programs" && (
                 <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
@@ -933,30 +1021,24 @@ export function Navbar() {
 
             {/* 3. Institutions Accordion */}
             <div className="border border-border rounded-xl overflow-hidden bg-background/50">
-              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
-                <Link
-                  href="/partnerships"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
-                >
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("institutions")}
+                className="w-full flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors text-left cursor-pointer"
+                aria-expanded={mobileExpandedSection === "institutions"}
+                aria-label="Toggle institutions sub-menu"
+              >
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground">
                   <Building2 className="h-4 w-4 text-brand-primary" />
                   <span>Institutional Partnerships</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleMobileSection("institutions")}
-                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
-                  aria-expanded={mobileExpandedSection === "institutions"}
-                  aria-label="Toggle institutions sub-menu"
-                >
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 transition-transform duration-200",
-                      mobileExpandedSection === "institutions" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
-              </div>
+                </div>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    mobileExpandedSection === "institutions" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {mobileExpandedSection === "institutions" && (
                 <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
@@ -986,30 +1068,24 @@ export function Navbar() {
 
             {/* 4. Academy Accordion */}
             <div className="border border-border rounded-xl overflow-hidden bg-background/50">
-              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
-                <Link
-                  href="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
-                >
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("academy")}
+                className="w-full flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors text-left cursor-pointer"
+                aria-expanded={mobileExpandedSection === "academy"}
+                aria-label="Toggle academy sub-menu"
+              >
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground">
                   <ShieldCheck className="h-4 w-4 text-brand-primary" />
                   <span>Academy Leadership & Ethics</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleMobileSection("academy")}
-                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
-                  aria-expanded={mobileExpandedSection === "academy"}
-                  aria-label="Toggle academy sub-menu"
-                >
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 transition-transform duration-200",
-                      mobileExpandedSection === "academy" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
-              </div>
+                </div>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    mobileExpandedSection === "academy" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {mobileExpandedSection === "academy" && (
                 <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
@@ -1037,30 +1113,24 @@ export function Navbar() {
 
             {/* 5. Centres Accordion */}
             <div className="border border-border rounded-xl overflow-hidden bg-background/50">
-              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
-                >
+              <button
+                type="button"
+                onClick={() => toggleMobileSection("centres")}
+                className="w-full flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors text-left cursor-pointer"
+                aria-expanded={mobileExpandedSection === "centres"}
+                aria-label="Toggle centres sub-menu"
+              >
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground">
                   <MapPin className="h-4 w-4 text-brand-primary" />
                   <span>Academy Centres & Contact</span>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => toggleMobileSection("centres")}
-                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
-                  aria-expanded={mobileExpandedSection === "centres"}
-                  aria-label="Toggle centres sub-menu"
-                >
-                  <ChevronDown
-                    className={cn(
-                      "h-4 w-4 transition-transform duration-200",
-                      mobileExpandedSection === "centres" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
-              </div>
+                </div>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition-transform duration-200",
+                    mobileExpandedSection === "centres" && "rotate-180 text-brand-primary"
+                  )}
+                />
+              </button>
 
               {mobileExpandedSection === "centres" && (
                 <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">

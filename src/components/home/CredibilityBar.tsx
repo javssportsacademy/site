@@ -30,7 +30,7 @@ const PROOF_POINTS = [
 
 export function CredibilityBar() {
   return (
-    <section className="bg-white border-b border-slate-200 py-8 relative z-20">
+    <section className="bg-background border-b border-border py-8 relative z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {PROOF_POINTS.map((item, idx) => {
@@ -38,19 +38,19 @@ export function CredibilityBar() {
             return (
               <div
                 key={idx}
-                className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs"
+                className="flex items-start gap-4 p-4 rounded-2xl bg-card border border-border shadow-xs"
               >
-                <div className="p-2.5 rounded-xl bg-amber-100 text-amber-800 shrink-0 mt-0.5">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 text-brand-primary dark:text-amber-400 shrink-0 mt-0.5">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-xl font-black text-slate-900 font-mono tracking-tight">
+                  <p className="text-xl font-black text-foreground font-mono tracking-tight">
                     {item.value}
                   </p>
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-800 mt-0.5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-foreground/90 mt-0.5">
                     {item.title}
                   </p>
-                  <p className="text-[11px] text-slate-500 leading-normal mt-1">
+                  <p className="text-[11px] text-muted-foreground leading-normal mt-1">
                     {item.detail}
                   </p>
                 </div>

@@ -45,6 +45,19 @@
   --brand-whatsapp: #16A34A;
   --brand-youtube: #DC2626;
 
+  /* --- Brand Theme Bridge Tokens (prevents undefined var(--brand-bg)) --- */
+  --brand-bg: #F8FAFC;
+  --brand-bg-elevated: #FFFFFF;
+  --brand-surface: #FFFFFF;
+  --brand-surface-subtle: #F1F5F9;
+  --brand-surface-hover: #F8FAFC;
+  --brand-border: #E2E8F0;
+  --brand-border-subtle: #F1F5F9;
+  --brand-border-strong: #CBD5E1;
+  --brand-text-primary: #0F172A;
+  --brand-text-secondary: #475569;
+  --brand-text-muted: #64748B;
+
   /* --- Elevated surface for cards in light mode --- */
   --surface-elevated: #FFFFFF;
   --surface-subtle: #F1F5F9;
@@ -88,6 +101,19 @@
   --brand-cyan: #38BDF8;
   --brand-whatsapp: #22C55E;
   --brand-youtube: #EF4444;
+
+  /* --- Brand Theme Bridge Tokens in Dark --- */
+  --brand-bg: #090D16;
+  --brand-bg-elevated: #0F172A;
+  --brand-surface: #0F172A;
+  --brand-surface-subtle: #1E293B;
+  --brand-surface-hover: #1E293B;
+  --brand-border: rgba(255, 255, 255, 0.1);
+  --brand-border-subtle: rgba(255, 255, 255, 0.05);
+  --brand-border-strong: rgba(255, 255, 255, 0.2);
+  --brand-text-primary: #F8FAFC;
+  --brand-text-secondary: #CBD5E1;
+  --brand-text-muted: #94A3B8;
 
   --surface-elevated: #0F172A;
   --surface-subtle: #1E293B;
