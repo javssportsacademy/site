@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -185,17 +185,13 @@ const CENTRES_ITEMS: DropdownItem[] = [
   },
 ];
 
-type DropdownKey = "sports" | "programs" | "institutions" | "academy" | "centres" | null;
+type MobileSectionKey = "sports" | "programs" | "institutions" | "academy" | "centres" | null;
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<DropdownKey>(null);
-  const [mobileExpandedSection, setMobileExpandedSection] = useState<DropdownKey>(null);
-
-  const navRef = useRef<HTMLElement>(null);
-  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [mobileExpandedSection, setMobileExpandedSection] = useState<MobileSectionKey>(null);
 
   // Scroll detection for subtle elevation styling
   useEffect(() => {
@@ -206,63 +202,13 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menus on route change
+  // Close mobile drawer on route change
   useEffect(() => {
-    setActiveDropdown(null);
     setMobileMenuOpen(false);
     setMobileExpandedSection(null);
   }, [pathname]);
 
-  // Click outside listener
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
-        setActiveDropdown(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Keyboard accessibility: Escape key closes menus
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === "Escape") {
-      setActiveDropdown(null);
-      setMobileMenuOpen(false);
-    }
-  }, []);
-
-  // Clear pending close timer
-  const clearCloseTimer = () => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
-  };
-
-  // Hover enter: open immediately and cancel close
-  const handleDropdownEnter = (key: DropdownKey) => {
-    clearCloseTimer();
-    setActiveDropdown(key);
-  };
-
-  // Hover leave: wait 300ms before closing
-  const handleDropdownLeave = () => {
-    clearCloseTimer();
-    closeTimerRef.current = setTimeout(() => {
-      setActiveDropdown(null);
-    }, 300);
-  };
-
-  // Click toggle: If open, close; if closed, open!
-  const handleDropdownClick = (key: DropdownKey, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    clearCloseTimer();
-    setActiveDropdown((prev) => (prev === key ? null : key));
-  };
-
-  const toggleMobileSection = (key: DropdownKey) => {
+  const toggleMobileSection = (key: MobileSectionKey) => {
     setMobileExpandedSection((prev) => (prev === key ? null : key));
   };
 
@@ -279,8 +225,6 @@ export function Navbar() {
 
   return (
     <header
-      ref={navRef}
-      onKeyDown={handleKeyDown}
       className={cn(
         "fixed top-0 left-0 right-0 z-40 transition-all duration-200 select-none",
         scrolled
@@ -290,7 +234,9 @@ export function Navbar() {
     >
       {/* 80px Compact Navbar Container */}
       <div className="max-w-7xl mx-auto h-20 px-3 sm:px-6 lg:px-8">
-        {/* Desktop 3-Column Balanced Grid: 1fr - auto - 1fr */}
+        {/* ======================================================== */}
+        {/* DESKTOP 3-COLUMN BALANCED GRID: 1fr - auto - 1fr          */}
+        {/* ======================================================== */}
         <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] items-center h-full">
           {/* ======================================================== */}
           {/* LEFT COLUMN: Logo + Sports ▾ | Programmes ▾ | Institutions ▾ */}
@@ -315,273 +261,216 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Left Navigation Dropdowns */}
+            {/* Left Navigation Dropdowns (Direct Link + Hover Dropdown) */}
             <nav className="flex items-center gap-1 xl:gap-1.5" aria-label="Main sports and programme navigation">
               {/* 1. Sports Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleDropdownEnter("sports")}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <button
-                  type="button"
-                  onClick={(e) => handleDropdownClick("sports", e)}
-                  aria-expanded={activeDropdown === "sports"}
-                  aria-haspopup="menu"
+              <div className="relative group">
+                <Link
+                  href="/sports"
                   className={cn(
-                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
-                    isSportsActive || activeDropdown === "sports"
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
+                    isSportsActive
                       ? "text-brand-primary bg-primary/10 font-bold"
-                      : "text-foreground/85 hover:text-foreground hover:bg-muted"
+                      : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                   )}
                 >
                   <span>Sports</span>
-                  <ChevronDown
-                    className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
-                      activeDropdown === "sports" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
+                </Link>
 
-                {activeDropdown === "sports" && (
-                  <div
-                    role="menu"
-                    onMouseEnter={() => handleDropdownEnter("sports")}
-                    onMouseLeave={handleDropdownLeave}
-                    className="absolute left-0 top-full pt-2 w-[460px] z-50 animate-in fade-in zoom-in-95 duration-150"
-                  >
-                    <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
-                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-border">
-                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                          12 Olympic & Athletic Disciplines
-                        </span>
-                        <Link
-                          href="/sports"
-                          className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
-                        >
-                          <span>All Curriculums</span>
-                          <ChevronRight className="h-3 w-3" />
-                        </Link>
-                      </div>
+                {/* Dropdown Card */}
+                <div className="absolute left-0 top-full pt-2 w-[460px] z-50 hidden group-hover:block group-focus-within:block">
+                  <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-border">
+                      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                        12 Olympic & Athletic Disciplines
+                      </span>
+                      <Link
+                        href="/sports"
+                        className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
+                      >
+                        <span>All Curriculums</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Link>
+                    </div>
 
-                      <div className="grid grid-cols-2 gap-2">
-                        {SPORTS_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <Link
-                              key={item.title}
-                              href={item.href}
-                              role="menuitem"
-                              className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-muted transition-colors"
-                            >
-                              <div className="p-1.5 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <div className="flex flex-col min-w-0">
-                                <div className="flex items-center gap-1.5">
-                                  <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors truncate">
-                                    {item.title}
-                                  </span>
-                                  {item.badge && (
-                                    <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <span className="text-[11px] text-muted-foreground line-clamp-1">
-                                  {item.subtitle}
+                    <div className="grid grid-cols-2 gap-2">
+                      {SPORTS_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.title}
+                            href={item.href}
+                            className="group/item flex items-start gap-2.5 p-2 rounded-xl hover:bg-muted transition-colors"
+                          >
+                            <div className="p-1.5 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors truncate">
+                                  {item.title}
                                 </span>
+                                {item.badge && (
+                                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                                    {item.badge}
+                                  </span>
+                                )}
                               </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
+                              <span className="text-[11px] text-muted-foreground line-clamp-1">
+                                {item.subtitle}
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
 
-                      <div className="mt-3 pt-3 border-t border-border bg-muted/50 rounded-xl p-2.5 flex items-center justify-between">
-                        <span className="text-xs text-muted-foreground">
-                          Also training Basketball, Skating, Karate, Table Tennis & Archery.
-                        </span>
-                        <Link
-                          href="/sports"
-                          className="text-xs font-bold text-brand-primary shrink-0 ml-2 hover:underline"
-                        >
-                          View 12 →
-                        </Link>
-                      </div>
+                    <div className="mt-3 pt-3 border-t border-border bg-muted/50 rounded-xl p-2.5 flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground">
+                        Also training Basketball, Skating, Karate, Table Tennis & Archery.
+                      </span>
+                      <Link
+                        href="/sports"
+                        className="text-xs font-bold text-brand-primary shrink-0 ml-2 hover:underline"
+                      >
+                        View 12 →
+                      </Link>
                     </div>
                   </div>
-                )}
+                </div>
               </div>
 
               {/* 2. Programmes Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleDropdownEnter("programs")}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <button
-                  type="button"
-                  onClick={(e) => handleDropdownClick("programs", e)}
-                  aria-expanded={activeDropdown === "programs"}
-                  aria-haspopup="menu"
+              <div className="relative group">
+                <Link
+                  href="/programs"
                   className={cn(
-                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
-                    isProgramsActive || activeDropdown === "programs"
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
+                    isProgramsActive
                       ? "text-brand-primary bg-primary/10 font-bold"
-                      : "text-foreground/85 hover:text-foreground hover:bg-muted"
+                      : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                   )}
                 >
                   <span>Programmes</span>
-                  <ChevronDown
-                    className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
-                      activeDropdown === "programs" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
+                </Link>
 
-                {activeDropdown === "programs" && (
-                  <div
-                    role="menu"
-                    onMouseEnter={() => handleDropdownEnter("programs")}
-                    onMouseLeave={handleDropdownLeave}
-                    className="absolute left-0 top-full pt-2 w-[380px] z-50 animate-in fade-in zoom-in-95 duration-150"
-                  >
-                    <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
-                      <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
-                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                          Lifelong Athletic Pathways
-                        </span>
-                        <Link
-                          href="/programs"
-                          className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
-                        >
-                          <span>Full Overview</span>
-                          <ChevronRight className="h-3 w-3" />
-                        </Link>
-                      </div>
+                {/* Dropdown Card */}
+                <div className="absolute left-0 top-full pt-2 w-[380px] z-50 hidden group-hover:block group-focus-within:block">
+                  <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
+                      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                        Lifelong Athletic Pathways
+                      </span>
+                      <Link
+                        href="/programs"
+                        className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
+                      >
+                        <span>Full Overview</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Link>
+                    </div>
 
-                      <div className="flex flex-col gap-1.5">
-                        {PROGRAM_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <Link
-                              key={item.title}
-                              href={item.href}
-                              role="menuitem"
-                              className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
-                            >
-                              <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <div className="flex flex-col min-w-0">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
-                                    {item.title}
-                                  </span>
-                                  {item.badge && (
-                                    <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <span className="text-[11px] text-muted-foreground">
-                                  {item.subtitle}
+                    <div className="flex flex-col gap-1.5">
+                      {PROGRAM_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.title}
+                            href={item.href}
+                            className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
+                          >
+                            <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
+                                  {item.title}
                                 </span>
+                                {item.badge && (
+                                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                                    {item.badge}
+                                  </span>
+                                )}
                               </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
+                              <span className="text-[11px] text-muted-foreground">
+                                {item.subtitle}
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
 
               {/* 3. Institutions Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleDropdownEnter("institutions")}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <button
-                  type="button"
-                  onClick={(e) => handleDropdownClick("institutions", e)}
-                  aria-expanded={activeDropdown === "institutions"}
-                  aria-haspopup="menu"
+              <div className="relative group">
+                <Link
+                  href="/partnerships"
                   className={cn(
-                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
-                    isInstitutionsActive || activeDropdown === "institutions"
+                    "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
+                    isInstitutionsActive
                       ? "text-brand-primary bg-primary/10 font-bold"
-                      : "text-foreground/85 hover:text-foreground hover:bg-muted"
+                      : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                   )}
                 >
                   <span>Institutions</span>
-                  <ChevronDown
-                    className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
-                      activeDropdown === "institutions" && "rotate-180 text-brand-primary"
-                    )}
-                  />
-                </button>
+                  <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
+                </Link>
 
-                {activeDropdown === "institutions" && (
-                  <div
-                    role="menu"
-                    onMouseEnter={() => handleDropdownEnter("institutions")}
-                    onMouseLeave={handleDropdownLeave}
-                    className="absolute left-0 top-full pt-2 w-[400px] z-50 animate-in fade-in zoom-in-95 duration-150"
-                  >
-                    <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
-                      <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
-                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                          Institutional Sports Solutions
-                        </span>
-                        <Link
-                          href="/partnerships"
-                          className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
-                        >
-                          <span>Partner Pathways</span>
-                          <ChevronRight className="h-3 w-3" />
-                        </Link>
-                      </div>
+                {/* Dropdown Card */}
+                <div className="absolute left-0 top-full pt-2 w-[400px] z-50 hidden group-hover:block group-focus-within:block">
+                  <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
+                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
+                      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                        Institutional Sports Solutions
+                      </span>
+                      <Link
+                        href="/partnerships"
+                        className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
+                      >
+                        <span>Partner Pathways</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Link>
+                    </div>
 
-                      <div className="flex flex-col gap-1.5">
-                        {INSTITUTION_ITEMS.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <Link
-                              key={item.title}
-                              href={item.href}
-                              role="menuitem"
-                              className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
-                            >
-                              <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <div className="flex flex-col min-w-0">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
-                                    {item.title}
-                                  </span>
-                                  {item.badge && (
-                                    <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
-                                      {item.badge}
-                                    </span>
-                                  )}
-                                </div>
-                                <span className="text-[11px] text-muted-foreground">
-                                  {item.subtitle}
+                    <div className="flex flex-col gap-1.5">
+                      {INSTITUTION_ITEMS.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.title}
+                            href={item.href}
+                            className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
+                          >
+                            <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
+                                  {item.title}
                                 </span>
+                                {item.badge && (
+                                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                                    {item.badge}
+                                  </span>
+                                )}
                               </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
+                              <span className="text-[11px] text-muted-foreground">
+                                {item.subtitle}
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
-                )}
+                </div>
               </div>
             </nav>
           </div>
@@ -625,187 +514,149 @@ export function Navbar() {
           {/* ======================================================== */}
           <div className="flex items-center justify-end gap-3 xl:gap-4 min-w-0">
             {/* 4. Academy Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleDropdownEnter("academy")}
-              onMouseLeave={handleDropdownLeave}
-            >
-              <button
-                type="button"
-                onClick={(e) => handleDropdownClick("academy", e)}
-                aria-expanded={activeDropdown === "academy"}
-                aria-haspopup="menu"
+            <div className="relative group">
+              <Link
+                href="/about"
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
-                  isAcademyActive || activeDropdown === "academy"
+                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
+                  isAcademyActive
                     ? "text-brand-primary bg-primary/10 font-bold"
-                    : "text-foreground/85 hover:text-foreground hover:bg-muted"
+                    : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                 )}
               >
                 <span>Academy</span>
-                <ChevronDown
-                  className={cn(
-                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
-                    activeDropdown === "academy" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
+              </Link>
 
-              {activeDropdown === "academy" && (
-                <div
-                  role="menu"
-                  onMouseEnter={() => handleDropdownEnter("academy")}
-                  onMouseLeave={handleDropdownLeave}
-                  className="absolute right-0 top-full pt-2 w-[420px] z-50 animate-in fade-in zoom-in-95 duration-150"
-                >
-                  <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
-                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
-                      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                        Institutional Leadership & Safeguarding
-                      </span>
-                      <Link
-                        href="/about"
-                        className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
-                      >
-                        <span>About Academy</span>
-                        <ChevronRight className="h-3 w-3" />
-                      </Link>
-                    </div>
+              {/* Dropdown Card */}
+              <div className="absolute right-0 top-full pt-2 w-[420px] z-50 hidden group-hover:block group-focus-within:block">
+                <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
+                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      Institutional Leadership & Safeguarding
+                    </span>
+                    <Link
+                      href="/about"
+                      className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
+                    >
+                      <span>About Academy</span>
+                      <ChevronRight className="h-3 w-3" />
+                    </Link>
+                  </div>
 
-                    <div className="flex flex-col gap-1.5">
-                      {ACADEMY_ITEMS.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            role="menuitem"
-                            className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
-                          >
-                            <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                              <Icon className="h-4 w-4" />
-                            </div>
-                            <div className="flex flex-col min-w-0">
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
-                                  {item.title}
-                                </span>
-                                {item.badge && (
-                                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
-                                    {item.badge}
-                                  </span>
-                                )}
-                              </div>
-                              <span className="text-[11px] text-muted-foreground">
-                                {item.subtitle}
+                  <div className="flex flex-col gap-1.5">
+                    {ACADEMY_ITEMS.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={item.title}
+                          href={item.href}
+                          className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
+                        >
+                          <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
+                                {item.title}
                               </span>
+                              {item.badge && (
+                                <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                                  {item.badge}
+                                </span>
+                              )}
                             </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                            <span className="text-[11px] text-muted-foreground">
+                              {item.subtitle}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* 5. Centres Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleDropdownEnter("centres")}
-              onMouseLeave={handleDropdownLeave}
-            >
-              <button
-                type="button"
-                onClick={(e) => handleDropdownClick("centres", e)}
-                aria-expanded={activeDropdown === "centres"}
-                aria-haspopup="menu"
+            <div className="relative group">
+              <Link
+                href="/contact"
                 className={cn(
-                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
-                  isCentresActive || activeDropdown === "centres"
+                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary",
+                  isCentresActive
                     ? "text-brand-primary bg-primary/10 font-bold"
-                    : "text-foreground/85 hover:text-foreground hover:bg-muted"
+                    : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
                 )}
               >
                 <span>Centres</span>
-                <ChevronDown
-                  className={cn(
-                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
-                    activeDropdown === "centres" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                <ChevronDown className="h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary" />
+              </Link>
 
-              {activeDropdown === "centres" && (
-                <div
-                  role="menu"
-                  onMouseEnter={() => handleDropdownEnter("centres")}
-                  onMouseLeave={handleDropdownLeave}
-                  className="absolute right-0 top-full pt-2 w-[360px] z-50 animate-in fade-in zoom-in-95 duration-150"
-                >
-                  <div className="bg-popover text-popover-foreground border border-border shadow-2xl rounded-2xl p-4">
-                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
-                      <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                        Academy Locations
-                      </span>
-                      <Link
-                        href="/contact"
-                        className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
-                      >
-                        <span>Map & Hours</span>
-                        <ChevronRight className="h-3 w-3" />
-                      </Link>
-                    </div>
+              {/* Dropdown Card */}
+              <div className="absolute right-0 top-full pt-2 w-[360px] z-50 hidden group-hover:block group-focus-within:block">
+                <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
+                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                      Academy Locations
+                    </span>
+                    <Link
+                      href="/contact"
+                      className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
+                    >
+                      <span>Map & Hours</span>
+                      <ChevronRight className="h-3 w-3" />
+                    </Link>
+                  </div>
 
-                    <div className="flex flex-col gap-1.5">
-                      {CENTRES_ITEMS.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            role="menuitem"
-                            className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
-                          >
-                            <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
-                              <Icon className="h-4 w-4" />
-                            </div>
-                            <div className="flex flex-col min-w-0">
-                              <div className="flex items-center gap-2">
-                                <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
-                                  {item.title}
-                                </span>
-                                {item.badge && (
-                                  <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
-                                    {item.badge}
-                                  </span>
-                                )}
-                              </div>
-                              <span className="text-[11px] text-muted-foreground">
-                                {item.subtitle}
+                  <div className="flex flex-col gap-1.5">
+                    {CENTRES_ITEMS.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={item.title}
+                          href={item.href}
+                          className="group/item flex items-start gap-3 p-2.5 rounded-xl hover:bg-muted transition-colors"
+                        >
+                          <div className="p-2 rounded-lg bg-amber-500/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0 mt-0.5">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-bold text-foreground group-hover/item:text-brand-primary transition-colors">
+                                {item.title}
                               </span>
+                              {item.badge && (
+                                <span className="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400">
+                                  {item.badge}
+                                </span>
+                              )}
                             </div>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                            <span className="text-[11px] text-muted-foreground">
+                              {item.subtitle}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
 
-                    {/* Direct Coaching Desk Call action inside Centres dropdown */}
-                    <div className="mt-3 pt-3 border-t border-border">
-                      <a
-                        href={`tel:${WHATSAPP_PRIMARY_NUMBER}`}
-                        className="flex items-center justify-between p-2 rounded-xl bg-muted/60 hover:bg-muted text-xs font-bold text-foreground transition-colors"
-                      >
-                        <span className="flex items-center gap-2">
-                          <Phone className="h-3.5 w-3.5 text-brand-primary" />
-                          <span>Direct Coaching Desk</span>
-                        </span>
-                        <span className="text-brand-primary">{PRIMARY_PHONE_DISPLAY}</span>
-                      </a>
-                    </div>
+                  {/* Direct Coaching Desk Call action inside Centres dropdown */}
+                  <div className="mt-3 pt-3 border-t border-border">
+                    <a
+                      href={`tel:${WHATSAPP_PRIMARY_NUMBER}`}
+                      className="flex items-center justify-between p-2 rounded-xl bg-muted/60 hover:bg-muted text-xs font-bold text-foreground transition-colors"
+                    >
+                      <span className="flex items-center gap-2">
+                        <Phone className="h-3.5 w-3.5 text-brand-primary" />
+                        <span>Direct Coaching Desk</span>
+                      </span>
+                      <span className="text-brand-primary">{PRIMARY_PHONE_DISPLAY}</span>
+                    </a>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* Theme Toggle Button */}
@@ -907,10 +758,10 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation Drawer"
-          className="lg:hidden bg-white/98 dark:bg-slate-900/98 border-b border-border backdrop-blur-xl px-4 pt-3 pb-6 max-h-[calc(100vh-80px)] overflow-y-auto space-y-3 shadow-2xl animate-in slide-in-from-top-3 duration-200"
+          className="lg:hidden bg-card/98 border-b border-border backdrop-blur-xl px-4 pt-3 pb-6 max-h-[calc(100vh-80px)] overflow-y-auto space-y-3 shadow-2xl animate-in slide-in-from-top-3 duration-200"
         >
           {/* Quick Header inside Mobile Drawer */}
-          <div className="flex items-center justify-between pb-2 border-b border-border/60">
+          <div className="flex items-center justify-between pb-2 border-b border-border">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Navigation Menu
             </span>
@@ -928,27 +779,33 @@ export function Navbar() {
 
           <div className="flex flex-col space-y-1">
             {/* 1. Sports Accordion */}
-            <div className="border border-border/70 rounded-xl overflow-hidden bg-background/50">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection("sports")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
-                aria-expanded={mobileExpandedSection === "sports"}
-              >
-                <span className="flex items-center gap-2">
+            <div className="border border-border rounded-xl overflow-hidden bg-background/50">
+              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
+                <Link
+                  href="/sports"
+                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
+                >
                   <Trophy className="h-4 w-4 text-brand-primary" />
                   <span>Sports (12 Curriculums)</span>
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 text-muted-foreground transition-transform duration-200",
-                    mobileExpandedSection === "sports" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("sports")}
+                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
+                  aria-expanded={mobileExpandedSection === "sports"}
+                  aria-label="Toggle sports sub-menu"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform duration-200",
+                      mobileExpandedSection === "sports" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
+              </div>
 
               {mobileExpandedSection === "sports" && (
-                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border/50">
+                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
                   {SPORTS_ITEMS.map((item) => (
                     <Link
                       key={item.title}
@@ -972,27 +829,33 @@ export function Navbar() {
             </div>
 
             {/* 2. Programmes Accordion */}
-            <div className="border border-border/70 rounded-xl overflow-hidden bg-background/50">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection("programs")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
-                aria-expanded={mobileExpandedSection === "programs"}
-              >
-                <span className="flex items-center gap-2">
+            <div className="border border-border rounded-xl overflow-hidden bg-background/50">
+              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
+                <Link
+                  href="/programs"
+                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
+                >
                   <Activity className="h-4 w-4 text-brand-primary" />
-                  <span>Programmes & Age Pathways</span>
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 text-muted-foreground transition-transform duration-200",
-                    mobileExpandedSection === "programs" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                  <span>Programmes & Pathways</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("programs")}
+                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
+                  aria-expanded={mobileExpandedSection === "programs"}
+                  aria-label="Toggle programmes sub-menu"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform duration-200",
+                      mobileExpandedSection === "programs" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
+              </div>
 
               {mobileExpandedSection === "programs" && (
-                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border/50">
+                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
                   {PROGRAM_ITEMS.map((item) => (
                     <Link
                       key={item.title}
@@ -1016,27 +879,33 @@ export function Navbar() {
             </div>
 
             {/* 3. Institutions Accordion */}
-            <div className="border border-border/70 rounded-xl overflow-hidden bg-background/50">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection("institutions")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
-                aria-expanded={mobileExpandedSection === "institutions"}
-              >
-                <span className="flex items-center gap-2">
+            <div className="border border-border rounded-xl overflow-hidden bg-background/50">
+              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
+                <Link
+                  href="/partnerships"
+                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
+                >
                   <Building2 className="h-4 w-4 text-brand-primary" />
                   <span>Institutional Partnerships</span>
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 text-muted-foreground transition-transform duration-200",
-                    mobileExpandedSection === "institutions" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("institutions")}
+                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
+                  aria-expanded={mobileExpandedSection === "institutions"}
+                  aria-label="Toggle institutions sub-menu"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform duration-200",
+                      mobileExpandedSection === "institutions" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
+              </div>
 
               {mobileExpandedSection === "institutions" && (
-                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border/50">
+                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
                   {INSTITUTION_ITEMS.map((item) => (
                     <Link
                       key={item.title}
@@ -1060,27 +929,33 @@ export function Navbar() {
             </div>
 
             {/* 4. Academy Accordion */}
-            <div className="border border-border/70 rounded-xl overflow-hidden bg-background/50">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection("academy")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
-                aria-expanded={mobileExpandedSection === "academy"}
-              >
-                <span className="flex items-center gap-2">
+            <div className="border border-border rounded-xl overflow-hidden bg-background/50">
+              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
+                <Link
+                  href="/about"
+                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
+                >
                   <ShieldCheck className="h-4 w-4 text-brand-primary" />
                   <span>Academy Leadership & Ethics</span>
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 text-muted-foreground transition-transform duration-200",
-                    mobileExpandedSection === "academy" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("academy")}
+                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
+                  aria-expanded={mobileExpandedSection === "academy"}
+                  aria-label="Toggle academy sub-menu"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform duration-200",
+                      mobileExpandedSection === "academy" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
+              </div>
 
               {mobileExpandedSection === "academy" && (
-                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border/50">
+                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
                   {ACADEMY_ITEMS.map((item) => (
                     <Link
                       key={item.title}
@@ -1103,27 +978,33 @@ export function Navbar() {
             </div>
 
             {/* 5. Centres Accordion */}
-            <div className="border border-border/70 rounded-xl overflow-hidden bg-background/50">
-              <button
-                type="button"
-                onClick={() => toggleMobileSection("centres")}
-                className="w-full flex items-center justify-between px-3.5 py-3 text-sm font-bold text-foreground hover:bg-muted/60 transition-colors cursor-pointer"
-                aria-expanded={mobileExpandedSection === "centres"}
-              >
-                <span className="flex items-center gap-2">
+            <div className="border border-border rounded-xl overflow-hidden bg-background/50">
+              <div className="flex items-center justify-between px-3.5 py-3 hover:bg-muted/60 transition-colors">
+                <Link
+                  href="/contact"
+                  className="flex items-center gap-2 text-sm font-bold text-foreground hover:text-brand-primary"
+                >
                   <MapPin className="h-4 w-4 text-brand-primary" />
                   <span>Academy Centres & Contact</span>
-                </span>
-                <ChevronDown
-                  className={cn(
-                    "h-4 w-4 text-muted-foreground transition-transform duration-200",
-                    mobileExpandedSection === "centres" && "rotate-180 text-brand-primary"
-                  )}
-                />
-              </button>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection("centres")}
+                  className="p-1 text-muted-foreground hover:text-brand-primary cursor-pointer"
+                  aria-expanded={mobileExpandedSection === "centres"}
+                  aria-label="Toggle centres sub-menu"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 transition-transform duration-200",
+                      mobileExpandedSection === "centres" && "rotate-180 text-brand-primary"
+                    )}
+                  />
+                </button>
+              </div>
 
               {mobileExpandedSection === "centres" && (
-                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border/50">
+                <div className="px-3 pb-3 pt-1 space-y-1 bg-muted/20 border-t border-border">
                   {CENTRES_ITEMS.map((item) => (
                     <Link
                       key={item.title}
