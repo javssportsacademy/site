@@ -255,15 +255,24 @@ export function Navbar() {
     setDesktopDropdown(null);
   }, [pathname]);
 
-  // Click outside header closes open desktop dropdown
+  // Click outside header or press Escape closes open desktop dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
         setDesktopDropdown(null);
       }
     };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDesktopDropdown(null);
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const toggleDesktopDropdown = (key: DropdownKey) => {
@@ -324,10 +333,10 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Left Navigation Dropdowns (Direct Link + Hover Dropdown) */}
+            {/* Left Navigation Dropdowns (Click Toggle Dropdown) */}
             <nav className="flex items-center gap-1 xl:gap-1.5" aria-label="Main sports and programme navigation">
               {/* 1. Sports Dropdown */}
-              <div className="relative group">
+              <div className="relative">
                 <button
                   type="button"
                   onClick={() => toggleDesktopDropdown("sports")}
@@ -336,13 +345,13 @@ export function Navbar() {
                     "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
                     isSportsActive || desktopDropdown === "sports"
                       ? "text-brand-primary bg-primary/10 font-bold"
-                      : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
+                      : "text-foreground/85 hover:text-foreground hover:bg-muted"
                   )}
                 >
                   <span>Sports</span>
                   <ChevronDown
                     className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
                       desktopDropdown === "sports" && "rotate-180 text-brand-primary"
                     )}
                   />
@@ -352,9 +361,7 @@ export function Navbar() {
                 <div
                   className={cn(
                     "absolute left-0 top-full pt-2 w-[580px] xl:w-[640px] z-50",
-                    desktopDropdown === "sports"
-                      ? "block"
-                      : "hidden group-hover:block group-focus-within:block"
+                    desktopDropdown === "sports" ? "block" : "hidden"
                   )}
                 >
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
@@ -423,7 +430,7 @@ export function Navbar() {
               </div>
 
               {/* 2. Programmes Dropdown */}
-              <div className="relative group">
+              <div className="relative">
                 <button
                   type="button"
                   onClick={() => toggleDesktopDropdown("programs")}
@@ -432,13 +439,13 @@ export function Navbar() {
                     "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
                     isProgramsActive || desktopDropdown === "programs"
                       ? "text-brand-primary bg-primary/10 font-bold"
-                      : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
+                      : "text-foreground/85 hover:text-foreground hover:bg-muted"
                   )}
                 >
                   <span>Programmes</span>
                   <ChevronDown
                     className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
                       desktopDropdown === "programs" && "rotate-180 text-brand-primary"
                     )}
                   />
@@ -448,9 +455,7 @@ export function Navbar() {
                 <div
                   className={cn(
                     "absolute left-0 top-full pt-2 w-[380px] z-50",
-                    desktopDropdown === "programs"
-                      ? "block"
-                      : "hidden group-hover:block group-focus-within:block"
+                    desktopDropdown === "programs" ? "block" : "hidden"
                   )}
                 >
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
@@ -505,7 +510,7 @@ export function Navbar() {
               </div>
 
               {/* 3. Institutions Dropdown */}
-              <div className="relative group">
+              <div className="relative">
                 <button
                   type="button"
                   onClick={() => toggleDesktopDropdown("institutions")}
@@ -514,13 +519,13 @@ export function Navbar() {
                     "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
                     isInstitutionsActive || desktopDropdown === "institutions"
                       ? "text-brand-primary bg-primary/10 font-bold"
-                      : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
+                      : "text-foreground/85 hover:text-foreground hover:bg-muted"
                   )}
                 >
                   <span>Institutions</span>
                   <ChevronDown
                     className={cn(
-                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                      "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
                       desktopDropdown === "institutions" && "rotate-180 text-brand-primary"
                     )}
                   />
@@ -530,9 +535,7 @@ export function Navbar() {
                 <div
                   className={cn(
                     "absolute left-0 top-full pt-2 w-[400px] z-50",
-                    desktopDropdown === "institutions"
-                      ? "block"
-                      : "hidden group-hover:block group-focus-within:block"
+                    desktopDropdown === "institutions" ? "block" : "hidden"
                   )}
                 >
                   <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
@@ -627,7 +630,7 @@ export function Navbar() {
           {/* ======================================================== */}
           <div className="flex items-center justify-end gap-3 xl:gap-4 min-w-0">
             {/* 4. Academy Dropdown */}
-            <div className="relative group">
+            <div className="relative">
               <button
                 type="button"
                 onClick={() => toggleDesktopDropdown("academy")}
@@ -636,13 +639,13 @@ export function Navbar() {
                   "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
                   isAcademyActive || desktopDropdown === "academy"
                     ? "text-brand-primary bg-primary/10 font-bold"
-                    : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
+                    : "text-foreground/85 hover:text-foreground hover:bg-muted"
                 )}
               >
                 <span>Academy</span>
                 <ChevronDown
                   className={cn(
-                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
                     desktopDropdown === "academy" && "rotate-180 text-brand-primary"
                   )}
                 />
@@ -652,9 +655,7 @@ export function Navbar() {
               <div
                 className={cn(
                   "absolute right-0 top-full pt-2 w-[420px] z-50",
-                  desktopDropdown === "academy"
-                    ? "block"
-                    : "hidden group-hover:block group-focus-within:block"
+                  desktopDropdown === "academy" ? "block" : "hidden"
                 )}
               >
                 <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
@@ -709,7 +710,7 @@ export function Navbar() {
             </div>
 
             {/* 5. Centres Dropdown */}
-            <div className="relative group">
+            <div className="relative">
               <button
                 type="button"
                 onClick={() => toggleDesktopDropdown("centres")}
@@ -718,13 +719,13 @@ export function Navbar() {
                   "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-primary cursor-pointer",
                   isCentresActive || desktopDropdown === "centres"
                     ? "text-brand-primary bg-primary/10 font-bold"
-                    : "text-foreground/85 hover:text-foreground hover:bg-muted group-hover:text-brand-primary group-hover:bg-muted"
+                    : "text-foreground/85 hover:text-foreground hover:bg-muted"
                 )}
               >
                 <span>Centres</span>
                 <ChevronDown
                   className={cn(
-                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground group-hover:rotate-180 group-hover:text-brand-primary",
+                    "h-3.5 w-3.5 transition-transform duration-200 motion-reduce:transform-none text-muted-foreground",
                     desktopDropdown === "centres" && "rotate-180 text-brand-primary"
                   )}
                 />
@@ -734,9 +735,7 @@ export function Navbar() {
               <div
                 className={cn(
                   "absolute right-0 top-full pt-2 w-[360px] z-50",
-                  desktopDropdown === "centres"
-                    ? "block"
-                    : "hidden group-hover:block group-focus-within:block"
+                  desktopDropdown === "centres" ? "block" : "hidden"
                 )}
               >
                 <div className="bg-card text-card-foreground border border-border shadow-2xl rounded-2xl p-4 animate-in fade-in zoom-in-95 duration-150">
