@@ -79,16 +79,16 @@ export default function FounderPage() {
               {/* Founder Portrait Frame */}
               <div className="relative aspect-4/5 w-full rounded-2xl overflow-hidden border border-border shadow-md group bg-muted">
                 <Image
-                  src="/images/founder-portrait.png"
+                  src="/images/founder-portrait.jpg"
                   alt="Coach Mohammed Javeed (M.P.Ed.) addressing audience at sports conference"
                   fill
                   priority
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-[center_68%] group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
 
                 {/* Subtle gradient overlay at bottom for contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
 
                 {/* Verified Director Badge */}
                 <div className="absolute top-3 right-3 z-10">
