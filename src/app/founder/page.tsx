@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { SubpageHero } from "@/components/layout/SubpageHero";
 import { FOUNDER_DATA, FOUNDER_TIMELINE, FOUNDER_MEDIA_APPEARANCES } from "@/lib/constants/founder";
 import { COACHING_TEAM, ACADEMY_ACHIEVEMENTS, ACADEMY_FACILITIES, ACADEMY_EVENTS } from "@/lib/constants/team";
@@ -76,8 +77,20 @@ export default function FounderPage() {
           <div className="lg:col-span-5 space-y-6">
             <div className="p-6 sm:p-8 rounded-3xl bg-card border border-border shadow-xl space-y-6">
               {/* Founder Portrait Frame */}
-              <div className="relative aspect-4/5 w-full rounded-2xl bg-gradient-to-b from-muted via-card to-amber-500/10 border border-border overflow-hidden flex flex-col items-center justify-between p-6 text-center group">
-                {/* Ambient radial badge */}
+              <div className="relative aspect-4/5 w-full rounded-2xl overflow-hidden border border-border shadow-md group bg-muted">
+                <Image
+                  src="/images/founder-portrait.png"
+                  alt="Coach Mohammed Javeed (M.P.Ed.) addressing audience at sports conference"
+                  fill
+                  priority
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+
+                {/* Subtle gradient overlay at bottom for contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+
+                {/* Verified Director Badge */}
                 <div className="absolute top-3 right-3 z-10">
                   <Badge variant="default" className="text-[10px] font-bold uppercase tracking-wider bg-brand-primary text-white shadow-sm flex items-center gap-1">
                     <ShieldCheck className="h-3 w-3" />
@@ -85,31 +98,17 @@ export default function FounderPage() {
                   </Badge>
                 </div>
 
-                {/* Editorial Visual Placeholder */}
-                <div className="my-auto flex flex-col items-center justify-center space-y-4">
-                  <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-tr from-brand-primary via-amber-600 to-amber-700 p-1 shadow-lg shadow-brand-primary/20">
-                    <div className="w-full h-full rounded-[22px] bg-card flex flex-col items-center justify-center text-foreground">
-                      <span className="text-4xl sm:text-5xl font-black text-brand-primary font-mono tracking-tight">MJ</span>
-                      <span className="text-[10px] font-bold uppercase text-muted-foreground mt-1">Head Coach</span>
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xl font-black uppercase text-foreground tracking-tight">
-                      Mohammed Javeed
-                    </p>
-                    <p className="text-xs font-bold text-brand-primary uppercase tracking-wider">
-                      M.Sc. (CS) • M.P.Ed.
-                    </p>
-                    <p className="text-[11px] text-muted-foreground font-mono">
-                      Wicketkeeper-Batsman • TNCA / TDCA Leagues
-                    </p>
-                  </div>
-                </div>
-
-                {/* Photo Drop-in Notice */}
-                <div className="w-full py-2 px-3 rounded-xl bg-background/80 backdrop-blur-xs border border-border text-[10px] font-mono text-muted-foreground flex items-center justify-center gap-1.5 shadow-2xs">
-                  <Camera className="h-3 w-3 text-brand-primary" />
-                  <span>[ High-Res Founder Portrait Placeholder ]</span>
+                {/* Bottom Credential Overlay */}
+                <div className="absolute bottom-0 inset-x-0 p-6 z-10 text-white space-y-1">
+                  <p className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white drop-shadow-sm">
+                    Mohammed Javeed
+                  </p>
+                  <p className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    M.Sc. (CS) • M.P.Ed.
+                  </p>
+                  <p className="text-[11px] text-white/80 font-mono">
+                    Wicketkeeper-Batsman • TNCA / TDCA Leagues
+                  </p>
                 </div>
               </div>
 

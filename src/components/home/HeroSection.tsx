@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, GraduationCap, Users, Play, Camera, MapPin, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ShieldCheck, GraduationCap, Users, Play, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 
 export function HeroSection() {
@@ -19,7 +19,7 @@ export function HeroSection() {
             {/* Institutional Badge */}
             <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-brand-primary dark:text-amber-400 text-[11px] sm:text-xs font-bold tracking-wide shadow-xs max-w-full">
               <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
-              <span className="truncate sm:whitespace-normal">Chennai&apos;s Multi-Sport & Athletic Development Institution</span>
+              <span className="truncate sm:whitespace-normal">Chennai&apos;s Multi-Sport &amp; Athletic Development Institution</span>
             </div>
 
             {/* Core Athletic Manifesto */}
@@ -70,7 +70,7 @@ export function HeroSection() {
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-brand-primary shrink-0" />
-                <span>MSDCA & Coaching Beyond</span>
+                <span>MSDCA &amp; Coaching Beyond</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-brand-primary shrink-0" />
@@ -79,38 +79,32 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Compelling Visual Media & Training Imagery Card */}
+          {/* Right Column: Showcase Collage Image */}
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl bg-card border border-border p-4 sm:p-5 shadow-2xl space-y-4 overflow-hidden group">
-              {/* Training Photography Frame Placeholder */}
-              <div className="relative aspect-4/3 w-full rounded-2xl bg-gradient-to-tr from-muted via-card to-amber-500/10 border border-border overflow-hidden flex flex-col items-center justify-between p-5 text-center">
-                {/* Badges on top */}
-                <div className="w-full flex items-center justify-between">
-                  <Badge variant="outline" className="text-[10px] font-mono uppercase bg-background/80 backdrop-blur-xs border-border text-foreground">
-                    Thiruverkadu & Bella Vista
-                  </Badge>
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" title="Active Batches" />
-                </div>
-
-                {/* Center Visual Art & Placeholder */}
-                <div className="my-auto flex flex-col items-center justify-center space-y-2">
-                  <div className="w-14 h-14 rounded-2xl bg-amber-500/10 text-brand-primary flex items-center justify-center shadow-xs">
-                    <Camera className="h-7 w-7" />
-                  </div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-foreground">
-                    Academy Training in Action
-                  </p>
-                  <p className="text-[11px] text-muted-foreground font-mono">
-                    [ High-Performance Turf Nets & Movement Drills ]
-                  </p>
-                </div>
-
-                {/* Bottom info pill */}
-                <div className="w-full py-1.5 px-3 rounded-xl bg-background/80 backdrop-blur-xs border border-border text-[11px] font-semibold text-foreground flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-brand-primary">
-                    <MapPin className="h-3.5 w-3.5" /> 2 Operating Hubs
+              {/* JAV'S Sports Academy Showcase Collage */}
+              <div className="relative aspect-4/3 w-full rounded-2xl overflow-hidden border border-border shadow-lg">
+                <Image
+                  src="/images/javs-showcase-collage.jpg"
+                  alt="JAV'S Sports Academy — Sport Teaches Life showcase featuring Jav's Inbox and match victories"
+                  fill
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                />
+                {/* Gradient overlay at bottom */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-white text-[11px] font-bold">
+                    <MapPin className="h-3.5 w-3.5 text-amber-400" /> 2 Operating Hubs
                   </span>
-                  <span className="font-mono text-[10px] text-muted-foreground">12 Sports Disciplines</span>
+                  <span className="font-mono text-[10px] text-white/80">12 Sports Disciplines</span>
+                </div>
+                {/* Active batches live badge */}
+                <div className="absolute top-3 right-3">
+                  <span className="flex items-center gap-1.5 bg-emerald-500/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    Active Batches
+                  </span>
                 </div>
               </div>
 
@@ -129,7 +123,7 @@ export function HeroSection() {
                         Featured on Jav&apos;s Inbox
                       </p>
                       <p className="text-xs font-bold text-foreground truncate">
-                        Dayalan Hemalatha (RCB & Team India)
+                        Dayalan Hemalatha (RCB &amp; Team India)
                       </p>
                     </div>
                   </div>
