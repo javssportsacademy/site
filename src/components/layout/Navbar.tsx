@@ -810,11 +810,6 @@ export function Navbar() {
               </div>
             </div>
 
-            {/* Theme Toggle Button */}
-            <div className="shrink-0">
-              <ThemeToggle />
-            </div>
-
             {/* 6. Athletic Amber Book Assessment CTA */}
             <div className="shrink-0">
               <TrialBookingModal
@@ -829,6 +824,11 @@ export function Navbar() {
                   </Button>
                 }
               />
+            </div>
+
+            {/* Theme Toggle Button */}
+            <div className="shrink-0">
+              <ThemeToggle />
             </div>
           </div>
         </div>
@@ -870,12 +870,8 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Right: ThemeToggle, Quick Assessment, Hamburger Toggle */}
+          {/* Mobile Right: Quick Assessment, ThemeToggle, Hamburger Toggle */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <div className="hidden sm:block">
-              <ThemeToggle />
-            </div>
-
             <TrialBookingModal
               triggerButton={
                 <Button
@@ -887,6 +883,10 @@ export function Navbar() {
                 </Button>
               }
             />
+
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
 
             <button
               type="button"
