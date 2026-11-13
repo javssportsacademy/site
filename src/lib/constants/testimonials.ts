@@ -56,3 +56,6 @@ export const APPROVED_TESTIMONIALS: Testimonial[] = [
     verifiedDuration: "Enrolled for 1 Year"
   }
 ];
+
+export const TESTIMONIALS_SUBTITLE =
+  "Real feedback from families enrolled across our Chennai training centers and residential cricket sessions.";

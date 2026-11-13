@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { SportCard } from "@/components/shared/SportCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { SPORTS_LIST } from "@/lib/constants/sports";
+import { SPORTS_LIST, SPORTS_AVAILABILITY_NOTE } from "@/lib/constants/sports";
 
 const CATEGORIES = ["All", "Field & Court", "Racket Sports", "Precision & Water", "Endurance"] as const;
 
@@ -62,7 +62,7 @@ export function SportsShowcase() {
         <div className="mt-14 p-6 rounded-2xl bg-card border border-border text-center max-w-3xl mx-auto space-y-3 shadow-xs">
           <p className="text-xs sm:text-sm text-muted-foreground">
             <strong className="text-foreground">Operational Availability Note: </strong>
-            &ldquo;Gallery images are illustrative. Sports availability varies by location (Prestige Bella Vista hosts dedicated cricket sessions, while our Thiruverkadu main campus hosts full multi-sport training). Contact our team to confirm current batch timings.&rdquo;
+            &ldquo;{SPORTS_AVAILABILITY_NOTE}&rdquo;
           </p>
           <Button asChild size="default" variant="default" className="font-bold text-xs uppercase tracking-wider gap-2">
             <Link href="/sports">

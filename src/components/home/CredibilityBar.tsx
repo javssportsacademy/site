@@ -1,9 +1,11 @@
 import React from "react";
 import { Award, Shield, Users, MapPin } from "lucide-react";
+import { ACADEMY_LOCATIONS_COUNT, ACADEMY_LOCATIONS_SUMMARY } from "@/lib/constants/locations";
+import { FOUNDER_DATA } from "@/lib/constants/founder";
 
 const PROOF_POINTS = [
   {
-    value: "10+ Yrs",
+    value: `${FOUNDER_DATA.experienceYears} Yrs`,
     title: "Coaching Leadership",
     detail: "TNCA/TDCA league playing experience & M.P.Ed. direction.",
     icon: Award,
@@ -15,15 +17,15 @@ const PROOF_POINTS = [
     icon: Shield,
   },
   {
-    value: "500+",
+    value: FOUNDER_DATA.childrenCoached.replace(" Children Coached", "+"),
     title: "Children Coached",
     detail: "Grassroots movement to competitive tournament squads.",
     icon: Users,
   },
   {
-    value: "3 Hubs",
+    value: `${ACADEMY_LOCATIONS_COUNT} Hubs`,
     title: "Operating Locations",
-    detail: "Thiruverkadu, Prestige Bella Vista (Cricket) & Avadi.",
+    detail: `${ACADEMY_LOCATIONS_SUMMARY}.`,
     icon: MapPin,
   },
 ];

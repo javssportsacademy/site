@@ -60,6 +60,8 @@ export interface AcademyLocation {
   timing: string;
   facilities: string[];
   mapEmbedOrDirectionsUrl: string;
+  navSubtitle?: string;
+  badge?: string;
 }
 
 export interface TrialBookingPayload {

@@ -5,6 +5,7 @@ import { ArrowRight, ShieldCheck, GraduationCap, Users, Play, MapPin, ExternalLi
 import { Button } from "@/components/ui/button";
 import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 import { FEATURED_CONVERSATIONS } from "@/lib/constants/media";
+import { ACADEMY_SUB_TAGLINE, ACADEMY_WHO_WE_ARE } from "@/lib/constants/site";
 
 export function HeroSection() {
   return (
@@ -29,13 +30,13 @@ export function HeroSection() {
                 SPORT <span className="text-brand-primary">TEACHES</span> LIFE.
               </h1>
               <p className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight uppercase text-foreground/85 dark:text-slate-200">
-                ONE PLATFORM. EVERY STAGE OF GROWTH.
+                {ACADEMY_SUB_TAGLINE}
               </p>
             </div>
 
             {/* Shorter, punchier description */}
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              At JAV&apos;S SPORTS ACADEMY, we develop human character, mental composure, and physical vitality across 12 structured sports disciplines. Led by Coach Mohammed Javeed (M.P.Ed.), we partner with families, schools, and communities to deliver accountable sports education.
+              {ACADEMY_WHO_WE_ARE}
             </p>
 
             {/* Fast-Track Actions */}

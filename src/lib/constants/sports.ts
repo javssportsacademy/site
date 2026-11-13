@@ -282,3 +282,7 @@ export const SPORTS_LIST: Sport[] = [
 export function getSportBySlug(slug: string): Sport | undefined {
   return SPORTS_LIST.find((s) => s.slug === slug);
 }
+
+export const SPORTS_AVAILABILITY_NOTE =
+  "Gallery images are illustrative. Sports availability varies by location (Prestige Bella Vista hosts dedicated cricket sessions, while our Thiruverkadu main campus hosts full multi-sport training). Contact our team to confirm current batch timings.";
+

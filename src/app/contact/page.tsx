@@ -2,7 +2,14 @@
 
 import React, { useState } from "react";
 import { SubpageHero } from "@/components/layout/SubpageHero";
-import { ACADEMY_LOCATIONS } from "@/lib/constants/locations";
+import {
+  ACADEMY_LOCATIONS,
+  ACADEMY_LOCATIONS_SUBTITLE,
+  ACADEMY_LOCATIONS_HEADING,
+  ACADEMY_TRAINING_SCHEDULE_LABEL,
+  ACADEMY_TRAINING_SCHEDULE_TITLE,
+  ACADEMY_TRAINING_SCHEDULE_SUBTEXT,
+} from "@/lib/constants/locations";
 import { SPORTS_LIST } from "@/lib/constants/sports";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -52,7 +59,7 @@ export default function ContactPage() {
       <SubpageHero
         badge="Connect With JAV'S Academy"
         title="Contact & Training Centers"
-        subtitle="Visit our training centers in Thiruverkadu, Prestige Bella Vista (Cricket Sessions in Iyyappanthangal), and Avadi, or reach out directly to Coach Mohammed Javeed on WhatsApp."
+        subtitle={ACADEMY_LOCATIONS_SUBTITLE}
       >
         <div className="flex flex-wrap items-center gap-4">
           <DirectWhatsAppButton label="Instant WhatsApp Chat" />
@@ -96,9 +103,9 @@ export default function ContactPage() {
               <Clock className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Training Schedules</p>
-              <p className="text-base font-bold text-foreground mt-1">Flexible Coaching Batches</p>
-              <p className="text-xs text-muted-foreground">Morning & evening sessions planned by age & discipline</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{ACADEMY_TRAINING_SCHEDULE_LABEL}</p>
+              <p className="text-base font-bold text-foreground mt-1">{ACADEMY_TRAINING_SCHEDULE_TITLE}</p>
+              <p className="text-xs text-muted-foreground">{ACADEMY_TRAINING_SCHEDULE_SUBTEXT}</p>
             </div>
           </div>
         </div>
@@ -108,7 +115,7 @@ export default function ContactPage() {
           {/* Left Column: Centers */}
           <div className="lg:col-span-7 space-y-8">
             <h2 className="text-2xl sm:text-3xl font-black uppercase text-foreground tracking-tight">
-              Our Training Locations & Fitness Hubs in Chennai
+              {ACADEMY_LOCATIONS_HEADING}
             </h2>
 
             <div className="space-y-6">

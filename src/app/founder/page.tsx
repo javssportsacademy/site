@@ -5,7 +5,7 @@ import { SubpageHero } from "@/components/layout/SubpageHero";
 import { FOUNDER_DATA, FOUNDER_TIMELINE, FOUNDER_MEDIA_APPEARANCES } from "@/lib/constants/founder";
 import { COACHING_TEAM, ACADEMY_ACHIEVEMENTS, ACADEMY_FACILITIES, ACADEMY_EVENTS } from "@/lib/constants/team";
 import { FEATURED_CONVERSATIONS, JAVS_INBOX_CHANNEL } from "@/lib/constants/media";
-import { APPROVED_TESTIMONIALS } from "@/lib/constants/testimonials";
+import { APPROVED_TESTIMONIALS, TESTIMONIALS_SUBTITLE } from "@/lib/constants/testimonials";
 import { PlayableConversationsGrid } from "@/components/media/PlayableConversationsGrid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -194,11 +194,11 @@ export default function FounderPage() {
                 <span>Our Clear 3-Tier Evidence Distinction:</span>
               </div>
               <p className="text-[11px] leading-relaxed">
-                <strong>1. Jav&apos;s Inbox Dialogues: </strong>Independent conversations with prominent figures (Dayalan Hemalatha, NCA mentors) demonstrating continuous learning.
+                <strong>1. Jav&apos;s Inbox Dialogues: </strong>{FOUNDER_DATA.evidenceDistinction.interviews}
                 <br />
-                <strong>2. Professional Standing: </strong>Verified certifications through MSDCA, Coaching Beyond, and TNCA/TDCA player registries.
+                <strong>2. Professional Standing: </strong>{FOUNDER_DATA.evidenceDistinction.network}
                 <br />
-                <strong>3. Academy Operations: </strong>Direct coaching delivery across our dedicated hubs in Thiruverkadu, Prestige Bella Vista (Cricket Sessions), and Avadi.
+                <strong>3. Academy Operations: </strong>{FOUNDER_DATA.evidenceDistinction.academy}
               </p>
             </div>
           </div>
@@ -551,7 +551,7 @@ export default function FounderPage() {
               Approved <span className="text-brand-primary">Testimonials</span>
             </h3>
             <p className="text-base text-muted-foreground leading-relaxed">
-              Real feedback from families enrolled at our Thiruverkadu Center, Prestige Bella Vista cricket sessions, and Avadi hubs.
+              {TESTIMONIALS_SUBTITLE}
             </p>
           </div>
 

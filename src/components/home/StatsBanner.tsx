@@ -1,32 +1,35 @@
 import React from "react";
 import { Award, Trophy, Users, MapPin } from "lucide-react";
+import { ACADEMY_LOCATIONS_COUNT, ACADEMY_LOCATIONS_SUMMARY } from "@/lib/constants/locations";
+import { SPORTS_LIST } from "@/lib/constants/sports";
+import { FOUNDER_DATA } from "@/lib/constants/founder";
 
 const STATS = [
   {
-    value: "10+",
+    value: FOUNDER_DATA.experienceYears,
     label: "Years of Excellence",
     subtext: "Professional Sports Coaching & Physical Education",
     icon: Award,
     color: "text-amber-500",
   },
   {
-    value: "12",
+    value: `${SPORTS_LIST.length}`,
     label: "Sporting Disciplines",
     subtext: "From Cricket & Football to Archery & Swimming",
     icon: Trophy,
     color: "text-red-500",
   },
   {
-    value: "500+",
+    value: FOUNDER_DATA.childrenCoached.replace(" Children Coached", "+"),
     label: "Children Coached",
     subtext: "Grassroots Movement to Competitive Squads",
     icon: Users,
     color: "text-cyan-600 dark:text-cyan-400",
   },
   {
-    value: "3",
+    value: `${ACADEMY_LOCATIONS_COUNT}`,
     label: "Chennai Centers",
-    subtext: "Thiruverkadu, Prestige Bella Vista (Cricket) & Avadi",
+    subtext: ACADEMY_LOCATIONS_SUMMARY,
     icon: MapPin,
     color: "text-emerald-600 dark:text-emerald-400",
   },

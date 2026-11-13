@@ -33,6 +33,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 import { PRIMARY_PHONE_DISPLAY, WHATSAPP_PRIMARY_NUMBER, getQuickChatWhatsAppUrl } from "@/lib/whatsapp";
+import { ACADEMY_LOCATIONS } from "@/lib/constants/locations";
 import { cn } from "@/lib/utils";
 
 // --- Dropdown Navigation Items ---
@@ -212,29 +213,13 @@ const ACADEMY_ITEMS: DropdownItem[] = [
   },
 ];
 
-const CENTRES_ITEMS: DropdownItem[] = [
-  {
-    title: "Thiruverkadu Center (Main Academy)",
-    subtitle: "Karpagambal Nagar — Cricket nets, turf pitches & track",
-    href: "/contact#thiruverkadu",
-    icon: MapPin,
-    badge: "Main Campus",
-  },
-  {
-    title: "Prestige Bella Vista (Cricket Sessions)",
-    subtitle: "Iyyappanthangal / Porur — Cricket nets, batting & bowling sessions",
-    href: "/contact#iyyappanthangal",
-    icon: Building2,
-    badge: "Cricket Sessions",
-  },
-  {
-    title: "Avadi (Fitness Session)",
-    subtitle: "Avadi — Morning 5:45 AM to 7:00 AM athletic conditioning",
-    href: "/contact#avadi",
-    icon: Flame,
-    badge: "Morning Fitness",
-  },
-];
+const CENTRES_ITEMS: DropdownItem[] = ACADEMY_LOCATIONS.map((loc) => ({
+  title: loc.name,
+  subtitle: loc.navSubtitle || `${loc.area} — ${loc.timing}`,
+  href: `/contact#${loc.id}`,
+  icon: loc.id === "thiruverkadu" ? MapPin : loc.id === "iyyappanthangal" ? Building2 : Flame,
+  badge: loc.badge,
+}));
 
 type DropdownKey = "sports" | "programs" | "institutions" | "academy" | "centres" | null;
 

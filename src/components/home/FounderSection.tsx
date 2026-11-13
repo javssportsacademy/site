@@ -57,7 +57,7 @@ export function FounderSection() {
                   <p className="text-[10px] font-bold uppercase text-muted-foreground mt-0.5">League Play</p>
                 </div>
                 <div className="p-3 rounded-2xl bg-muted/40 border border-border">
-                  <p className="text-xl font-black text-foreground font-mono">500+</p>
+                  <p className="text-xl font-black text-foreground font-mono">{FOUNDER_DATA.childrenCoached.replace(" Children Coached", "+")}</p>
                   <p className="text-[10px] font-bold uppercase text-muted-foreground mt-0.5">Athletes Coached</p>
                 </div>
               </div>

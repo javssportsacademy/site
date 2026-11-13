@@ -15,6 +15,7 @@ import {
   Phone,
 } from "lucide-react";
 import { PRIMARY_PHONE_DISPLAY, PRIMARY_EMAIL } from "@/lib/whatsapp";
+import { ACADEMY_SAFEGUARDING_STATEMENT } from "@/lib/constants/site";
 
 export const metadata = {
   title: "Safeguarding & Child Protection Policy | JAV'S SPORTS ACADEMY Chennai",
@@ -27,7 +28,7 @@ export default function SafeguardingPage() {
       <SubpageHero
         badge="Official Academy Standards"
         title="Safeguarding & Child Protection"
-        subtitle="Our formal commitment to participant safety, ethical coaching conduct, age-calibrated physical workloads, and privacy protection for youth athletes across Chennai."
+        subtitle={ACADEMY_SAFEGUARDING_STATEMENT}
       >
         <div className="flex flex-wrap items-center gap-4">
           <TrialBookingModal />

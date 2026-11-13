@@ -6,46 +6,27 @@ import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 import { DirectWhatsAppButton } from "@/components/shared/DirectWhatsAppButton";
 import { Shield, Target, Compass, Award, Heart, CheckCircle2, Trophy, Sparkles, UserCheck } from "lucide-react";
 import { COACHING_TEAM, ACADEMY_ACHIEVEMENTS } from "@/lib/constants/team";
+import {
+  ACADEMY_TAGLINE,
+  ACADEMY_WHO_WE_ARE,
+  ACADEMY_VISION,
+  ACADEMY_MISSION,
+  ACADEMY_COMMITMENT,
+  ACADEMY_VALUES
+} from "@/lib/constants/site";
 
 export const metadata = {
   title: "About Us & Safeguarding | JAV'S SPORTS ACADEMY Chennai",
   description: "Learn about JAV'S SPORTS ACADEMY's mission, values, commitment to youth athlete safeguarding, safety standards, and whole-person development in Chennai.",
 };
 
-const VALUES = [
-  {
-    title: "Discipline & Responsibility",
-    desc: "Athletes learn punctuality, accountability for their preparation, and respect for coaches, peers, and equipment."
-  },
-  {
-    title: "Leadership & Teamwork",
-    desc: "Cultivating vocal encouragement, mutual support in adversity, and selfless collective team-first attitudes."
-  },
-  {
-    title: "Confidence & Resilience",
-    desc: "Overcoming fear of failure, bouncing back from dropped catches or missed goals, and trusting the process."
-  },
-  {
-    title: "Respect & Sportsmanship",
-    desc: "Win with humility, lose with grace, and honor the spirit of the game and decisions of match officials."
-  },
-  {
-    title: "Healthy Habits & Active Living",
-    desc: "Building a permanent lifestyle of movement, good sleep hygiene, wholesome nutrition, and bodily vitality."
-  },
-  {
-    title: "Goal Setting & Growth Mindset",
-    desc: "Setting measurable benchmarks, embracing effort as the path to mastery, and celebrating gradual improvement."
-  }
-];
-
 export function AboutPage() {
   return (
     <div className="bg-background pb-24 text-foreground">
       <SubpageHero
         badge="About JAV'S Sports Academy"
-        title="Sport Teaches Life"
-        subtitle="At JAV'S SPORTS ACADEMY, we believe sport is more than a game. It is a powerful platform for developing physical abilities, mental strength, character, and lifelong healthy habits."
+        title={ACADEMY_TAGLINE}
+        subtitle={ACADEMY_WHO_WE_ARE}
       >
         <div className="flex flex-wrap items-center gap-4">
           <TrialBookingModal />
@@ -64,10 +45,10 @@ export function AboutPage() {
               One Organization. Total Development.
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed">
-              We bring together sports coaching, fitness, performance development, mental conditioning and sporting experiences within one organization. From early years movement to competitive sports, individual fitness to community programmes, we aim to make quality sporting experiences accessible, engaging, and meaningful for everyone.
+              {ACADEMY_WHO_WE_ARE}
             </p>
             <p className="text-base text-muted-foreground leading-relaxed">
-              Through structured coaching, responsible training and strong institutional partnerships, we aim to create sporting experiences that build skills, character and healthier communities across Chennai.
+              {ACADEMY_COMMITMENT}
             </p>
           </div>
 
@@ -78,7 +59,7 @@ export function AboutPage() {
                 <h3 className="text-xl font-black uppercase text-foreground">Our Vision</h3>
               </div>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                To build a trusted and progressive sports organisation that transforms how people learn, play, perform and live through sport.
+                {ACADEMY_VISION}
               </p>
             </div>
 
@@ -88,7 +69,7 @@ export function AboutPage() {
                 <h3 className="text-xl font-black uppercase text-foreground">Our Mission</h3>
               </div>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                To deliver inclusive, age-appropriate and professionally guided sports and fitness programmes that develop skills, strengthen communities and inspire lifelong physical activity.
+                {ACADEMY_MISSION}
               </p>
             </div>
           </div>
@@ -109,7 +90,7 @@ export function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {VALUES.map((val, idx) => (
+            {ACADEMY_VALUES.map((val, idx) => (
               <div
                 key={idx}
                 className="p-6 rounded-2xl bg-card border border-border space-y-2 hover:border-brand-primary/40 transition-colors shadow-xs"

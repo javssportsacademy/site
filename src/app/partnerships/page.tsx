@@ -1,6 +1,6 @@
 import React from "react";
 import { SubpageHero } from "@/components/layout/SubpageHero";
-import { INSTITUTIONAL_PARTNERS, EVENT_SUPPORT_SERVICES } from "@/lib/constants/partnerships";
+import { INSTITUTIONAL_PARTNERS, EVENT_SUPPORT_SERVICES, PARTNERSHIP_CASE_STUDIES } from "@/lib/constants/partnerships";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -111,81 +111,45 @@ export default function PartnershipsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Case Study 1: School Sports Day Model */}
-            <Card id="sports-days" className="scroll-mt-24 bg-card border-border p-8 rounded-3xl shadow-sm space-y-5">
-              <div className="flex items-center justify-between gap-2">
-                <Badge variant="default" className="text-xs font-bold uppercase tracking-wider">
-                  School Execution Model
-                </Badge>
-                <Calendar className="h-5 w-5 text-brand-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl sm:text-2xl font-black uppercase text-foreground">
-                  Turnkey Annual School Sports Day
-                </h3>
-                <p className="text-xs text-brand-primary font-bold mt-1">
-                  Comprehensive Event Architecture & Officiating
-                </p>
-              </div>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Schools eliminate operational headaches by delegating event choreography to JAV&apos;S Academy. We manage track line markings, electronic timing, certified referees, march-past coordination, and awards ceremony protocols for over 800 student participants.
-              </p>
-              <div className="space-y-2 pt-3 border-t border-border">
-                <p className="text-xs font-bold uppercase text-foreground">Deliverables Included:</p>
-                <ul className="space-y-1 text-xs text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>15 Track & Field events with certified athletics officials</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Age-group heat sheets and computerized score consolidation</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Emergency first-aid station and hydration management</span>
-                  </li>
-                </ul>
-              </div>
-            </Card>
-
-            {/* Case Study 2: Prestige Bella Vista Residential Model */}
-            <Card className="bg-card border-border p-8 rounded-3xl shadow-sm space-y-5">
-              <div className="flex items-center justify-between gap-2">
-                <Badge variant="default" className="text-xs font-bold uppercase tracking-wider">
-                  Residential Society Model
-                </Badge>
-                <Building2 className="h-5 w-5 text-brand-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl sm:text-2xl font-black uppercase text-foreground">
-                  Prestige Bella Vista Cricket Sessions
-                </h3>
-                <p className="text-xs text-brand-primary font-bold mt-1">
-                  On-Campus Residential Cricket Coaching
-                </p>
-              </div>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Operating directly inside the prestigious Prestige Bella Vista community in Iyyappanthangal. Residents benefit from structured after-school cricket coaching, net drills, batting biomechanics, and match temperament training right at their doorstep, without commuting across Chennai.
-              </p>
-              <div className="space-y-2 pt-3 border-t border-border">
-                <p className="text-xs font-bold uppercase text-foreground">Impact Delivered:</p>
-                <ul className="space-y-1 text-xs text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Evening cricket batches for children ages 6 to 17</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Weekend society cricket matches and net assessment sessions</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Specialised batting, bowling mechanics, and wicketkeeping instruction</span>
-                  </li>
-                </ul>
-              </div>
-            </Card>
+            {PARTNERSHIP_CASE_STUDIES.map((study, idx) => {
+              const Icon = study.iconType === "calendar" ? Calendar : Building2;
+              return (
+                <Card
+                  key={idx}
+                  id={study.id}
+                  className="scroll-mt-24 bg-card border-border p-8 rounded-3xl shadow-sm space-y-5"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <Badge variant="default" className="text-xs font-bold uppercase tracking-wider">
+                      {study.badge}
+                    </Badge>
+                    <Icon className="h-5 w-5 text-brand-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black uppercase text-foreground">
+                      {study.title}
+                    </h3>
+                    <p className="text-xs text-brand-primary font-bold mt-1">
+                      {study.subtitle}
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    {study.description}
+                  </p>
+                  <div className="space-y-2 pt-3 border-t border-border">
+                    <p className="text-xs font-bold uppercase text-foreground">{study.pointsLabel}</p>
+                    <ul className="space-y-1 text-xs text-muted-foreground">
+                      {study.points.map((point, pIdx) => (
+                        <li key={pIdx} className="flex items-center gap-2">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </section>
 

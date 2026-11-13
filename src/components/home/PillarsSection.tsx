@@ -4,6 +4,7 @@ import { Shield, HeartPulse, Brain, Trophy, ArrowRight, Target, Compass } from "
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ACADEMY_PHILOSOPHY, ACADEMY_PHILOSOPHY_CONTEXT } from "@/lib/constants/site";
 
 const PILLARS = [
   {
@@ -77,10 +78,10 @@ export function PillarsSection() {
         {/* Central Quote Callout */}
         <div className="max-w-4xl mx-auto mb-16 p-8 rounded-3xl bg-gradient-to-r from-amber-500/5 via-card to-red-500/5 border border-border text-center relative shadow-sm">
           <p className="text-xl sm:text-2xl md:text-3xl font-black italic text-foreground tracking-tight">
-            &ldquo;We develop people through sport, not just players for the game.&rdquo;
+            &ldquo;{ACADEMY_PHILOSOPHY}&rdquo;
           </p>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-            Every session is an opportunity to build discipline, confidence, teamwork, resilience and an authentic growth mindset that endures far beyond the field.
+            {ACADEMY_PHILOSOPHY_CONTEXT}
           </p>
         </div>
 

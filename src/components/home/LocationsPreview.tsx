@@ -5,7 +5,12 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ACADEMY_LOCATIONS } from "@/lib/constants/locations";
+import {
+  ACADEMY_LOCATIONS,
+  LOCATIONS_PREVIEW_BADGE,
+  LOCATIONS_PREVIEW_HEADING,
+  LOCATIONS_PREVIEW_SUBTITLE
+} from "@/lib/constants/locations";
 import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
 
 export function LocationsPreview() {
@@ -13,9 +18,9 @@ export function LocationsPreview() {
     <section className="py-24 bg-background relative overflow-hidden border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          badge="Training Centers"
-          title="Where Champions Train in Chennai"
-          subtitle="Premier training centers and fitness hubs across Chennai equipped with professional coaching facilities, turf nets, and athletic conditioning grounds."
+          badge={LOCATIONS_PREVIEW_BADGE}
+          title={LOCATIONS_PREVIEW_HEADING}
+          subtitle={LOCATIONS_PREVIEW_SUBTITLE}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
