@@ -38,11 +38,11 @@ export const FEATURED_CONVERSATIONS: FeaturedConversation[] = [
     duration: "Full Video Dialogue",
     discussionSummary: "In this candid discussion hosted by Mohammed Javeed, international cricketer Dayalan Hemalatha (RCB / Team India) explores the emotional pressures aspiring youth athletes face from match scoreboards and parental expectations. She reflects on her climb through domestic cricket, emphasizing that mental patience, core physical stamina, and process consistency far outweigh rushing for early selection.",
     actionableTakeaway: "Key Insight for Parents: Rushing young athletes into high-stakes competitive tournaments before their core physical conditioning and emotional composure are grounded leads to early dropout. Consistent technical routines and patient parental encouragement build durable athletes.",
-    evidenceDisclaimer: "Published on Instagram @javs_inbox & YouTube @JavsInbox • Independent Sporting Dialogue",
-    primaryPlatform: "Instagram",
-    mediaUrl: "https://www.instagram.com/javs_inbox/",
-    youtubeVideoId: "sLBk4N8xfF8",
-    thumbnailUrl: "https://i.ytimg.com/vi/sLBk4N8xfF8/hqdefault.jpg"
+    evidenceDisclaimer: "Jav's Inbox Episode 1 • Collaborations with MS Media Studio",
+    primaryPlatform: "YouTube",
+    mediaUrl: "https://www.youtube.com/watch_videos?video_ids=oWOyxIxK4LE,dh-9xx9CzHU,wgWvhfaGP90,kfex_4tw5gE,McwqG_fzbCs,IbX9rgmE8VQ,uPW9qBuKhZY,HZvwOtdjh74,uTlfkcd3dPY,1mlPLhC1VBw,gSIWiXLdj40,fX-FZSVNf40,v0HEk2m3naE,GDsSbsHDawU,I6qtnCQS4Hc,-3J5QL4UAys,TKPg7kmtyIU,B4dfb6tI1nA&title=Collaborations",
+    youtubeVideoId: "B4dfb6tI1nA",
+    thumbnailUrl: "https://i.ytimg.com/vi/B4dfb6tI1nA/hqdefault.jpg"
   },
   {
     id: "srinivasan-pace-bowling",
