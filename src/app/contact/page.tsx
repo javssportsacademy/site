@@ -96,9 +96,9 @@ export default function ContactPage() {
               <Clock className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Coaching Hours</p>
-              <p className="text-base font-bold text-foreground mt-1">Morning: 6:00 AM - 10:00 AM</p>
-              <p className="text-xs font-semibold text-muted-foreground">Evening: 4:00 PM - 8:30 PM</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Training Schedules</p>
+              <p className="text-base font-bold text-foreground mt-1">Flexible Coaching Batches</p>
+              <p className="text-xs text-muted-foreground">Morning & evening sessions planned by age & discipline</p>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function ContactPage() {
 
                   <div className="space-y-2">
                     <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                      Available Facilities:
+                      Programme Focus & Offerings:
                     </p>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
                       {loc.facilities.map((fac, idx) => (

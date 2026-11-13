@@ -60,35 +60,35 @@ export const COACHING_TEAM: CoachMentor[] = [
 export const ACADEMY_FACILITIES = [
   {
     id: "thiruverkadu-turf",
-    title: "Thiruverkadu High-Performance Cricket Nets",
+    title: "Thiruverkadu Sports & Performance Center",
     hub: "Thiruverkadu Center",
-    specs: "3 Turf Practice Nets • Floodlights • Automated Bowling Machine • Match Practice Pitch",
-    description: "Equipped for all-weather evening net sessions, video-assisted batting drill sequencing, and match simulation bowling.",
-    tag: "Turf Practice Facility"
+    specs: "Multi-Sport Disciplines • Structured Coaching Programmes • Safe Training Environment",
+    description: "Structured coaching programmes designed to develop fundamental skills, sporting ability, tactical understanding and confidence.",
+    tag: "Sports & Performance"
   },
   {
     id: "bella-vista-arena",
     title: "Prestige Bella Vista Cricket Sessions",
     hub: "Iyyappanthangal",
-    specs: "Cricket Practice Nets • Turf Drills • Batting Biomechanics Focus",
-    description: "Dedicated residential cricket coaching sessions providing age-specific cricket technique, net practice, and tactical instruction for resident players.",
+    specs: "Cricket Net Drills • Batting, Bowling & Fielding • Age-Appropriate Coaching",
+    description: "Dedicated on-campus cricket sessions focusing on batting, bowling, fielding, wicketkeeping, and match awareness for resident participants.",
     tag: "Cricket Sessions"
   },
   {
     id: "sports-science-lab",
-    title: "Movement Analysis & Kinetic Screening Unit",
-    hub: "Both Hubs",
-    specs: "High-Speed Video Frame Capture • Bowling Action Review • Footwork Alignment",
-    description: "Scientific video playback used during 1-on-1 mentor reviews to assess kinetic chain alignment and bowler injury risks.",
+    title: "Sports Science & Performance Development",
+    hub: "Academy Wide",
+    specs: "Fitness Assessments • Movement Quality • Injury Prevention Practices",
+    description: "Fitness assessments and physical development, strength, speed, agility and endurance training, and individual skill preparation.",
     tag: "Sports Science"
   },
   {
     id: "agility-conditioning-zone",
-    title: "Youth Fitness & Recovery Zone",
-    hub: "Both Hubs",
-    specs: "Agility Ladders • Plyometric Hurdles • Resistance Bands • Hydration Protocol",
-    description: "Dedicated safe space for neuromuscular warm-ups, multi-directional speed training, and post-session stretching routines.",
-    tag: "Conditioning Facility"
+    title: "Fitness, Wellness & Movement Zone",
+    hub: "Thiruverkadu & Avadi",
+    specs: "Movement Development • Physical Conditioning • Active Lifestyles",
+    description: "Programmes for physical fitness, sporting performance, mental wellbeing, and healthy habits across early years, youth, and adults.",
+    tag: "Fitness & Wellness"
   }
 ];
 

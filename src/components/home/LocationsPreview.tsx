@@ -52,7 +52,7 @@ export function LocationsPreview() {
 
                 <div className="space-y-2 pt-2">
                   <p className="text-[11px] font-bold uppercase tracking-wider text-foreground">
-                    Key Facilities:
+                    Programme Focus & Offerings:
                   </p>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted-foreground">
                     {loc.facilities.slice(0, 4).map((fac, idx) => (

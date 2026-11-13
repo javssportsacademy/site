@@ -454,7 +454,7 @@ export default function FounderPage() {
           {/* Facilities & Photographic Placeholders */}
           <div className="space-y-4 pt-4">
             <h4 className="text-xl font-black uppercase text-foreground tracking-tight flex items-center gap-2">
-              <Camera className="h-5 w-5 text-brand-primary" /> Facilities & Training Photography
+              <Camera className="h-5 w-5 text-brand-primary" /> Training Environments & Programme Photography
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {ACADEMY_FACILITIES.map((facility) => (
