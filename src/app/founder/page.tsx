@@ -51,22 +51,7 @@ export default function FounderPage() {
         badge="Evidence-Backed Founder Story"
         title="Coach Mohammed Javeed"
         subtitle="Founder & Director of Operations • M.Sc. Computer Science • Master of Physical Education (M.P.Ed.)"
-      >
-        <div className="flex flex-wrap items-center gap-3 pt-2">
-          <DirectWhatsAppButton
-            label="Connect with Coach Javeed"
-            message="Hi Coach Mohammed Javeed, I am reaching out through the JAV'S Sports Academy website to discuss coaching/partnerships."
-          />
-          <TrialBookingModal
-            triggerButton={
-              <Button size="lg" className="font-bold text-sm tracking-wide gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white shadow-md shadow-brand-primary/20">
-                <Users className="h-4 w-4" />
-                <span>Book Player Assessment</span>
-              </Button>
-            }
-          />
-        </div>
-      </SubpageHero>
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 space-y-24">
         {/* ======================================================== */}
@@ -136,6 +121,23 @@ export default function FounderPage() {
                   <ExternalLink className="h-3.5 w-3.5 ml-auto" />
                 </a>
               </Button>
+
+              {/* Direct Connect & Assessment Actions */}
+              <div className="pt-2 border-t border-border space-y-3">
+                <DirectWhatsAppButton
+                  label="Connect with Coach Javeed"
+                  message="Hi Coach Mohammed Javeed, I am reaching out through the JAV'S Sports Academy website to discuss coaching/partnerships."
+                  className="w-full justify-center py-5 text-xs font-bold uppercase tracking-wider shadow-sm"
+                />
+                <TrialBookingModal
+                  triggerButton={
+                    <Button size="lg" className="w-full font-bold text-xs uppercase tracking-wider gap-2 bg-brand-primary hover:bg-brand-primary-hover text-white shadow-md shadow-brand-primary/20 py-5">
+                      <Users className="h-4 w-4" />
+                      <span>Book Player Assessment</span>
+                    </Button>
+                  }
+                />
+              </div>
             </div>
           </div>
 

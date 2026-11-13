@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface SubpageHeroProps {
   badge?: string;
@@ -9,6 +10,7 @@ interface SubpageHeroProps {
   subtitle?: string;
   breadcrumbs?: { label: string; href?: string }[];
   children?: React.ReactNode;
+  className?: string;
 }
 
 export function SubpageHero({
@@ -17,9 +19,16 @@ export function SubpageHero({
   subtitle,
   breadcrumbs = [{ label: "Home", href: "/" }],
   children,
+  className,
 }: SubpageHeroProps) {
   return (
-    <div className="relative pt-32 pb-16 sm:pb-20 overflow-hidden bg-gradient-to-b from-card via-background to-muted/30 border-b border-border">
+    <div
+      className={cn(
+        "relative pt-32 overflow-hidden bg-gradient-to-b from-card via-background to-muted/30 border-b border-border",
+        children ? "pb-16 sm:pb-20" : "pb-4 sm:pb-5",
+        className
+      )}
+    >
       {/* Background ambient mesh */}
       <div className="absolute inset-0 bg-radial-[at_top_center] from-primary/5 via-transparent to-transparent pointer-events-none" />
 
