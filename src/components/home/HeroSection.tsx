@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, GraduationCap, Users, Play, MapPin } from "lucide-react";
+import { ArrowRight, ShieldCheck, GraduationCap, Users, Play, MapPin, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TrialBookingModal } from "@/components/shared/TrialBookingModal";
+import { FEATURED_CONVERSATIONS } from "@/lib/constants/media";
 
 export function HeroSection() {
   return (
@@ -109,9 +110,12 @@ export function HeroSection() {
               </div>
 
               {/* Editorial Teaser: Jav's Inbox dialogue preview */}
-              <Link
-                href="/founder#conversations"
+              <a
+                href={FEATURED_CONVERSATIONS[0].mediaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block p-3.5 rounded-2xl bg-muted/40 hover:bg-muted/70 border border-border transition-colors group/teaser"
+                title="Watch Dayalan Hemalatha on Jav's Inbox (YouTube)"
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
@@ -127,9 +131,9 @@ export function HeroSection() {
                       </p>
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover/teaser:text-brand-primary shrink-0 transition-transform group-hover/teaser:translate-x-0.5" />
+                  <ExternalLink className="h-4 w-4 text-muted-foreground group-hover/teaser:text-brand-primary shrink-0 transition-transform group-hover/teaser:translate-x-0.5" />
                 </div>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

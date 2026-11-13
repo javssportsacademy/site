@@ -105,7 +105,7 @@ export function InsideTheGameSection() {
                   Independent Sporting Dialogue
                 </span>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <Button
                     type="button"
                     size="sm"
@@ -113,26 +113,27 @@ export function InsideTheGameSection() {
                     className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider gap-1.5 shadow-xs"
                   >
                     <Play className="h-3.5 w-3.5 fill-current" />
-                    <span>{isPlayingLead ? "Stop Video" : "Play Directly"}</span>
+                    <span>{isPlayingLead ? "Stop Video" : "Play in Card"}</span>
                   </Button>
-                  <Button asChild size="sm" variant="outline" className="text-xs font-bold uppercase tracking-wider gap-1.5 border-border bg-card">
+                  <Button asChild size="sm" variant="outline" className="text-xs font-bold uppercase tracking-wider gap-1.5 border-border bg-card hover:bg-muted text-foreground">
+                    <a
+                      href={primaryInterview.mediaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <YoutubeIcon className="h-3.5 w-3.5 fill-current text-red-600" />
+                      <span>Watch on YouTube</span>
+                      <ExternalLink className="h-3 w-3 ml-0.5" />
+                    </a>
+                  </Button>
+                  <Button asChild size="sm" variant="outline" className="text-xs font-bold uppercase tracking-wider gap-1.5 border-border bg-card hover:bg-muted text-foreground">
                     <a
                       href={JAVS_INBOX_CHANNEL.instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <InstagramIcon className="h-3.5 w-3.5 text-pink-600" />
-                      <span>Reel</span>
-                    </a>
-                  </Button>
-                  <Button asChild size="sm" variant="outline" className="text-xs font-bold uppercase tracking-wider gap-1.5 border-border bg-card">
-                    <a
-                      href={JAVS_INBOX_CHANNEL.youtubeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <YoutubeIcon className="h-3.5 w-3.5 fill-current text-red-600" />
-                      <span>Channel</span>
+                      <span>Reels</span>
                     </a>
                   </Button>
                 </div>

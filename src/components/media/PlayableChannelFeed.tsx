@@ -15,6 +15,7 @@ import { YoutubeIcon, InstagramIcon } from "@/components/shared/SocialIcons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { FEATURED_CONVERSATIONS } from "@/lib/constants/media";
 
 export interface ChannelVideo {
   id: string;
@@ -374,11 +375,18 @@ export function PlayableChannelFeed() {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Coach Mohammed Javeed hosts Dayalan Hemalatha discussing youth pressure, patience with scoring droughts, and physical endurance. The full discussion was officially shared on Instagram.
               </p>
-              <div className="pt-2">
-                <Button asChild className="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs gap-2">
+              <div className="pt-2 flex flex-wrap gap-2.5">
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs gap-2">
+                  <a href={FEATURED_CONVERSATIONS[0].mediaUrl} target="_blank" rel="noopener noreferrer">
+                    <YoutubeIcon className="h-4 w-4 fill-current" />
+                    <span>Watch on YouTube</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="text-xs font-bold gap-2">
                   <a href="https://www.instagram.com/javs_inbox/" target="_blank" rel="noopener noreferrer">
-                    <InstagramIcon className="h-4 w-4" />
-                    <span>Watch Full Conversation on Instagram</span>
+                    <InstagramIcon className="h-4 w-4 text-pink-600" />
+                    <span>Instagram Reel</span>
                   </a>
                 </Button>
               </div>
