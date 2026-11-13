@@ -59,14 +59,14 @@ export function TrialBookingModal({
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[520px] bg-card border-border text-foreground shadow-2xl">
-        <DialogHeader>
+        <DialogHeader className="pr-8 text-left">
           <div className="flex items-center gap-2 text-brand-primary text-xs uppercase font-bold tracking-widest">
             <CheckCircle2 className="h-4 w-4" /> Assessment Session & Programme Enquiry
           </div>
-          <DialogTitle className="text-2xl font-black uppercase text-foreground mt-1">
+          <DialogTitle className="text-xl sm:text-2xl font-black uppercase text-foreground mt-1">
             Book Your Assessment
           </DialogTitle>
-          <DialogDescription className="text-muted-foreground text-sm">
+          <DialogDescription className="text-muted-foreground text-xs sm:text-sm">
             Experience our structured coaching and discuss age-appropriate batches directly with Coach Mohammed Javeed on WhatsApp.
           </DialogDescription>
         </DialogHeader>
@@ -116,6 +116,9 @@ export function TrialBookingModal({
                     {s.name}
                   </option>
                 ))}
+                <option value="Fitness & Conditioning" className="bg-card text-foreground">
+                  Fitness & Conditioning
+                </option>
               </select>
             </div>
             <div>
@@ -174,9 +177,16 @@ export function TrialBookingModal({
             <MessageCircle className="h-5 w-5 fill-current" />
             <span>Send Enquiry on WhatsApp</span>
           </Button>
-          <p className="text-center text-xs text-muted-foreground">
-            Direct response from Coach Mohammed Javeed • No commitment required
-          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-2 pt-1">
+            <span>Direct response from Coach Mohammed Javeed • No commitment</span>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="text-muted-foreground hover:text-foreground font-semibold underline underline-offset-2 transition-colors py-1 px-2"
+            >
+              Close Window
+            </button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

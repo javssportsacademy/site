@@ -52,7 +52,7 @@ export default function ContactPage() {
       <SubpageHero
         badge="Connect With JAV'S Academy"
         title="Contact & Training Centers"
-        subtitle="Visit our training centers in Thiruverkadu and Prestige Bella Vista (Iyyappanthangal), or reach out directly to Coach Mohammed Javeed on WhatsApp."
+        subtitle="Visit our training centers in Thiruverkadu, Prestige Bella Vista (Iyyappanthangal), and Avadi, or reach out directly to Coach Mohammed Javeed on WhatsApp."
       >
         <div className="flex flex-wrap items-center gap-4">
           <DirectWhatsAppButton label="Instant WhatsApp Chat" />
@@ -108,7 +108,7 @@ export default function ContactPage() {
           {/* Left Column: Centers */}
           <div className="lg:col-span-7 space-y-8">
             <h2 className="text-2xl sm:text-3xl font-black uppercase text-foreground tracking-tight">
-              Our 2 Training Locations in Chennai
+              Our Training Locations & Fitness Hubs in Chennai
             </h2>
 
             <div className="space-y-6">
@@ -230,6 +230,9 @@ export default function ContactPage() {
                             {s.name}
                           </option>
                         ))}
+                        <option value="Fitness & Conditioning" className="bg-card text-foreground">
+                          Fitness & Conditioning
+                        </option>
                       </select>
                     </div>
 

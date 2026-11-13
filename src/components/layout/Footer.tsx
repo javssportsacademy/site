@@ -151,20 +151,15 @@ export function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-wider text-brand-primary mb-4">
               Chennai Centers
             </h4>
-            <div className="space-y-4 text-xs text-muted-foreground">
-              <div>
-                <p className="font-bold text-foreground mb-0.5">1. Thiruverkadu Center</p>
-                <p className="text-[11px] leading-relaxed">
-                  349C+564, Karpagambal Nagar, Thambusamy Nagar, Thiruverkadu, Tamil Nadu 600077
-                </p>
-              </div>
-
-              <div>
-                <p className="font-bold text-foreground mb-0.5">2. Prestige Bella Vista</p>
-                <p className="text-[11px] leading-relaxed">
-                  Mount Poonamallee Rd, Iyyappanthangal, Chennai, Tamil Nadu 600056
-                </p>
-              </div>
+            <div className="space-y-3.5 text-xs text-muted-foreground">
+              {ACADEMY_LOCATIONS.map((loc, idx) => (
+                <div key={loc.id}>
+                  <p className="font-bold text-foreground mb-0.5">{idx + 1}. {loc.name}</p>
+                  <p className="text-[11px] leading-relaxed">
+                    {loc.address}
+                  </p>
+                </div>
+              ))}
 
               <div className="pt-2 border-t border-border space-y-1">
                 <a

@@ -15,10 +15,10 @@ export function LocationsPreview() {
         <SectionHeading
           badge="Training Centers"
           title="Where Champions Train in Chennai"
-          subtitle="Two premier sporting hubs equipped with professional coaching facilities, turf nets, and athletic training grounds."
+          subtitle="Premier training centers and fitness hubs across Chennai equipped with professional coaching facilities, turf nets, and athletic conditioning grounds."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {ACADEMY_LOCATIONS.map((loc) => (
             <Card
               key={loc.id}

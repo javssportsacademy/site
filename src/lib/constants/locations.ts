@@ -38,5 +38,22 @@ export const ACADEMY_LOCATIONS: AcademyLocation[] = [
       "Secured, gated community environment with CCTV surveillance"
     ],
     mapEmbedOrDirectionsUrl: "https://maps.google.com/?q=Prestige+Bella+Vista+Mount+Poonamallee+Rd+Iyyappanthangal+Chennai+Tamil+Nadu+600056"
+  },
+  {
+    id: "avadi",
+    name: "Avadi (Fitness Session)",
+    area: "Avadi, Chennai",
+    address: "Avadi, Chennai, Tamil Nadu 600054",
+    plusCode: "Avadi, Chennai",
+    phoneNumbers: ["+91 95001 61690", "+91 73391 11690"],
+    email: "javssportsacademy@gmail.com",
+    timing: "Morning: 5:45 AM - 7:00 AM",
+    facilities: [
+      "Morning fitness & athletic conditioning sessions",
+      "Stamina, agility, and mobility training drills",
+      "Youth & adult physical conditioning batches",
+      "Coach-led structured functional fitness workouts"
+    ],
+    mapEmbedOrDirectionsUrl: "https://maps.google.com/?q=Avadi+Chennai+Tamil+Nadu"
   }
 ];

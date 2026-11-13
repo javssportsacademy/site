@@ -227,6 +227,13 @@ const CENTRES_ITEMS: DropdownItem[] = [
     icon: Building2,
     badge: "Porur Hub",
   },
+  {
+    title: "Avadi (Fitness Session)",
+    subtitle: "Avadi — Morning 5:45 AM to 7:00 AM athletic conditioning",
+    href: "/contact#avadi",
+    icon: Flame,
+    badge: "Morning Fitness",
+  },
 ];
 
 type DropdownKey = "sports" | "programs" | "institutions" | "academy" | "centres" | null;

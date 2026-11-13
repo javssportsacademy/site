@@ -21,9 +21,9 @@ const PROOF_POINTS = [
     icon: Users,
   },
   {
-    value: "2 Hubs",
-    title: "Confirmed Locations",
-    detail: "Thiruverkadu Center & Prestige Bella Vista (Iyyappanthangal).",
+    value: "3 Hubs",
+    title: "Operating Locations",
+    detail: "Thiruverkadu, Prestige Bella Vista & Avadi.",
     icon: MapPin,
   },
 ];

@@ -24,9 +24,9 @@ const STATS = [
     color: "text-cyan-600 dark:text-cyan-400",
   },
   {
-    value: "2",
+    value: "3",
     label: "Chennai Centers",
-    subtext: "Thiruverkadu & Prestige Bella Vista, Iyyappanthangal",
+    subtext: "Thiruverkadu, Prestige Bella Vista & Avadi",
     icon: MapPin,
     color: "text-emerald-600 dark:text-emerald-400",
   },
