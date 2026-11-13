@@ -34,7 +34,7 @@ export const INSTITUTIONAL_PARTNERS: InstitutionalPartner[] = [
     title: "Apartment & Gated Communities",
     subtitle: "On-Campus Coaching & Weekend Sports Leagues",
     badge: "Resident Community Sports",
-    description: "Bringing professional coaching directly to your residential clubhouses and community grounds (such as our ongoing programs at Prestige Bella Vista, Iyyappanthangal).",
+    description: "Bringing professional coaching directly to your residential clubhouses and community grounds (such as our ongoing cricket sessions at Prestige Bella Vista, Iyyappanthangal).",
     offerings: [
       "Convenient doorstep coaching batches for children (Ages 4 to 16)",
       "Weekend fitness, yoga, and badminton sessions for working parents & seniors",

@@ -27,10 +27,10 @@ export const APPROVED_TESTIMONIALS: Testimonial[] = [
     parentName: "Priya V.",
     childName: "Diya & Karan",
     childAge: "Ages 6 & 9",
-    sport: "Multi-Sport & Physical Conditioning",
+    sport: "Junior Cricket Sessions",
     hub: "Prestige Bella Vista",
-    quote: "Having JAV'S Academy right inside our residential community at Prestige Bella Vista has been life-changing. Both my children look forward to their evening sessions. The coaches treat every child with patience and respect. Their stamina, agility, and teamwork have visibly improved over the last 18 months.",
-    highlight: "Safe, disciplined on-campus coaching with verified coaches",
+    quote: "Having JAV'S Academy cricket sessions right inside our residential community at Prestige Bella Vista has been life-changing. Both my children look forward to their evening net sessions. The coaches treat every child with patience and respect. Their batting stance, agility, and teamwork have visibly improved over the last 18 months.",
+    highlight: "Safe, disciplined on-campus cricket sessions with verified coaches",
     verifiedDuration: "Enrolled for 18 Months"
   },
   {
@@ -49,10 +49,10 @@ export const APPROVED_TESTIMONIALS: Testimonial[] = [
     parentName: "M. Karthikeyan",
     childName: "Arjun K.",
     childAge: "Age 8",
-    sport: "Early Years Movement",
+    sport: "Cricket Fundamentals & Batting",
     hub: "Prestige Bella Vista",
-    quote: "Coach Javeed's M.P.Ed. background shows in every training drill. Rather than boring repetitive exercises, drills are structured as joyful motor-skill games. Arjun's coordination, balance, and hand-eye speed improved dramatically within the first three months.",
-    highlight: "Joyful age-calibrated motor skill development",
+    quote: "Coach Javeed's cricket and sports science background shows in every training drill. Rather than boring repetitive exercises, drills are structured as engaging skill-building games. Arjun's batting grip, balance, and hand-eye speed improved dramatically within the first three months.",
+    highlight: "Engaging age-calibrated cricket skill development",
     verifiedDuration: "Enrolled for 1 Year"
   }
 ];

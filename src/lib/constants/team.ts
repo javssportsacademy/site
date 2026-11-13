@@ -68,11 +68,11 @@ export const ACADEMY_FACILITIES = [
   },
   {
     id: "bella-vista-arena",
-    title: "Prestige Bella Vista Multi-Sport Campus",
+    title: "Prestige Bella Vista Cricket Sessions",
     hub: "Iyyappanthangal",
-    specs: "Full Badminton Courts • Dedicated Turf Box • Functional Athletic Field",
-    description: "Safe, enclosed gated-community athletic environment providing age-specific coaching for residents and nearby neighborhoods.",
-    tag: "Residential Arena"
+    specs: "Cricket Practice Nets • Turf Drills • Batting Biomechanics Focus",
+    description: "Dedicated residential cricket coaching sessions providing age-specific cricket technique, net practice, and tactical instruction for resident players.",
+    tag: "Cricket Sessions"
   },
   {
     id: "sports-science-lab",
@@ -136,9 +136,9 @@ export const ACADEMY_ACHIEVEMENTS = [
   },
   {
     id: "community-partnership-success",
-    title: "Prestige Bella Vista Residential Sports Program",
+    title: "Prestige Bella Vista Cricket Sessions",
     category: "Community Model",
-    description: "Successfully established on-campus multi-sport coaching and society sports leagues at Prestige Bella Vista, Iyyappanthangal, serving resident families with doorstep sports excellence.",
+    description: "Successfully established on-campus cricket coaching batches and society cricket leagues at Prestige Bella Vista, Iyyappanthangal, serving resident families with doorstep cricket excellence.",
     tag: "Community Impact"
   },
   {

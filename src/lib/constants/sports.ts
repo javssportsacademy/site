@@ -22,7 +22,7 @@ export const SPORTS_LIST: Sport[] = [
     benefits: ["Hand-eye coordination", "Mental composure under pressure", "Strategic field thinking", "Endurance & stamina"],
     equipmentNeeded: "Cricket bat, batting pads, gloves, helmet, spiked/turf shoes. Academy provides match balls, cones, and practice nets.",
     accentColor: "#D97706",
-    locationAvailability: ["Thiruverkadu Center (Main Academy)", "Prestige Bella Vista (Net Drills)"]
+    locationAvailability: ["Thiruverkadu Center (Main Academy)", "Prestige Bella Vista (Cricket Sessions)"]
   },
   {
     id: "02",
@@ -45,7 +45,7 @@ export const SPORTS_LIST: Sport[] = [
     benefits: ["Aerobic stamina", "Lower-body power", "Rapid reflex decision-making", "Team leadership"],
     equipmentNeeded: "Football boots (studs/turf), shin guards, breathable athletic sportswear.",
     accentColor: "#0284C7",
-    locationAvailability: ["Thiruverkadu Center (Main Academy)", "Prestige Bella Vista"]
+    locationAvailability: ["Thiruverkadu Center (Main Academy)"]
   },
   {
     id: "03",
@@ -68,7 +68,7 @@ export const SPORTS_LIST: Sport[] = [
     benefits: ["Vertical leap & calf power", "Full-body agility", "Rapid court perception", "Unmatched team camaraderie"],
     equipmentNeeded: "Non-marking basketball shoes, comfortable basketball shorts and jersey.",
     accentColor: "#D97706",
-    locationAvailability: ["Prestige Bella Vista Center"]
+    locationAvailability: ["Thiruverkadu Center (Main Academy)"]
   },
   {
     id: "04",
@@ -91,7 +91,7 @@ export const SPORTS_LIST: Sport[] = [
     benefits: ["Explosive deceleration & reflex speed", "Shoulder & wrist mobility", "Cardiovascular fitness"],
     equipmentNeeded: "Badminton racket, non-marking indoor court shoes, grip wraps.",
     accentColor: "#059669",
-    locationAvailability: ["Thiruverkadu Center (Main Academy)", "Prestige Bella Vista"]
+    locationAvailability: ["Thiruverkadu Center (Main Academy)"]
   },
   {
     id: "05",
@@ -183,7 +183,7 @@ export const SPORTS_LIST: Sport[] = [
     benefits: ["Zero-impact full-body conditioning", "Enhanced lung capacity", "Life-saving aquatic survival skills"],
     equipmentNeeded: "Swimming costume/trunks, silicone swim cap, anti-fog goggles.",
     accentColor: "#0284C7",
-    locationAvailability: ["Prestige Bella Vista Center"]
+    locationAvailability: ["Thiruverkadu Center (Main Academy)"]
   },
   {
     id: "09",
@@ -275,7 +275,7 @@ export const SPORTS_LIST: Sport[] = [
     benefits: ["Complete anaerobic & aerobic conditioning", "Shoulder, arm & core power", "Mental fortitude and self-reliance"],
     equipmentNeeded: "Age-appropriate tennis racket, tennis court shoes, comfortable sports apparel.",
     accentColor: "#65A30D",
-    locationAvailability: ["Prestige Bella Vista Center"]
+    locationAvailability: ["Thiruverkadu Center (Main Academy)"]
   }
 ];
 

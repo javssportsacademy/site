@@ -125,7 +125,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/partnerships" className="hover:text-foreground transition-colors">
-                  Gated Communities & Bella Vista
+                  Gated Communities & Bella Vista Cricket
                 </Link>
               </li>
               <li>

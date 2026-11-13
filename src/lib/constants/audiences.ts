@@ -52,7 +52,7 @@ export const AUDIENCE_PATHWAYS: AudiencePathway[] = [
     eyebrow: "Residential Living",
     headline: "On-Campus Coaching in Your Society Clubhouse",
     badge: "For Residents",
-    description: "Bring professional coaching directly to your residential campus. Like our proven ongoing model at Prestige Bella Vista (Iyyappanthangal), we run safe, verified sports batches inside your society.",
+    description: "Bring professional coaching directly to your residential campus. Like our proven ongoing cricket sessions at Prestige Bella Vista (Iyyappanthangal), we run safe, verified sports batches inside your society.",
     primaryValuePoints: [
       "Doorstep convenience: Zero travel hassle for working parents",
       "Cricket, football, badminton, and swimming batches within society gates",

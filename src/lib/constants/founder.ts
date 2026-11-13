@@ -42,7 +42,7 @@ export const FOUNDER_TIMELINE: FounderTimelineMilestone[] = [
     year: "2021",
     title: "Founding JAV'S Sports Academy & Chennai Training Hubs",
     category: "Academy Expansion",
-    description: "Founded JAV'S Sports Academy with a mandate to replace casual coaching with structured, accountable physical education. Established flagship centers at Thiruverkadu and an on-campus community sports hub at Prestige Bella Vista (Iyyappanthangal).",
+    description: "Founded JAV'S Sports Academy with a mandate to replace casual coaching with structured, accountable physical education. Established flagship centers at Thiruverkadu and on-campus cricket sessions at Prestige Bella Vista (Iyyappanthangal).",
     evidenceProof: "2 Active Coaching Centers with 500+ mentored children"
   },
   {
@@ -118,6 +118,6 @@ export const FOUNDER_DATA = {
   evidenceDistinction: {
     interviews: "Independent conversations with prominent sporting figures (e.g. Dayalan Hemalatha, NCA Coaches) demonstrating sustained ecosystem learning.",
     network: "Verified professional affiliations and certifications through MSDCA, Coaching Beyond, and TNCA/TDCA.",
-    academy: "Direct training delivery conducted across our operating centers in Thiruverkadu and Prestige Bella Vista."
+    academy: "Direct training delivery conducted across our operating centers in Thiruverkadu, Prestige Bella Vista (Cricket Sessions), and Avadi."
   }
 };

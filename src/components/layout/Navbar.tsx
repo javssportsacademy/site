@@ -165,7 +165,7 @@ const INSTITUTION_ITEMS: DropdownItem[] = [
   },
   {
     title: "Gated Communities & Clubhouses",
-    subtitle: "On-site coaching (e.g., Prestige Bella Vista hub)",
+    subtitle: "On-site cricket coaching (e.g., Prestige Bella Vista hub)",
     href: "/partnerships#apartments",
     icon: Building2,
   },
@@ -221,11 +221,11 @@ const CENTRES_ITEMS: DropdownItem[] = [
     badge: "Main Campus",
   },
   {
-    title: "Prestige Bella Vista Multi-Sport Hub",
-    subtitle: "Iyyappanthangal / Porur — Swimming, badminton & courts",
+    title: "Prestige Bella Vista (Cricket Sessions)",
+    subtitle: "Iyyappanthangal / Porur — Cricket nets, batting & bowling sessions",
     href: "/contact#iyyappanthangal",
     icon: Building2,
-    badge: "Porur Hub",
+    badge: "Cricket Sessions",
   },
   {
     title: "Avadi (Fitness Session)",

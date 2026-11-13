@@ -159,29 +159,29 @@ export default function PartnershipsPage() {
               </div>
               <div>
                 <h3 className="text-xl sm:text-2xl font-black uppercase text-foreground">
-                  Prestige Bella Vista Sports Complex
+                  Prestige Bella Vista Cricket Sessions
                 </h3>
                 <p className="text-xs text-brand-primary font-bold mt-1">
-                  On-Campus Multi-Sport Society Coaching
+                  On-Campus Residential Cricket Coaching
                 </p>
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Operating directly inside the prestigious Prestige Bella Vista community in Iyyappanthangal. Residents benefit from structured after-school coaching in swimming, badminton, tennis, and cricket right at their doorstep, without commuting across Chennai.
+                Operating directly inside the prestigious Prestige Bella Vista community in Iyyappanthangal. Residents benefit from structured after-school cricket coaching, net drills, batting biomechanics, and match temperament training right at their doorstep, without commuting across Chennai.
               </p>
               <div className="space-y-2 pt-3 border-t border-border">
                 <p className="text-xs font-bold uppercase text-foreground">Impact Delivered:</p>
                 <ul className="space-y-1 text-xs text-muted-foreground">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Daily evening batches for children ages 4 to 17</span>
+                    <span>Evening cricket batches for children ages 6 to 17</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Weekend society cricket and badminton tournaments</span>
+                    <span>Weekend society cricket matches and net assessment sessions</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="h-3.5 w-3.5 text-brand-primary shrink-0" />
-                    <span>Adult fitness conditioning and swimming masterclasses</span>
+                    <span>Specialised batting, bowling mechanics, and wicketkeeping instruction</span>
                   </li>
                 </ul>
               </div>

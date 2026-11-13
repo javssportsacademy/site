@@ -23,7 +23,7 @@ const PROOF_POINTS = [
   {
     value: "3 Hubs",
     title: "Operating Locations",
-    detail: "Thiruverkadu, Prestige Bella Vista & Avadi.",
+    detail: "Thiruverkadu, Prestige Bella Vista (Cricket) & Avadi.",
     icon: MapPin,
   },
 ];

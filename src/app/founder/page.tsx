@@ -198,7 +198,7 @@ export default function FounderPage() {
                 <br />
                 <strong>2. Professional Standing: </strong>Verified certifications through MSDCA, Coaching Beyond, and TNCA/TDCA player registries.
                 <br />
-                <strong>3. Academy Operations: </strong>Direct coaching delivery across our dedicated hubs in Thiruverkadu and Prestige Bella Vista.
+                <strong>3. Academy Operations: </strong>Direct coaching delivery across our dedicated hubs in Thiruverkadu, Prestige Bella Vista (Cricket Sessions), and Avadi.
               </p>
             </div>
           </div>
@@ -551,7 +551,7 @@ export default function FounderPage() {
               Approved <span className="text-brand-primary">Testimonials</span>
             </h3>
             <p className="text-base text-muted-foreground leading-relaxed">
-              Real feedback from families enrolled at our Thiruverkadu Center and Prestige Bella Vista hubs.
+              Real feedback from families enrolled at our Thiruverkadu Center, Prestige Bella Vista cricket sessions, and Avadi hubs.
             </p>
           </div>
 

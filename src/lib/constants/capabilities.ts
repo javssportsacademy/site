@@ -75,7 +75,7 @@ export const ACADEMY_CAPABILITIES: CapabilityFamily[] = [
     familyTitle: "Turnkey Sports Events & Institutional Services",
     tagline: "End-to-End Delivery for Institutions & Communities",
     badge: "B2B Solutions",
-    description: "Complete outsourced physical education, annual sports day organization, licensed referees and umpires, tournament fixtures, and residential community coaching (such as Prestige Bella Vista).",
+    description: "Complete outsourced physical education, annual sports day organization, licensed referees and umpires, tournament fixtures, and residential community coaching (such as Prestige Bella Vista cricket sessions).",
     scopeList: [
       "Annual School Sports Days: Track marking, heats, judging & medals",
       "Qualified referees & umpires for inter-school & corporate tournaments",

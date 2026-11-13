@@ -52,7 +52,7 @@ export default function ContactPage() {
       <SubpageHero
         badge="Connect With JAV'S Academy"
         title="Contact & Training Centers"
-        subtitle="Visit our training centers in Thiruverkadu, Prestige Bella Vista (Iyyappanthangal), and Avadi, or reach out directly to Coach Mohammed Javeed on WhatsApp."
+        subtitle="Visit our training centers in Thiruverkadu, Prestige Bella Vista (Cricket Sessions in Iyyappanthangal), and Avadi, or reach out directly to Coach Mohammed Javeed on WhatsApp."
       >
         <div className="flex flex-wrap items-center gap-4">
           <DirectWhatsAppButton label="Instant WhatsApp Chat" />

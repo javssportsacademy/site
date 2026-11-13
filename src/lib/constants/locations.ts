@@ -22,19 +22,18 @@ export const ACADEMY_LOCATIONS: AcademyLocation[] = [
   },
   {
     id: "iyyappanthangal",
-    name: "Prestige Bella Vista Center",
+    name: "Prestige Bella Vista (Cricket Sessions)",
     area: "Iyyappanthangal, Porur / Mount Poonamallee",
     address: "Prestige Bella Vista, Mount Poonamallee Rd, Iyyappanthangal, Chennai, Tamil Nadu 600056",
     plusCode: "Near Porur Junction",
     phoneNumbers: ["+91 95001 61690", "+91 73391 11690"],
     email: "javssportsacademy@gmail.com",
-    timing: "Batches on Weekday Evenings & Weekend Mornings",
+    timing: "Cricket Batches: Weekday Evenings & Weekend Mornings",
     facilities: [
-      "State-of-the-art residential sports complex",
-      "Full-sized swimming pool with dedicated coaching lanes",
-      "Indoor badminton courts with shock-absorbent wooden flooring",
-      "Tennis court & basketball arena",
-      "Football turf & children's active play arena",
+      "Dedicated Cricket coaching nets & turf pitch practice",
+      "Batting technique, bowling rhythm, and wicketkeeping drills",
+      "Structured age-appropriate cricket batches for junior & youth players",
+      "Match simulation, tactical game awareness, and athletic conditioning",
       "Secured, gated community environment with CCTV surveillance"
     ],
     mapEmbedOrDirectionsUrl: "https://maps.google.com/?q=Prestige+Bella+Vista+Mount+Poonamallee+Rd+Iyyappanthangal+Chennai+Tamil+Nadu+600056"

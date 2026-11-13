@@ -26,7 +26,7 @@ const STATS = [
   {
     value: "3",
     label: "Chennai Centers",
-    subtext: "Thiruverkadu, Prestige Bella Vista & Avadi",
+    subtext: "Thiruverkadu, Prestige Bella Vista (Cricket) & Avadi",
     icon: MapPin,
     color: "text-emerald-600 dark:text-emerald-400",
   },

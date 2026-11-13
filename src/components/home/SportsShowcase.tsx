@@ -62,7 +62,7 @@ export function SportsShowcase() {
         <div className="mt-14 p-6 rounded-2xl bg-card border border-border text-center max-w-3xl mx-auto space-y-3 shadow-xs">
           <p className="text-xs sm:text-sm text-muted-foreground">
             <strong className="text-foreground">Operational Availability Note: </strong>
-            &ldquo;Gallery images are illustrative. Sports availability may vary by location and programme schedule. Contact our team to confirm current batch timings at Thiruverkadu or Prestige Bella Vista.&rdquo;
+            &ldquo;Gallery images are illustrative. Sports availability varies by location (Prestige Bella Vista hosts dedicated cricket sessions, while our Thiruverkadu main campus hosts full multi-sport training). Contact our team to confirm current batch timings.&rdquo;
           </p>
           <Button asChild size="default" variant="default" className="font-bold text-xs uppercase tracking-wider gap-2">
             <Link href="/sports">
